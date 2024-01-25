@@ -27,7 +27,7 @@ export default function Home() {
         </div>
         <div className="mt-8 space-y-6 bg-white shadow-md rounded-lg px-10 py-8">
           <div className="rounded-md shadow-sm -space-y-px">
-            <div>
+            <div className='mb-4'>
               <label htmlFor="username" className="sr-only">Username</label>
               <input
                 id="username"
