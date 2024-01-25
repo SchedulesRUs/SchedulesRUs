@@ -8,12 +8,12 @@ export default function Home() {
   
 
   const handleLogin = async () => {
-    const username = "Admin123";
-    const password = "schedule123";
+    const correctUsername = "Admin123";
+    const correctPassword = "manager123";
     if (enteredUsername === correctUsername && enteredPassword === correctPassword) {
       window.location.href = '/dashboard';
     } else {
-      console.error('Invalid credentials'); 
+      alert('Invalid username or password! Please retry'); 
     }
   };
 
@@ -21,7 +21,7 @@ export default function Home() {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold text-purple-800">
+          <h2 className="mt-6 text-3xl font-extrabold text-purple-800 font-mono">
             Schedule "R" Us
           </h2>
         </div>
