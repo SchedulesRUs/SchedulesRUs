@@ -21,7 +21,7 @@ import {
           icon: <MdDashboard />,
         },
         {
-          title: "Staffs",
+          title: "Team Member",
           path: "/dashboard/staffs",
           icon: <MdSupervisedUserCircle />,
         },
@@ -31,9 +31,9 @@ import {
           icon: <MdShoppingBag />,
         },
         {
-          title: "Request",
+          title: "Management",
           path: "/dashboard/request",
-          icon: <MdAttachMoney />,
+          icon: <MdPeople />,
         },
       ],
     },
@@ -41,19 +41,9 @@ import {
       title: "Analytics",
       list: [
         {
-          title: "Management",
-          path: "/dashboard/management",
-          icon: <MdWork />,
-        },
-        {
           title: "Reports",
           path: "/dashboard/reports",
           icon: <MdAnalytics />,
-        },
-        {
-          title: "Teams",
-          path: "/dashboard/teams",
-          icon: <MdPeople />,
         },
       ],
     },
@@ -70,6 +60,11 @@ import {
           path: "/dashboard/help",
           icon: <MdHelpCenter />,
         },
+        {
+          title: "Logout",
+          path: "/",
+          icon: <MdLogout />,
+        }
       ],
     },
   ];
