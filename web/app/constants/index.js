@@ -22,17 +22,17 @@ import {
         },
         {
           title: "Team Member",
-          path: "/dashboard/staffs",
+          path: "/dashboard/teams",
           icon: <MdSupervisedUserCircle />,
         },
         {
           title: "Scheduling",
-          path: "/dashboard/scheduling",
+          path: "/dashboard/schedules",
           icon: <MdShoppingBag />,
         },
         {
           title: "Management",
-          path: "/dashboard/request",
+          path: "/dashboard/management",
           icon: <MdPeople />,
         },
       ],
@@ -60,11 +60,6 @@ import {
           path: "/dashboard/help",
           icon: <MdHelpCenter />,
         },
-        {
-          title: "Logout",
-          path: "/",
-          icon: <MdLogout />,
-        }
       ],
     },
   ];
