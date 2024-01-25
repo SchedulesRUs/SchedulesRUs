@@ -1,19 +1,18 @@
-"use client"; 
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Home() {
-  const [enteredUsername, setEnteredUsername] = useState('');
-  const [enteredPassword, setEnteredPassword] = useState('');
-  
+  const [enteredUsername, setEnteredUsername] = useState("");
+  const [enteredPassword, setEnteredPassword] = useState("");
 
   const handleLogin = async () => {
     const username = "Admin123";
     const password = "schedule123";
-    if (enteredUsername === correctUsername && enteredPassword === correctPassword) {
-      window.location.href = '/dashboard';
+    if (enteredUsername === username && enteredPassword === password) {
+      window.location.href = "/dashboard";
     } else {
-      console.error('Invalid credentials'); 
+      console.error("Invalid credentials");
     }
   };
 
@@ -21,14 +20,16 @@ export default function Home() {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold text-purple-800">
+          <h2 className="mt-6 text-3xl font-extrabold text-[#0D1282]">
             Schedule "R" Us
           </h2>
         </div>
         <div className="mt-8 space-y-6 bg-white shadow-md rounded-lg px-10 py-8">
           <div className="rounded-md shadow-sm -space-y-px">
-            <div className='mb-4'>
-              <label htmlFor="username" className="sr-only">Username</label>
+            <div className="mb-4">
+              <label htmlFor="username" className="sr-only">
+                Username
+              </label>
               <input
                 id="username"
                 name="username"
@@ -42,7 +43,9 @@ export default function Home() {
               />
             </div>
             <div>
-              <label htmlFor="password" className="sr-only">Password</label>
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
               <input
                 id="password"
                 name="password"
@@ -60,7 +63,7 @@ export default function Home() {
             <button
               onClick={handleLogin}
               type="button"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#0D1282] hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Login
             </button>
