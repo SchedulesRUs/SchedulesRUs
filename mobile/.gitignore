@@ -20,12 +20,12 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-ios/.xcode.env.local
+template/ios/.xcode.env.local
 
 # Android/IntelliJ
 #
 build/
-.idea
+../.idea
 .gradle
 local.properties
 *.iml
