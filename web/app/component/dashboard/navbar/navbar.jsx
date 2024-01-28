@@ -21,7 +21,7 @@ const Navbar = () => {
 
       <div className="flex items-center gap-4">
           <div className="flex items-center gap-4 bg-[#f1efefe9] p-2 rounded-md">
-            <MdSearch />
+            <MdSearch size={24} />
             <input type="text" placeholder="Search..." className="p-1 font-mono rounded-md"></input>
           </div>
           <div className="flex flex-row gap-2">

@@ -16,7 +16,7 @@ const MenuLink = ({item}) => {
 
   return (
     <Link href={item.path} 
-    className={`flex p-3 mb-1 items-center gap-2 rounded-2xl ${isActive ? 'bg-[#0D1282] text-[#FCFCFC]' : 'hover:bg-[#0D1282] hover:text-[#FCFCFC]'}`}
+    className={`flex p-3 mb-1 items-center gap-2 rounded-2xl ${isActive ? 'bg-indigo-950 text-[#FCFCFC]' : 'hover:bg-indigo-950 hover:text-[#FCFCFC]'}`}
     >
       {item.icon}
       {item.title}

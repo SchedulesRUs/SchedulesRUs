@@ -4,9 +4,10 @@
 
 :root {
   --bg: #FCFCFC;
-  --bgSoft: #FCFCFC;
+  --bgSoft: #f1efefe9;
   --text: #11142D;
   --textSoft: #808191;
+  --blue: #0D1282;
 }
 
 *{
