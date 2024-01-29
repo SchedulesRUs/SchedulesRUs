@@ -71,7 +71,7 @@ export default function Home() {
         </div>
       </div>
       <footer className="text-center py-4 text-gray-600">
-        <p>Schedule "R" Us © 2024 - <a href='https://github.com/JustKhit/SchedulesRUs' target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 focus:ring-indigo-900">GitHub</a></p>
+        <p>Schedule "R" Us © 2024 - <a href='https://github.com/JustKhit/SchedulesRUs' target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-900 focus:ring-indigo-800">GitHub</a></p>
       </footer>
     </div>
   );
