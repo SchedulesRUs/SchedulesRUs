@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export default class User {
@@ -9,5 +9,9 @@ export default class User {
   username: string;
 
   @Column()
-  email: string;
+  password: string;
+
+//After modifying your entity, remember to synchronize your database schema using TypeORM:
+//npx typeorm schema:sync
+
 }
