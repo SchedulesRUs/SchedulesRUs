@@ -5,9 +5,11 @@ import {
   Text,
   View,
   TouchableOpacity,
+  StatusBar,
 } from "react-native";
 
 const BookOffItem = ({ day, date, status }) => (
+  
   <View style={styles.bookOffItem}>
     <View style={styles.bookOffDetails}>
       <Text style={styles.bookOffDay}>{day}</Text>
@@ -28,9 +30,23 @@ class BookOffScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor="#000080" barStyle="light-content" />
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>BookOff Page</Text>
-          {/* The tab navigation would go here */}
+          <Text style={styles.headerTitle}>Shift & Schedule</Text>
+          <View style={styles.tabContainer}>
+            <TouchableOpacity style={[styles.tab, styles.activeTab]}>
+              <Text style={styles.tabText}>Schedule</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.tab}>
+              <Text style={styles.tabText}>BookOffs</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.tab}>
+              <Text style={styles.tabText}>Switch Shift</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.tab}>
+              <Text style={styles.tabText}>Availability</Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.newBookOff}>
           <TouchableOpacity style={styles.newBookOffButton}>
@@ -51,18 +67,47 @@ class BookOffScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
   header: {
-    backgroundColor: "#000080", // Navy blue color
-    padding: 20,
-    paddingTop: 40, // Adjust for status bar height
+    backgroundColor: '#000080',
+    paddingTop: StatusBar.currentHeight + 10,
+    paddingBottom: 10,
+    paddingHorizontal: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  menuButton: {
+    position: 'absolute',
+    top: StatusBar.currentHeight + 10,
+    left: 10,
   },
   headerTitle: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 24,
-    textAlign: "center",
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  tabContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#000099',
+    borderRadius: 20,
+    marginTop: 10,
+    paddingVertical: 4,
+    width: '100%',
+  },
+  tab: {
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+  },
+  activeTab: {
+    borderBottomWidth: 3,
+    borderBottomColor: '#fff',
+  },
+  tabText: {
+    color: '#fff',
+    fontSize: 16,
   },
   newBookOff: {
     alignItems: "center",
