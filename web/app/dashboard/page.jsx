@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "../component/dashboard/card/card";
 import Rightbar from "../component/dashboard/rightbar/rightbar";
-import Schedule from "./schedules/page";
+import Schedule from "../component/dashboard/schedule/schedule";
 import Chart from "../component/dashboard/chart/chart";
 import data from "../constants/data.json"
 

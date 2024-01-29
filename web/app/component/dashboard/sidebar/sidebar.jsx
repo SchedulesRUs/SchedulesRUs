@@ -6,7 +6,7 @@ import { MdLogout } from "react-icons/md";
 
 const Sidebar = () => {
   return (
-    <div>
+    <div className="min-w-max">
       <div className="flex items-center gap-5 mb-8">
         <Image
           src="/user2.jpg"
@@ -30,7 +30,7 @@ const Sidebar = () => {
           </li>
         ))}
       </ul>
-      <button className="flex items-center p-3 gap-2 rounded-2xl hover:bg-[#0D1282] hover:text-white w-[100%]" >
+      <button className="flex items-center p-3 gap-2 rounded-2xl hover:bg-indigo-950 hover:text-white w-[100%]">
         <MdLogout />
         Logout
       </button>

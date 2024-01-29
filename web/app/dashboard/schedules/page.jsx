@@ -1,20 +1,12 @@
-"use client"
-
 import React from "react";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
+import Schedule from "@/app/component/dashboard/schedule/schedule";
 
-const Schedule = () => {
+const Schedules = () => {
   return (
-    <div>
-      <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-      />
+    <div className="mt-5">
+      <Schedule />
     </div>
-  );
+  )
 };
 
-export default Schedule;
+export default Schedules;
