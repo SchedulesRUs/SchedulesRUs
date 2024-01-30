@@ -31,8 +31,8 @@ import {
           icon: <MdShoppingBag />,
         },
         {
-          title: "Management",
-          path: "/dashboard/management",
+          title: "Hours Summary",
+          path: "/dashboard/hour",
           icon: <MdPeople />,
         },
       ],
