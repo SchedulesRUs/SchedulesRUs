@@ -15,7 +15,7 @@ class LoginScreen extends Component {
     employeeId: "",
   };
 
-  handleUsernameUpdate = (username) => {
+  /*handleUsernameUpdate = (username) => {
     this.setState({ username });
   };
 
@@ -34,7 +34,7 @@ class LoginScreen extends Component {
   handleAdminLogin = () => {
     // Implement admin login logic
   };
-
+*/
   render() {
     return (
       <View style={styles.container}>
