@@ -16,6 +16,7 @@ const user_controller_1 = require("./controllers/user.controller");
 const user_repository_1 = require("./repositories/user.repository");
 const user_entity_1 = require("./entities/user.entity");
 const typeorm_1 = require("@nestjs/typeorm");
+const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -23,6 +24,10 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [database_module_js_1.DatabaseModule,
             typeorm_1.TypeOrmModule.forFeature([user_entity_1.default]),
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+                envFilePath: '.env',
+            }),
         ],
         controllers: [app_controller_1.AppController, user_controller_1.UserController],
         providers: [app_service_1.AppService, user_service_1.UserService, user_repository_1.UserRepository],

@@ -8,10 +8,15 @@ import { UserController } from './controllers/user.controller';
 import { UserRepository } from './repositories/user.repository';
 import User from './entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [DatabaseModule,
     TypeOrmModule.forFeature([User]),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env', // optional, if you are using environment variables
+    }),
   ],
   controllers: [AppController,UserController],
   providers: [AppService,UserService, UserRepository],

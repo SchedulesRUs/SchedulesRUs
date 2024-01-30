@@ -1,25 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+// "use client"
+// import React, { useState } from 'react';
+// import axios from 'axios';
 
-const UserList = () => {
-  const [users, setUsers] = useState([]);
+// const YourComponent = () => {
+//   const [username, setUsername] = useState('');
+//   const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    axios.get('http://localhost:3000/user').then((response) => {
-      setUsers(response.data);
-    });
-  }, []);
+//   const handleLogin = async () => {
+//     try {
+//       const response = await axios.post('http://localhost:3000/user/login', {
+//         username,
+//         password,
+//       });
 
-  return (
-    <ul>
-      {users.map((user) => (
-        <li key={user.id}>
-          {user.username} - {user.email}
-        </li>
-      ))}
-    </ul>
-  );
-};
+//       console.log('Login successful:', response.data);
+//       // Handle the response as needed in your frontend
+//     } catch (error) {
+//       console.error('Login failed:', error.response.data);
+//       // Handle the error as needed in your frontend
+//     }
+//   };
 
-export default UserList;
+//   return (
+//     <div>
+//       <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+//       <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+//       <button onClick={handleLogin}>Login</button>
+//     </div>
+//   );
+// };
+
+// export default YourComponent;
