@@ -20,8 +20,14 @@ const Page = () => {
         },
         contactText: {
             marginBottom: '5px',
+        },
+        link: {
+            color: '#0077cc',
+            textDecoration: 'none',
         }
     };
+
+    const mailtoLink = (email) => `mailto:${email}?subject=Help Needed&body=Hi, I need some help with...`;
 
     return (
         <div>
@@ -30,13 +36,17 @@ const Page = () => {
                 <h2>Emergency Contact</h2>
                 <div style={styles.contactItem}>
                     <h3 style={styles.contactHeader}>Paradon Meeanan</h3>
-                    <p style={styles.contactText}>Email: ------------@gmail.com</p>
-                    <p style={styles.contactText}>Number: -----------</p>
+                    <p style={styles.contactText}>
+                        Email: <a style={styles.link} href={mailtoLink("paradon.meeanan@edu.sait.ca")}>paradon.meeanan@edu.sait.ca</a>
+                    </p>
+                    <p style={styles.contactText}>Number: <a style={styles.link} href="tel:+1403-1111-1111">403-1111-1111</a></p>
                 </div>
                 <div style={styles.contactItem}>
                     <h3 style={styles.contactHeader}>Felix Zhang</h3>
-                    <p style={styles.contactText}>Email: ------------@gmail.com</p>
-                    <p style={styles.contactText}>Number: -----------</p>
+                    <p style={styles.contactText}>
+                        Email: <a style={styles.link} href={mailtoLink("yuhao.zhang@edu.sait.ca")}>yuhao.zhang@edu.sait.ca</a>
+                    </p>
+                    <p style={styles.contactText}>Number: <a style={styles.link} href="tel:+1403-2222-2222">403-2222-2222</a></p>
                 </div>
             </div>
         </div>
