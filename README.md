@@ -12,11 +12,10 @@ npm i @fullcalendar/react @fullcalendar/core @fullcalendar/daygrid @fullcalendar
 
 ## Documentation
 
-Check out the [FullCalendar Documentation]([https://link-to-docs](https://fullcalendar.io/docs)) for more details and advanced usage.
+Check out the [FullCalendar Documentation](https://fullcalendar.io/docs) for more details and advanced usage.
 
 
-
-Adding the calendar(Fullcalendar) and chart(Nivo Chart)
+# Nivo
 
  Please install the below packgage:
    
