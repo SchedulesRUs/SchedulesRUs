@@ -15,7 +15,7 @@ const Dashboard = () => {
           <Card />
           <Card />
         </div>
-        <Schedule />
+        {/* <Schedule /> */}
         <Chart data={data}/>
       </div>
 

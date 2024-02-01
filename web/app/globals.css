@@ -25,3 +25,55 @@ a{
     color: inherit;
     text-decoration: none;
 }
+
+:root {
+  @apply bg-gray-50;
+}
+
+input {
+  @apply px-2;
+}
+  .fc-header-toolbar {
+    display: inline-block;
+    padding: 4px 4px;
+    font-size: 15px;
+    
+    @apply space-x-8;
+}
+
+.fc-day {
+  @apply m-8;
+}
+
+.fc-scrollgrid-sync-table {
+  @apply w-full;
+}
+
+.fc-view {
+  @apply w-full h-full  bg-white text-[14px];
+}
+
+.fc-h-event {
+  @apply bg-yellow-400 border border-yellow-500 text-[12px];
+  
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  @apply bg-[#abd0f5];
+}
+
+.fc .fc-button{
+  @apply bg-blue-950 hover:bg-indigo-800  ;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+  @apply bg-[#86A7FC];
+}
+
+.fc .fc-button-primary:disabled {
+  @apply bg-gray-500;
+}
+.fc-v-event {
+  @apply bg-green-500 border-violet-600 ;
+  
+}

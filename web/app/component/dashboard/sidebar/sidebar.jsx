@@ -14,6 +14,7 @@ const Sidebar = () => {
           width="100"
           height="100"
           className="rounded-md "
+          priority
         />
         <div className="flex flex-col">
           <span className="font-bold">Tony Tony Stark</span>
