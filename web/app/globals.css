@@ -36,6 +36,7 @@ input {
   .fc-header-toolbar {
     display: inline-block;
     padding: 4px 4px;
+    font-size: 15px;
     
     @apply space-x-8;
 }
@@ -49,11 +50,11 @@ input {
 }
 
 .fc-view {
-  @apply w-full h-full  bg-white;
+  @apply w-full h-full  bg-white text-[14px];
 }
 
 .fc-h-event {
-  @apply bg-yellow-400 border border-yellow-500 ;
+  @apply bg-yellow-400 border border-yellow-500 text-[12px];
   
 }
 

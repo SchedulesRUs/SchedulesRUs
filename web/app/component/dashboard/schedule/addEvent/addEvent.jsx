@@ -61,6 +61,41 @@ const AddEvent = ({ showModal, handleCloseModal, handleSubmit, handleChange, new
                             placeholder="Title"
                           />
                         </div>
+                        
+                        {/* <div className="mt-2 flex items-center">
+                          <label htmlFor="startTime" className="flex text-sm font-medium text-gray-700 p-3">
+                            Start Time
+                          </label>
+                          <input
+                            type="time"
+                            id="startTime"
+                            name="startTime"
+                            className="block w-[140px] mt-1 rounded-md border-0 py-1.5 text-gray-900 
+                            shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 
+                            focus:ring-2 
+                            focus:ring-inset focus:ring-green-300
+                            sm:text-sm sm:leading-6"
+                            value={newEvent.startTime}
+                            onChange={{}}
+                          />
+                          <label htmlFor="endTime" className="block text-sm font-medium text-gray-700 p-3">
+                            End Time
+                          </label>
+                          <input
+                            type="time"
+                            id="endTime"
+                            name="endTime"
+                            className="block w-[140px] mt-1 rounded-md border-0 py-1.5 text-gray-900 
+                            shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 
+                            focus:ring-2 
+                            focus:ring-inset focus:ring-green-300
+                            sm:text-sm sm:leading-6"
+                            value={newEvent.endTime}
+                            onChange={{}}
+                          />
+                        </div> */}
+
+
                         <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
                           <button
                             type="submit"
