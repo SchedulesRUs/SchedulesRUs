@@ -9,7 +9,6 @@ import {
 } from "react-native";
 
 const BookOffItem = ({ day, date, status }) => (
-  
   <View style={styles.bookOffItem}>
     <View style={styles.bookOffDetails}>
       <Text style={styles.bookOffDay}>{day}</Text>
@@ -67,35 +66,34 @@ class BookOffScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   header: {
-    backgroundColor: '#000080',
-    paddingTop: StatusBar.currentHeight + 10,
+    backgroundColor: "#0D1282", // Adjusted to a dark blue to match the image
+    paddingTop: StatusBar.currentHeight, // Only the status bar height
     paddingBottom: 10,
     paddingHorizontal: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "flex-start", // Aligns items to the start of the flex-direction
   },
   menuButton: {
-    position: 'absolute',
+    position: "absolute",
     top: StatusBar.currentHeight + 10,
     left: 10,
   },
   headerTitle: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 20,
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 24, // Adjusted size to match the image
+    alignSelf: "justify-center", // Aligns the title to the start of the flex-direction
+    marginTop: 10, // Adds some space above the title
   },
   tabContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#000099',
-    borderRadius: 20,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    backgroundColor: "transparent", // Background is transparent to show header color
     marginTop: 10,
-    paddingVertical: 4,
-    width: '100%',
+    width: "100%",
   },
   tab: {
     paddingVertical: 10,
@@ -103,10 +101,10 @@ const styles = StyleSheet.create({
   },
   activeTab: {
     borderBottomWidth: 3,
-    borderBottomColor: '#fff',
+    borderBottomColor: "#fff",
   },
   tabText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
   },
   newBookOff: {
@@ -114,54 +112,65 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   newBookOffButton: {
-    backgroundColor: "#000080", // Navy blue color
-    borderRadius: 20,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    backgroundColor: "#0D1282",
+    borderRadius: 8,
+    borderWidth: 4,
+    borderColor: "#333333",
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    justifyContent: "center",
+    alignItems: "center",
+    marginVertical: 20,
   },
   newBookOffButtonText: {
-    color: "#fff",
-    fontSize: 16,
+    color: "white",
+    fontSize: 28,
+    fontWeight: "800",
+    textAlign: "center",
   },
   bookOffList: {
     padding: 10,
   },
   bookOffItem: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
+    backgroundColor: "white",
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: "black",
+    padding: 10,
+    marginVertical: 10,
   },
   bookOffDetails: {
     flexDirection: "column",
   },
   bookOffDay: {
-    fontSize: 16,
-    fontWeight: "bold",
+    fontSize: 20,
+    fontWeight: "400",
+    color: "#00F900",
   },
   bookOffDate: {
-    fontSize: 14,
-    color: "gray",
+    fontSize: 20,
+    fontWeight: "400",
+    color: "#00F900",
   },
   bookOffStatus: {
-    borderRadius: 10,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    fontSize: 14,
-    fontWeight: "bold",
-    textTransform: "uppercase",
+    position: "absolute",
+    right: 10,
+    top: "50%",
+    transform: [{ translateY: -12 }],
+    borderRadius: 12,
+    padding: 4,
+    width: 123,
+    height: 25,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "transparent",
   },
   approved: {
-    backgroundColor: "lightgreen",
-    color: "green",
+    color: "#00F900",
   },
   denied: {
-    backgroundColor: "pink",
-    color: "red",
+    color: "#F90000",
   },
-  // Add styles for tab navigation and bottom navigation bar here
 });
 
 export default BookOffScreen;

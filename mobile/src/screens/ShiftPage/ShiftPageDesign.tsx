@@ -1,11 +1,18 @@
-import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, { Component } from "react";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  StatusBar,
+} from "react-native";
 
-const ShiftItem = ({ date, role, startTime, endTime }) => (
+const ShiftItem = ({ role, name, shiftTime }) => (
   <View style={styles.shiftItem}>
-    <Text style={styles.shiftDate}>{date}</Text>
     <Text style={styles.shiftRole}>{role}</Text>
-    <Text style={styles.shiftTime}>{`${startTime} - ${endTime}`}</Text>
+    <Text style={styles.shiftName}>{name}</Text>
+    <Text style={styles.shiftTime}>{shiftTime}</Text>
   </View>
 );
 
@@ -13,26 +20,34 @@ class ShiftScheduleScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor="#000080" barStyle="light-content" />
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>Your Home</Text>
-          <View style={styles.menuContainer}>
-            <Text style={styles.menuText}>Menu</Text>
-            <Text style={styles.userName}>Khang Trinh</Text>
+          <Text style={styles.headerTitle}>Shift & Schedule</Text>
+          <View style={styles.tabContainer}>
+            <TouchableOpacity style={[styles.tab, styles.activeTab]}>
+              <Text style={styles.tabText}>Schedule</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.tab}>
+              <Text style={styles.tabText}>BookOffs</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.tab}>
+              <Text style={styles.tabText}>Switch Shift</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.tab}>
+              <Text style={styles.tabText}>Availability</Text>
+            </TouchableOpacity>
           </View>
         </View>
-        <Text style={styles.upcomingShiftsTitle}>Your Upcoming Shifts</Text>
         <ScrollView style={styles.shiftsContainer}>
-          <ShiftItem date="Monday Feb 5, 2024" role="Cooker" startTime="1:00 PM" endTime="9:00 PM" />
-          <ShiftItem date="Tuesday Feb 6, 2024" role="Server" startTime="11:00 AM" endTime="7:00 PM" />
-          <ShiftItem date="Wednesday Feb 7, 2024" role="Cleaner" startTime="2:00 PM" endTime="7:00 PM" />
-          <ShiftItem date="Thursday Feb 8, 2024" role="Kitchen Helper" startTime="12:00 PM" endTime="4:00 PM" />
-          <ShiftItem date="Monday Feb 12, 2024" role="Server" startTime="3:00 PM" endTime="9:00 PM" />
-          <ShiftItem date="Saturday Feb 17, 2024" role="Cashier, Server" startTime="11:00 AM" endTime="7:00 PM" />
+          <ShiftItem
+            role="Restaurant Manager"
+            name="Bobby Brian"
+            shiftTime="11:00 AM - 7:00 PM"
+          />
+          {/* Repeat for other staff members */}
         </ScrollView>
         <View style={styles.bottomNavigation}>
-          <Text style={styles.bottomNavigationText}>Home</Text>
-          <Text style={styles.bottomNavigationText}>Calendar</Text>
-          <Text style={styles.bottomNavigationText}>Setting</Text>
+          {/* Bottom navigation items */}
         </View>
       </View>
     );
@@ -42,88 +57,68 @@ class ShiftScheduleScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: "#fff",
   },
   header: {
-    backgroundColor: '#0D1282',
-    paddingVertical: 20,
+    backgroundColor: "#0D1282",
+    paddingTop: StatusBar.currentHeight,
     paddingHorizontal: 10,
-    alignItems: 'center',
+    paddingBottom: 10,
   },
   headerTitle: {
-    color: 'white',
-    fontSize: 40,
-    fontWeight: '800',
-    marginBottom: 10,
+    color: "#fff",
+    fontSize: 24,
+    fontWeight: "bold",
+    alignSelf: "center",
+    paddingTop: 10,
   },
-  menuContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%',
+  tabContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 10,
   },
-  menuText: {
-    color: 'white',
-    fontSize: 25,
-    fontWeight: '800',
+  tab: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
-  userName: {
-    color: 'white',
-    fontSize: 25,
-    fontWeight: '800',
+  activeTab: {
+    borderBottomColor: "#fff",
+    borderBottomWidth: 2,
   },
-  upcomingShiftsTitle: {
-    fontSize: 25,
-    fontWeight: '800',
-    color: '#0D1282',
-    padding: 10,
+  tabText: {
+    color: "#fff",
+    fontSize: 16,
   },
   shiftsContainer: {
-    flex: 1,
-    paddingHorizontal: 10,
+    padding: 10,
   },
   shiftItem: {
-    backgroundColor: '#80C2FF',
+    backgroundColor: "#80C2FF",
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: 'black',
+    borderColor: "black",
     padding: 10,
     marginBottom: 10,
   },
-  shiftDate: {
-    color: 'black',
-    fontSize: 20,
-    fontWeight: '400',
-    marginBottom: 5,
-  },
   shiftRole: {
-    color: 'black',
-    fontSize: 20,
-    fontWeight: '400',
-    marginBottom: 5,
+    color: "black",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  shiftName: {
+    color: "black",
+    fontSize: 16,
   },
   shiftTime: {
-    color: 'black',
-    fontSize: 20,
-    fontWeight: '400',
+    color: "black",
+    fontSize: 16,
   },
   bottomNavigation: {
     borderTopWidth: 1,
-    borderTopColor: 'lightgray',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    borderTopColor: "lightgray",
+    flexDirection: "row",
+    justifyContent: "space-around",
     paddingVertical: 10,
-    backgroundColor: 'white',
-  },
-  bottomNavigationText: {
-    fontSize: 13,
-    fontWeight: '700',
-    textAlign: 'center',
-  },
-  shiftLine: {
-    height: 1,
-    backgroundColor: 'black',
-    marginVertical: 5,
   },
 });
 
