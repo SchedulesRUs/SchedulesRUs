@@ -1,20 +1,11 @@
-import React, { Component } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-} from "react-native";
+import React, { Component } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
-const ShiftItem = ({ role, name, time, period }) => (
+const ShiftItem = ({ date, role, startTime, endTime }) => (
   <View style={styles.shiftItem}>
+    <Text style={styles.shiftDate}>{date}</Text>
     <Text style={styles.shiftRole}>{role}</Text>
-    <View style={styles.shiftDetails}>
-      <Text style={styles.shiftName}>{name}</Text>
-      <Text style={styles.shiftTime}>{time}</Text>
-      <Text style={styles.shiftPeriod}>{period}</Text>
-    </View>
+    <Text style={styles.shiftTime}>{`${startTime} - ${endTime}`}</Text>
   </View>
 );
 
@@ -23,55 +14,25 @@ class ShiftScheduleScreen extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>Shift & Schedule</Text>
-          <View style={styles.tabNavigation}>
-            {/* Tab navigation buttons */}
-            <TouchableOpacity style={styles.tabButton}>
-              <Text style={styles.tabButtonText}>Schedule</Text>
-            </TouchableOpacity>
-            {/* Add other tabs here */}
+          <Text style={styles.headerTitle}>Your Home</Text>
+          <View style={styles.menuContainer}>
+            <Text style={styles.menuText}>Menu</Text>
+            <Text style={styles.userName}>Khang Trinh</Text>
           </View>
         </View>
-        <ScrollView style={styles.shiftList}>
-          {/* List of shifts */}
-          <ShiftItem
-            role="Restaurant Manager"
-            name="Bobby Brian"
-            time="11:00 AM - 7:00 PM"
-            period="Afternoon"
-          />
-          <ShiftItem
-            role="Restaurant Manager"
-            name="Bobby Brian"
-            time="11:00 AM - 7:00 PM"
-            period="Afternoon"
-          />
-          <ShiftItem
-            role="Restaurant Manager"
-            name="Bobby Brian"
-            time="11:00 AM - 7:00 PM"
-            period="Afternoon"
-          />
-          <ShiftItem
-            role="Restaurant Manager"
-            name="Bobby Brian"
-            time="11:00 AM - 7:00 PM"
-            period="Afternoon"
-          />
-          <ShiftItem
-            role="Restaurant Manager"
-            name="Bobby Brian"
-            time="11:00 AM - 7:00 PM"
-            period="Afternoon"
-          />
+        <Text style={styles.upcomingShiftsTitle}>Your Upcoming Shifts</Text>
+        <ScrollView style={styles.shiftsContainer}>
+          <ShiftItem date="Monday Feb 5, 2024" role="Cooker" startTime="1:00 PM" endTime="9:00 PM" />
+          <ShiftItem date="Tuesday Feb 6, 2024" role="Server" startTime="11:00 AM" endTime="7:00 PM" />
+          <ShiftItem date="Wednesday Feb 7, 2024" role="Cleaner" startTime="2:00 PM" endTime="7:00 PM" />
+          <ShiftItem date="Thursday Feb 8, 2024" role="Kitchen Helper" startTime="12:00 PM" endTime="4:00 PM" />
+          <ShiftItem date="Monday Feb 12, 2024" role="Server" startTime="3:00 PM" endTime="9:00 PM" />
+          <ShiftItem date="Saturday Feb 17, 2024" role="Cashier, Server" startTime="11:00 AM" endTime="7:00 PM" />
         </ScrollView>
         <View style={styles.bottomNavigation}>
-          {/* Bottom navigation buttons */}
-          <TouchableOpacity style={styles.bottomNavigationButton}>
-            {/* Replace with an icon component or image */}
-            <Text style={styles.bottomNavigationText}>Calendar</Text>
-          </TouchableOpacity>
-          {/* Add other navigation items here */}
+          <Text style={styles.bottomNavigationText}>Home</Text>
+          <Text style={styles.bottomNavigationText}>Calendar</Text>
+          <Text style={styles.bottomNavigationText}>Setting</Text>
         </View>
       </View>
     );
@@ -81,79 +42,88 @@ class ShiftScheduleScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: 'white',
   },
   header: {
-    backgroundColor: "#000080", // Navy blue color
-    padding: 20,
-    paddingTop: 40, // Adjust as per status bar height
+    backgroundColor: '#0D1282',
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    alignItems: 'center',
   },
   headerTitle: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 24,
-    textAlign: "center",
-  },
-  shiftList: {
-    padding: 10,
-  },
-  shiftItem: {
-    backgroundColor: "#f0f0f0",
-    borderRadius: 10,
-    padding: 15,
+    color: 'white',
+    fontSize: 40,
+    fontWeight: '800',
     marginBottom: 10,
   },
-  shiftRole: {
-    fontWeight: "bold",
-    fontSize: 18,
-    marginBottom: 5,
+  menuContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
   },
-  shiftDetails: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+  menuText: {
+    color: 'white',
+    fontSize: 25,
+    fontWeight: '800',
   },
-  shiftName: {
-    fontWeight: "bold",
+  userName: {
+    color: 'white',
+    fontSize: 25,
+    fontWeight: '800',
   },
-  shiftTime: {
-    fontSize: 16,
-    color: "black",
+  upcomingShiftsTitle: {
+    fontSize: 25,
+    fontWeight: '800',
+    color: '#0D1282',
+    padding: 10,
   },
-  shiftPeriod: {
-    fontSize: 14,
-    color: "gray",
-  },
-  tabNavigation: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    backgroundColor: "#000080",
-    paddingVertical: 10,
-  },
-  tabButton: {
-    paddingVertical: 6,
+  shiftsContainer: {
+    flex: 1,
     paddingHorizontal: 10,
   },
-  tabButtonText: {
-    color: "white",
-    fontSize: 16,
+  shiftItem: {
+    backgroundColor: '#80C2FF',
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: 'black',
+    padding: 10,
+    marginBottom: 10,
+  },
+  shiftDate: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: '400',
+    marginBottom: 5,
+  },
+  shiftRole: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: '400',
+    marginBottom: 5,
+  },
+  shiftTime: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: '400',
   },
   bottomNavigation: {
-    flexDirection: "row",
-    justifyContent: "space-around",
     borderTopWidth: 1,
-    borderTopColor: "lightgray",
+    borderTopColor: 'lightgray',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     paddingVertical: 10,
-  },
-  bottomNavigationButton: {
-    alignItems: "center",
-  },
-  bottomNavigationIcon: {
-    // Icons would be added here if you have an icon set
+    backgroundColor: 'white',
   },
   bottomNavigationText: {
-    color: "gray",
-    fontSize: 12,
+    fontSize: 13,
+    fontWeight: '700',
+    textAlign: 'center',
+  },
+  shiftLine: {
+    height: 1,
+    backgroundColor: 'black',
+    marginVertical: 5,
   },
 });
 
