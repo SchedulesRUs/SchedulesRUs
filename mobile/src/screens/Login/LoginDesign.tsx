@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import {
-  Button,
-  TextInput,
   View,
   Text,
-  StyleSheet,
+  TextInput,
   TouchableOpacity,
+  StyleSheet,
 } from "react-native";
 
 class LoginScreen extends Component {
@@ -15,7 +14,7 @@ class LoginScreen extends Component {
     employeeId: "",
   };
 
-  /*handleUsernameUpdate = (username) => {
+   /*handleUsernameUpdate = (username) => {
     this.setState({ username });
   };
 
@@ -35,35 +34,49 @@ class LoginScreen extends Component {
     // Implement admin login logic
   };
 */
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Schedule "R" Us</Text>
-        <TextInput
-          style={styles.input}
-          value={this.state.username}
-          onChangeText={this.handleUsernameUpdate}
-          placeholder="Employee Username"
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-        <TextInput
-          style={styles.input}
-          value={this.state.password}
-          onChangeText={this.handlePasswordUpdate}
-          placeholder="Password"
-          secureTextEntry
-        />
-        <TextInput
-          style={styles.input}
-          value={this.state.employeeId}
-          onChangeText={this.handleEmployeeIdUpdate}
-          placeholder="Employee ID"
-          keyboardType="numeric"
-        />
+      <View style={styles.fullScreen}>
+        <Text style={styles.header}>Schedule “R” Us</Text>
+
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>Employee Username</Text>
+          <TextInput
+            style={styles.input}
+            value={this.state.username}
+            onChangeText={(text) => this.setState({ username: text })}
+            placeholder="khang12323@gmail.com"
+            keyboardType="email-address"
+          />
+        </View>
+
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>Password</Text>
+          <TextInput
+            style={styles.input}
+            value={this.state.password}
+            onChangeText={(text) => this.setState({ password: text })}
+            placeholder="********************"
+            secureTextEntry
+          />
+        </View>
+
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>Employee ID</Text>
+          <TextInput
+            style={styles.input}
+            value={this.state.employeeId}
+            onChangeText={(text) => this.setState({ employeeId: text })}
+            placeholder="1234"
+            keyboardType="numeric"
+          />
+        </View>
+
         <TouchableOpacity onPress={this.handleLogin} style={styles.button}>
           <Text style={styles.buttonText}>Log In</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           onPress={this.handleAdminLogin}
           style={[styles.button, styles.buttonSecondary]}
@@ -76,38 +89,54 @@ class LoginScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  fullScreen: {
     flex: 1,
     justifyContent: "center",
-    padding: 20,
-    backgroundColor: "#fff",
+    alignItems: "center",
+    backgroundColor: "white",
   },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-    textAlign: "center",
+  header: {
     color: "#0D1282",
+    fontSize: 45,
+    fontWeight: "800",
+    marginBottom: 50,
+  },
+  inputGroup: {
+    width: "85%",
+    marginBottom: 20,
+  },
+  label: {
+    color: "#0D1282",
+    fontSize: 22,
+    fontWeight: "800",
+    marginBottom: 8,
   },
   input: {
-    height: 40,
-    borderColor: "#000",
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
+    height: 50,
+    borderColor: "#333333",
+    borderWidth: 3,
+    borderRadius: 8,
+    fontSize: 20,
+    padding: 12,
   },
   button: {
+    marginTop: 20,
     backgroundColor: "#0D1282",
-    padding: 10,
+    borderRadius: 8,
+    borderWidth: 4,
+    borderColor: "#0D1282",
+    width: "85%",
+    height: 72,
+    justifyContent: "center",
     alignItems: "center",
-    marginBottom: 10,
   },
   buttonText: {
-    color: "#fff",
-    fontWeight: "bold",
+    color: "white",
+    fontSize: 28,
+    fontWeight: "900",
   },
   buttonSecondary: {
-    backgroundColor: "#0D1282",
+    marginTop: 10,
   },
 });
 
