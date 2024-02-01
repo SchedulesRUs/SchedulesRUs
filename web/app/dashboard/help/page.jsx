@@ -1,6 +1,8 @@
 import React from "react";
 
 const Page = () => {
+    
+    
     const styles = {
         contactBox: {
             marginTop: '20px',
@@ -21,10 +23,19 @@ const Page = () => {
         contactText: {
             marginBottom: '5px',
         },
+        separator: {
+            border: '0',
+            height: '1px',
+            backgroundImage: 'linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0))',
+            margin: '20px 0',
+        },
         link: {
             color: '#0077cc',
             textDecoration: 'none',
-        }
+        },
+        boldText: { 
+            fontWeight: 'bold',
+        },
     };
 
     const mailtoLink = (email) => `mailto:${email}?subject=Help Needed&body=Hi, I need some help with...`;
@@ -33,7 +44,7 @@ const Page = () => {
         <div>
             <h1>Help</h1>
             <div style={styles.contactBox}>
-                <h2>Emergency Contact</h2>
+                <h2 style={styles.boldText}>If you have any question about this website, please contact: </h2>
                 <div style={styles.contactItem}>
                     <h3 style={styles.contactHeader}>Paradon Meeanan</h3>
                     <p style={styles.contactText}>
@@ -41,6 +52,7 @@ const Page = () => {
                     </p>
                     <p style={styles.contactText}>Number: <a style={styles.link} href="tel:+1403-1111-1111">403-1111-1111</a></p>
                 </div>
+                <hr style={styles.separator} />
                 <div style={styles.contactItem}>
                     <h3 style={styles.contactHeader}>Felix Zhang</h3>
                     <p style={styles.contactText}>
