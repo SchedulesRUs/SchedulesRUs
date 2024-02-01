@@ -11,6 +11,10 @@ import {
     MdLogout,
   } from "react-icons/md";
 
+import user from "./../../public/user.jpg";
+import user2 from "./../../public/user2.jpg";
+
+
   const menuItems = [
     {
       title: "Pages",
@@ -51,11 +55,6 @@ import {
       title: "User",
       list: [
         {
-          title: "Settings",
-          path: "/dashboard/settings",
-          icon: <MdOutlineSettings />,
-        },
-        {
           title: "Help",
           path: "/dashboard/help",
           icon: <MdHelpCenter />,
@@ -65,5 +64,81 @@ import {
   ];
 
 
-export {menuItems};
+  const staffMembers = [
+    {
+      name: "Donny Pinky",
+      email: "paradon.m95@gmail.com",
+      phone_no: "825-561-5913",
+      role: "GrandMaster",
+      status: "Active",
+      img: user,
+    },
+    {
+      name: "John F Kenedy",
+      email: "johnfk@gmail.com",
+      phone_no: "615-561-5913",
+      role: "GrandMaster",
+      status: "Active",
+      img: user,
+    },
+    {
+      name: "Toretto",
+      email: "toretto.m95@gmail.com",
+      phone_no: "444-561-5913",
+      role: "GrandMaster",
+      status: "Active",
+      img: user,
+    },
+    {
+      name: "Toretto",
+      email: "toretto.m95@gmail.com",
+      phone_no: "444-561-5913",
+      role: "GrandMaster",
+      status: "Active",
+      img: user,
+    },
+    {
+      name: "Toretto",
+      email: "toretto.m95@gmail.com",
+      phone_no: "444-561-5913",
+      role: "GrandMaster",
+      status: "Active",
+      img: user,
+    },
+    {
+      name: "Toretto",
+      email: "toretto.m95@gmail.com",
+      phone_no: "444-561-5913",
+      role: "GrandMaster",
+      status: "Active",
+      img: user,
+    },
+    {
+      name: "Toretto",
+      email: "toretto.m95@gmail.com",
+      phone_no: "444-561-5913",
+      role: "GrandMaster",
+      status: "Active",
+      img: user,
+    },
+    {
+      name: "Toretto",
+      email: "toretto.m95@gmail.com",
+      phone_no: "444-561-5913",
+      role: "GrandMaster",
+      status: "Active",
+      img: user,
+    },
+    {
+      name: "Toretto",
+      email: "toretto.m95@gmail.com",
+      phone_no: "444-561-5913",
+      role: "GrandMaster",
+      status: "Active",
+      img: user,
+    },
+  ]
+
+
+export {menuItems, staffMembers};
   
