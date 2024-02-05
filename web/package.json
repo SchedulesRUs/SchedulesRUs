@@ -3,11 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
-    "start-backend": "cd backend && npm run start",
-    "start-frontend": "cd web && npm run dev",
     "dev": "next dev",
     "build": "next build",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
