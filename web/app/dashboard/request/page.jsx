@@ -3,12 +3,9 @@ import Link from "next/link";
 import Image from "next/image";
 import Search from "@/app/component/dashboard/search/search";
 import Pagination from "@/app/component/dashboard/pagination/pagination";
-// Assuming there's an import for staff requests
-// If staffRequests might be undefined, ensure it's at least an empty array
 import { staffRequests } from "@/app/constants";
 
 const RequestsPage = () => {
-  // Use staffRequests if it's defined; otherwise, default to an empty array
   const safeStaffRequests = staffRequests || [];
 
   return (
@@ -19,12 +16,11 @@ const RequestsPage = () => {
       <table className="w-full m-3">
         <thead>
           <tr className="font-bold items-center">
-            <td>Staff Icon & Name</td>
-            <td>Staff Email</td>
-            <td>Staff Number</td>
-            <td>Staff Role</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Phone Number</td>
+            <td>Role</td>
             <td>Staff Request</td>
-            <td>Action</td>
           </tr>
         </thead>
         <tbody>
@@ -49,10 +45,10 @@ const RequestsPage = () => {
               <td>
                 <div className="flex">
                   <Link href={`/dashboard/requests/${request.id}`}>
-                    <a className="bg-green-600 text-white text-[12px] rounded-lg p-1 mr-2">View</a>
+                    <a className="bg-green-600 text-white text-[12px] rounded-lg p-1 mr-2">Approve</a>
                   </Link>
                   <button className="bg-red-700 text-white text-[12px] rounded-lg p-1">
-                    Delete
+                    Denine
                   </button>
                 </div>
               </td>
