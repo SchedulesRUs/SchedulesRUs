@@ -31,4 +31,4 @@ Nivo is a well-known library for building data visualizations in React applicati
 
   npm install @headlessui/react
 
-[FullCalendar Documentation](https://headlessui.com)
+For full documentation, please visit[headlessui.com](https://headlessui.com)
