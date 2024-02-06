@@ -14,21 +14,9 @@ export class UserController {
   }
 
   @Post()
-  createUser(@Body() createUserDto: any) {
+  createUser(@Body() createUserDto: User) {
     return this.userService.createUser(createUserDto);
   }
-
-  // @Post('login') // New endpoint for login
-  // async loginUser(@Body() loginDto: { username: string; password: string }): Promise<User | string> {
-  //   try {
-  //     const user = await this.userService.validateLogin(loginDto.username, loginDto.password);
-  //     // If validation is successful, you might return the user or a token here
-  //     return user;
-  //   } catch (error) {
-  //     // Handle validation errors
-  //     throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
-  //   }
-  // }
 
   @Get('login') // New endpoint for login
 async loginUser(

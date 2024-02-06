@@ -13,14 +13,7 @@ export class UserService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
   ) {}
-  // getUsers() {
-  //   return this.users;
-  // }
 
-  // createUser(createUserDto: any) {
-  //   this.users.push(createUserDto);
-  //   return createUserDto;
-  // }
   
   async getUsers(): Promise<User[]> {
     return this.userRepository.find();
@@ -28,10 +21,12 @@ export class UserService {
 
   async createUser(createUserDto: any): Promise<User[]> {
     const { password, ...rest } = createUserDto;
-    const hashedPassword = await bcrypt.hash(password, 10); // Adjust the salt rounds as needed
-    const newUser = this.userRepository.create({ ...rest, password: hashedPassword });
+    const hashedPassword = await bcrypt.hash(password, 6); // Adjust the salt rounds as needed
+    const userColor = generateHexColor()
+    const newUser = this.userRepository.create({ ...rest, password: hashedPassword, userColor:userColor });
     return this.userRepository.save(newUser);
   }
+  
 
   async validateLogin(username: string, password: string): Promise<User> {
     try {
@@ -58,4 +53,18 @@ export class UserService {
       throw error; // Rethrow the error for further analysis
     }
   }
+}
+function generateHexColor(): string {
+  // Generate random RGB values
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+
+  // Convert RGB to hex
+  const hexR = r.toString(16).padStart(2, '0');
+  const hexG = g.toString(16).padStart(2, '0');
+  const hexB = b.toString(16).padStart(2, '0');
+
+  // Concatenate and return hex color
+  return `#${hexR}${hexG}${hexB}`;
 }
