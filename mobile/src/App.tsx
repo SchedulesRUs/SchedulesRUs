@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/theme';
 
 import ApplicationNavigator from './navigators/Application';
 import './translations';
+import React = require('react');
 
 const queryClient = new QueryClient();
 
