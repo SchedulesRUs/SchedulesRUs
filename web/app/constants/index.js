@@ -66,7 +66,8 @@ import user2 from "./../../public/user2.jpg";
 
   const staffMembers = [
     {
-      name: "Donny Pinky",
+      id: "1",
+      title: "Paradon",
       email: "paradon.m95@gmail.com",
       phone_no: "825-561-5913",
       role: "GrandMaster",
@@ -74,7 +75,8 @@ import user2 from "./../../public/user2.jpg";
       img: user,
     },
     {
-      name: "John F Kenedy",
+      id: "2",
+      title: "Khitikhun",
       email: "johnfk@gmail.com",
       phone_no: "615-561-5913",
       role: "GrandMaster",
@@ -82,7 +84,8 @@ import user2 from "./../../public/user2.jpg";
       img: user,
     },
     {
-      name: "Toretto",
+      id: "3",
+      title: "Khang",
       email: "toretto.m95@gmail.com",
       phone_no: "444-561-5913",
       role: "GrandMaster",
@@ -90,7 +93,8 @@ import user2 from "./../../public/user2.jpg";
       img: user,
     },
     {
-      name: "Toretto",
+      id: "4",
+      title: "Sailor",
       email: "toretto.m95@gmail.com",
       phone_no: "444-561-5913",
       role: "GrandMaster",
@@ -98,7 +102,8 @@ import user2 from "./../../public/user2.jpg";
       img: user,
     },
     {
-      name: "Toretto",
+      id: "5",
+      title: "Nancy",
       email: "toretto.m95@gmail.com",
       phone_no: "444-561-5913",
       role: "GrandMaster",
@@ -106,7 +111,8 @@ import user2 from "./../../public/user2.jpg";
       img: user,
     },
     {
-      name: "Toretto",
+      id: "6",
+      title: "Liz",
       email: "toretto.m95@gmail.com",
       phone_no: "444-561-5913",
       role: "GrandMaster",
@@ -114,7 +120,8 @@ import user2 from "./../../public/user2.jpg";
       img: user,
     },
     {
-      name: "Toretto",
+      id: "7",
+      title: "Brian",
       email: "toretto.m95@gmail.com",
       phone_no: "444-561-5913",
       role: "GrandMaster",
@@ -122,7 +129,8 @@ import user2 from "./../../public/user2.jpg";
       img: user,
     },
     {
-      name: "Toretto",
+      id: "8",
+      title: "Bobby",
       email: "toretto.m95@gmail.com",
       phone_no: "444-561-5913",
       role: "GrandMaster",
@@ -130,7 +138,8 @@ import user2 from "./../../public/user2.jpg";
       img: user,
     },
     {
-      name: "Toretto",
+      id: "9",
+      title: "Wesly",
       email: "toretto.m95@gmail.com",
       phone_no: "444-561-5913",
       role: "GrandMaster",
@@ -139,6 +148,13 @@ import user2 from "./../../public/user2.jpg";
     },
   ]
 
+  const empScheudule = [
+    {title: "Paradon",start: "2024-01-31T15:00:00.000Z", end: "2024-01-31T24:00:00.000Z", id: "1", color: "#ff5733"},
+    {title: "Khang",start: "2024-02-01T15:00:00.000Z", end: "2024-02-01T18:30:00.000Z", id: "2", color: "#33ff57"},
+    {title: "Paradon", start: "2024-02-01T24:00:00.000Z", end: "2024-01-01T05:00:00.000Z", id: "3", color: "#5733ff"},
+    {title: "Paradon", start: "2024-02-3T15:00:00.000Z", end: "2024-01-31T24:00:00.000Z", id: "4", color: "#f6e05e"},
+  ]
 
-export {menuItems, staffMembers};
+
+export { menuItems, staffMembers, empScheudule };
   

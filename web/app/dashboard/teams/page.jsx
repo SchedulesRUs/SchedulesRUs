@@ -39,7 +39,7 @@ const Users = () => {
                     height={40}
                     className="rounded-lg object-cover p-[3px]"
                   />
-                  Donny Dan
+                  {staff.title}
                 </div>
               </td>
               <td>{staff.email}</td>
