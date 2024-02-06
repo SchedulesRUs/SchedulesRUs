@@ -11,10 +11,14 @@ import {
     MdLogout,
   } from "react-icons/md";
 
+import { BiSolidMessageRoundedError } from "react-icons/bi";
+
+
 import user from "./../../public/user.jpg";
 import user2 from "./../../public/user2.jpg";
-
-
+import user3 from "./../../public/user3.jpg";
+import user4 from "./../../public/user4.jpg";
+import user5 from "./../../public/user5.jpg";
   const menuItems = [
     {
       title: "Pages",
@@ -38,6 +42,11 @@ import user2 from "./../../public/user2.jpg";
           title: "Hours Summary",
           path: "/dashboard/hour",
           icon: <MdPeople />,
+        },
+        {
+          title: "Staff Request",
+          path: "/dashboard/leave",
+          icon: <BiSolidMessageRoundedError />,
         },
       ],
     },
@@ -81,7 +90,7 @@ import user2 from "./../../public/user2.jpg";
       phone_no: "615-561-5913",
       role: "GrandMaster",
       status: "Active",
-      img: user,
+      img: user2,
     },
     {
       id: "3",
@@ -90,7 +99,7 @@ import user2 from "./../../public/user2.jpg";
       phone_no: "444-561-5913",
       role: "GrandMaster",
       status: "Active",
-      img: user,
+      img: user3,
     },
     {
       id: "4",
@@ -99,7 +108,7 @@ import user2 from "./../../public/user2.jpg";
       phone_no: "444-561-5913",
       role: "GrandMaster",
       status: "Active",
-      img: user,
+      img: user4,
     },
     {
       id: "5",
@@ -108,7 +117,7 @@ import user2 from "./../../public/user2.jpg";
       phone_no: "444-561-5913",
       role: "GrandMaster",
       status: "Active",
-      img: user,
+      img: user5,
     },
     {
       id: "6",
@@ -117,7 +126,7 @@ import user2 from "./../../public/user2.jpg";
       phone_no: "444-561-5913",
       role: "GrandMaster",
       status: "Active",
-      img: user,
+      img: user2,
     },
     {
       id: "7",
@@ -126,7 +135,7 @@ import user2 from "./../../public/user2.jpg";
       phone_no: "444-561-5913",
       role: "GrandMaster",
       status: "Active",
-      img: user,
+      img: user3,
     },
     {
       id: "8",
@@ -135,7 +144,7 @@ import user2 from "./../../public/user2.jpg";
       phone_no: "444-561-5913",
       role: "GrandMaster",
       status: "Active",
-      img: user,
+      img: user4,
     },
     {
       id: "9",
@@ -144,7 +153,7 @@ import user2 from "./../../public/user2.jpg";
       phone_no: "444-561-5913",
       role: "GrandMaster",
       status: "Active",
-      img: user,
+      img: user5,
     },
   ]
 
