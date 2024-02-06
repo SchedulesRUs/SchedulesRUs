@@ -45,7 +45,7 @@ import user5 from "./../../public/user5.jpg";
         },
         {
           title: "Staff Request",
-          path: "/dashboard/leave",
+          path: "/dashboard/request",
           icon: <BiSolidMessageRoundedError />,
         },
       ],
