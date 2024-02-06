@@ -48,7 +48,7 @@ const Users = () => {
               <td>{staff.status}</td>
               <td>
                 <div className="flex">
-                  <Link href="/">
+                  <Link href="/dashboard/teams/test">
                     <button className="bg-green-600 text-white text-[12px] rounded-lg p-1 mr-2">
                       View
                     </button>

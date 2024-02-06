@@ -5,7 +5,7 @@ import { useState } from 'react';
 export default function Home() {
   const [enteredUsername, setEnteredUsername] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
-  
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleLogin = async () => {
     const correctUsername = "Admin123";
@@ -13,7 +13,7 @@ export default function Home() {
     if (enteredUsername === correctUsername && enteredPassword === correctPassword) {
       window.location.href = '/dashboard';
     } else {
-      alert('Invalid username or password! Please retry'); 
+      setErrorMessage('Wrong username or password, please try again!'); 
     }
   };
 
@@ -57,6 +57,9 @@ export default function Home() {
                 value={enteredPassword}
                 onChange={(e) => setEnteredPassword(e.target.value)}
               />
+              {errorMessage && (
+                <p className="mt-2 text-sm text-red-600">{errorMessage}</p> // Display error message here
+              )}
             </div>
           </div>
           <div>

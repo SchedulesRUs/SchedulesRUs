@@ -3,6 +3,7 @@ import { menuItems } from "@/app/constants";
 import MenuLink from "./menuLink/menuLink";
 import Image from "next/image";
 import { MdLogout } from "react-icons/md";
+import Link from "next/link";
 
 const Sidebar = () => {
   return (
@@ -31,10 +32,12 @@ const Sidebar = () => {
           </li>
         ))}
       </ul>
+      <Link href="./">
       <button className="flex items-center p-3 gap-2 rounded-2xl hover:bg-indigo-950 hover:text-white w-[100%]">
         <MdLogout />
         Logout
       </button>
+      </Link>
     </div>
   );
 };
