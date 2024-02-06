@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,10 +6,14 @@ import {
   Switch,
   ScrollView,
   StatusBar,
-  TouchableOpacity,
 } from "react-native";
 
 const SettingsPage = () => {
+    // State to keep track of dark mode
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Function to toggle dark mode
+  const toggleDarkMode = () => setIsDarkMode((previousState) => !previousState);
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#0D1282" barStyle="light-content" />
