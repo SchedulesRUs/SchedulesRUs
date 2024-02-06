@@ -5,7 +5,7 @@ import { useState } from 'react';
 export default function Home() {
   const [enteredUsername, setEnteredUsername] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
-  
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleLogin = async () => {
     const correctUsername = "Admin123";
@@ -13,19 +13,22 @@ export default function Home() {
     if (enteredUsername === correctUsername && enteredPassword === correctPassword) {
       window.location.href = '/dashboard';
     } else {
-      alert('Invalid username or password! Please retry'); 
+      setErrorMessage('Wrong username or password, please try again!'); 
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+      <div className="flex-grow flex max-w-4xl w-full justify-around items-center">
+        <div className='flex-1 flex justify-center '>
+          <img src='/logo/Logo1.jpg' alt='Image' className="max-w-xs" />
+        </div>
         <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold text-purple-800 font-mono">
-            Schedule "R" Us
+          <h2 className="mt-6 text-3xl font-extrabold text-indigo-950 font-mono">
+            
           </h2>
         </div>
-        <div className="mt-8 space-y-6 bg-white shadow-md rounded-lg px-10 py-8">
+        <div className="flex-1 max-w-md space-y-6 bg-white shadow-md rounded-lg px-10 py-8">
           <div className="rounded-md shadow-sm -space-y-px">
             <div className='mb-4'>
               <label htmlFor="username" className="sr-only">Username</label>
@@ -54,19 +57,25 @@ export default function Home() {
                 value={enteredPassword}
                 onChange={(e) => setEnteredPassword(e.target.value)}
               />
+              {errorMessage && (
+                <p className="mt-2 text-sm text-red-600">{errorMessage}</p> // Display error message here
+              )}
             </div>
           </div>
           <div>
             <button
               onClick={handleLogin}
               type="button"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-950 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Login
             </button>
           </div>
         </div>
       </div>
+      <footer className="text-center py-4 text-gray-600">
+        <p>Schedule "R" Us © 2024 - <a href='https://github.com/JustKhit/SchedulesRUs' target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-900 focus:ring-indigo-800">GitHub</a></p>
+      </footer>
     </div>
   );
 }

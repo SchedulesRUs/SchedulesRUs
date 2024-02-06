@@ -12,14 +12,19 @@
     "@fullcalendar/core": "^6.1.10",
     "@fullcalendar/daygrid": "^6.1.10",
     "@fullcalendar/interaction": "^6.1.10",
+    "@fullcalendar/list": "^6.1.10",
     "@fullcalendar/react": "^6.1.10",
     "@fullcalendar/timegrid": "^6.1.10",
+    "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.1",
     "@nivo/line": "^0.84.0",
+    "@nivo/line": "^0.55.0",
     "my-package": "^0.0.0",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "react-icons": "^4.11.0"
+    "react-icons": "^4.11.0",
+    "react-native-web": "^0.19.10"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
