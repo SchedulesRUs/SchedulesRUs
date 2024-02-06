@@ -1,3 +1,5 @@
+//plugin the FullCalendar Library package for creating calendar interface.
+
 "use client";
 
 import React, { useState, useEffect, Fragment} from "react";
@@ -8,37 +10,40 @@ import interactionPlugin, { Draggable, DropArg } from "@fullcalendar/interaction
 import listPlugin from "@fullcalendar/list";
 import DeleteModal from "./deleteModal/deleteModel";
 import AddEvent from "./addEvent/addEvent";
+import { staffMembers, empScheudule } from "@/app/constants";
+
 
 const Schedule = () => {
-  const [events, setEvents] = useState([
-    { id: "1", title: "Paradon" },
-    { id: "2", title: "Khang" },
-    { id: "3", title: "Felix" },
-    { id: "4", title: "Nancy" },
-    { id: "5", title: "Sailor"  },
-    { id: "6", title: "Khit" }
-  ]);
 
-  const [allEvents, setAllEvents] = useState([
-    {title: "Paradon",start: "2024-01-31T15:00:00.000Z", end: "2024-01-31T24:00:00.000Z", id: "1", color: "#ff5733"},
-    {title: "Khang",start: "2024-02-01T15:00:00.000Z", end: "2024-02-01T18:30:00.000Z", id: "2", color: "#33ff57"},
-    {title: "Paradon", start: "2024-02-01T24:00:00.000Z", end: "2024-01-01T05:00:00.000Z", id: "3", color: "#5733ff"},
-    {title: "Paradon", start: "2024-02-3T15:00:00.000Z", end: "2024-01-31T24:00:00.000Z", id: "4", color: "#f6e05e"},
-  ]);
+  const [events, setEvents] = useState(staffMembers);
+  const [allEvents, setAllEvents] = useState(empScheudule);
 
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [idToDelete, setIdToDelete] = useState(null);
-  const [newEvent, setNewEvent] = useState({
-    title: "",
-    start: "",
-    end: "",
-    allDay: false,
-    id: 0,
-  });
+  const [newEvent, setNewEvent] = useState({title: "",start: "",end: "",allDay: false,id: 0,});
 
   const handleEventDrop = (info) => {
-    const { event } = info;
+    const { event, revert } = info;
+
+    const isTitleAlreadyExists = allEvents.some(
+      (e) =>
+        e.title === event.title &&
+        e.id !== event.id &&
+        (
+          (event.start >= e.start && event.start <= e.end) ||
+          (event.end && event.end >= e.start && event.end <= e.end)
+        )
+    );
+
+    if (isTitleAlreadyExists) {
+    // If the title already exists on the same date, revert the drop
+    revert();
+    alert("Event with the same title already exists on this date!");
+    return;
+  }
+
+
     const updatedEvent = {
       ...event.toPlainObject(), 
       start: event.start.toISOString(),
@@ -98,13 +103,9 @@ const Schedule = () => {
 
   function addEvent(data) {
     const colors = ["#ff5733", "#33ff57", "#5733ff", "#ff33a1", "#a133ff", "#33a1ff", "#f6e05e"];
-    
     const event = { ...newEvent, start: data.date.toISOString(), end: data.date.toISOString(), title: data.draggedEl.innerText, allDay: data.allDay, id: new Date().getTime(),color: colors[allEvents.length % colors.length] }
-    
-    
     setAllEvents([...allEvents, event])
   }
-
 
   function handleDeleteModal(data) {
     setShowDeleteModal(true)
