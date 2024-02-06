@@ -14,7 +14,7 @@ export class UserController {
   }
 
   @Post()
-  createUser(@Body() createUserDto: User) {
+  createUser(@Body() createUserDto: any) {
     return this.userService.createUser(createUserDto);
   }
 
@@ -24,7 +24,6 @@ async loginUser(
   @Query('password') password: string,
 ): Promise<LoginRespond | string> {
   const loginResponse = new LoginRespond();
-
   try {
     const user = await this.userService.validateLogin(username, password);
     // If the login is successful, create a LoginRespond object
