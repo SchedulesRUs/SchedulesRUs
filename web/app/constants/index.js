@@ -157,6 +157,30 @@ import user5 from "./../../public/user5.jpg";
     },
   ]
 
+  export const userRequests = [
+    {
+      id: "1",
+      requestedDate: "04/06/18",
+      type: "Holiday",
+      period: "15/07/18 - 25/08/18",
+      staff: {
+        ...staffMembers.find((member) => member.id === "1"), // Spread operator to copy staff member info
+      },
+      status: "Approved",
+    },
+    {
+      id: "2",
+      requestedDate: "05/06/18",
+      type: "Sick Leave",
+      period: "16/07/18 - 18/07/18",
+      staff: {
+        ...staffMembers.find((member) => member.id === "2"),
+      },
+      status: "Pending",
+    },
+    // ... more user requests
+  ];
+
   const empScheudule = [
     {title: "Paradon",start: "2024-01-31T15:00:00.000Z", end: "2024-01-31T24:00:00.000Z", id: "1", color: "#ff5733"},
     {title: "Khang",start: "2024-02-01T15:00:00.000Z", end: "2024-02-01T18:30:00.000Z", id: "2", color: "#33ff57"},
