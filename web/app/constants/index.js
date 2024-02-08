@@ -19,6 +19,7 @@ import user2 from "./../../public/user2.jpg";
 import user3 from "./../../public/user3.jpg";
 import user4 from "./../../public/user4.jpg";
 import user5 from "./../../public/user5.jpg";
+
   const menuItems = [
     {
       title: "Pages",
@@ -113,7 +114,7 @@ import user5 from "./../../public/user5.jpg";
     {
       id: "5",
       title: "Nancy",
-      email: "toretto.m95@gmail.com",
+      email: "asdasd.m95@gmail.com",
       phone_no: "444-561-5913",
       role: "GrandMaster",
       status: "Active",
