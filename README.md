@@ -23,12 +23,24 @@ Check out the [FullCalendar Documentation](https://fullcalendar.io/docs) for mor
 
 Nivo is a well-known library for building data visualizations in React applications. It offers a rich set of graph components, including standard charts like bar, line, pie, scatter, and more complex visualizations like heatmaps, radar charts, and network diagrams. Nivo is built on top of D3.js, which is a powerful and flexible tool for creating complex data visualizations in the browser, but Nivo simplifies the process by providing pre-built, customizable components that are easy to integrate into React applications.
 
- Please install the below packgage:
+## Installation
+
+Please install the below packgage:
    
-  npm i @nivo/line
+npm i @nivo/line
+
+## Documentation
+
+The Nivo documentation is hosted on its official website, which you can visit at https://nivo.rocks. This site provides an overview of all the available charts and features.
 
 # 3.Headless UI
 
-  npm install @headlessui/react
+Headless UI is a library of completely unstyled, fully accessible UI components, designed to integrate seamlessly with Tailwind CSS. It's developed by the creators of Tailwind CSS to provide developers with the core functionality of various UI components without any default styling. This approach allows developers to build their own unique UI designs on top of robust, accessible components without having to fight against pre-existing styles.
+
+## Installation
+
+npm install @headlessui/react
+
+## Documentation
 
 For full documentation, please visit[headlessui.com](https://headlessui.com)
