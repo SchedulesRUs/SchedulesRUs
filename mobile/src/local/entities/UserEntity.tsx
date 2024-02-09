@@ -1,0 +1,3 @@
+type UserEntity = {
+    username: String;
+};
