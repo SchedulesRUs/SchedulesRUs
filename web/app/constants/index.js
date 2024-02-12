@@ -13,12 +13,7 @@ import {
 
 import { BiSolidMessageRoundedError } from "react-icons/bi";
 
-
-import user from "./../../public/user.jpg";
-import user2 from "./../../public/user2.jpg";
-import user3 from "./../../public/user3.jpg";
-import user4 from "./../../public/user4.jpg";
-import user5 from "./../../public/user5.jpg";
+import { user, user2, user3, user4, user5 } from "../asset";
 
   const menuItems = [
     {
@@ -140,8 +135,8 @@ import user5 from "./../../public/user5.jpg";
     },
     {
       id: "8",
-      title: "Bobby",
-      email: "toretto.m95@gmail.com",
+      title: "Felix",
+      email: "felix.supersnowboarding@gmail.com",
       phone_no: "444-561-5913",
       role: "GrandMaster",
       status: "Active",

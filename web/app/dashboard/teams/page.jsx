@@ -1,19 +1,25 @@
 "use client"
 
-import Search from "@/app/component/dashboard/search/search";
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Search from "@/app/component/dashboard/search/search";
 import Pagination from "@/app/component/dashboard/pagination/pagination";
 import { staffMembers } from "@/app/constants";
+import SingleUserPage from "./[id]/page";
 
 const Users = () => {
-
   const [searchUser, setSearchUser] = useState("");
+  const [selectedUser, setSelectedUser] = useState(null);
 
   const handleSearchUser = (event) => {
     setSearchUser(event.target.value);
   };
+
+  const handleViewUser = (user) => {
+    setSelectedUser(user);
+  };
+
   const filteredStaffMembers = staffMembers.filter((staff) =>
     staff.title.toLowerCase().includes(searchUser.toLowerCase())
   );
@@ -21,10 +27,10 @@ const Users = () => {
   return (
     <div className="bg-[#f1efefe9] rounded-lg p-4 mt-4">
       <div className="flex items-center justify-between">
-        <Search 
-        placeholder="Search for a user..." 
-        searchUser={searchUser}
-        handleSearchUser={handleSearchUser}
+        <Search
+          placeholder="Search for a user..."
+          searchUser={searchUser}
+          handleSearchUser={handleSearchUser}
         />
         <Link href="/dashboard/teams/add">
           <button className="p-[6px] bg-indigo-950 rounded-lg text-white text-[14px]">
@@ -64,14 +70,15 @@ const Users = () => {
               <td>{staff.status}</td>
               <td>
                 <div className="flex">
-                  <Link href="/dashboard/teams/test">
-                    <button className="bg-green-600 text-white text-[12px] rounded-lg p-1 mr-2">
-                      View
-                    </button>
-                    <button className="bg-red-700 text-white text-[12px] rounded-lg p-1">
-                      Delete
-                    </button>
-                  </Link>
+                  <button
+                    onClick={() => handleViewUser(staff)}
+                    className="bg-green-600 text-white text-[12px] rounded-lg p-1 mr-2"
+                  >
+                    View
+                  </button>
+                  <button className="bg-red-700 text-white text-[12px] rounded-lg p-1">
+                    Delete
+                  </button>
                 </div>
               </td>
             </tr>
@@ -79,6 +86,9 @@ const Users = () => {
         </tbody>
       </table>
       <Pagination />
+      <div className="mt-10">
+      {selectedUser && <SingleUserPage user={selectedUser} />}
+      </div>
     </div>
   );
 };

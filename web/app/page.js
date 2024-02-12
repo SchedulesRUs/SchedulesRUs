@@ -1,6 +1,9 @@
 "use client"; 
 
 import { useState } from 'react';
+import { logo, logo1 } from './asset';
+import Image from 'next/image';
+
 
 export default function Home() {
   const [enteredUsername, setEnteredUsername] = useState('');
@@ -21,7 +24,7 @@ export default function Home() {
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
       <div className="flex-grow flex max-w-4xl w-full justify-around items-center">
         <div className='flex-1 flex justify-center '>
-          <img src='/logo/Logo1.jpg' alt='Image' className="max-w-xs" />
+          <Image src={logo1} alt='Image' className="max-w-xs" />
         </div>
         <div className="text-center">
           <h2 className="mt-6 text-3xl font-extrabold text-indigo-950 font-mono">
