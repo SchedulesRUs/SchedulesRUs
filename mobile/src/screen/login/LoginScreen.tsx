@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import {
     View,
     Text,
@@ -11,22 +11,22 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { assertIsError } from '../../extension/ErrorExt';
-import { SecureStorageKey } from '../../local/LocalConfig';
+import { useAuthContext } from '../../context/AuthContext';
+import { User } from '../../model/User';
 
 function LoginScreen() {
+    const { user, saveUser } = useAuthContext();
+
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
     const login = async () => {
         try {
-            // Do login
-            // Set result
-            const username = "Khang"
-            const user: UserEntity = {
-                username: username
+            const user: User = {
+                username: 'Khang'
             }
-            await AsyncStorage.setItem(SecureStorageKey.USER, JSON.stringify(user));
-            console.log('successful logging in')
+
+            saveUser(user)
         } catch (error) {
             assertIsError(error);
             Alert.alert(error.message)
