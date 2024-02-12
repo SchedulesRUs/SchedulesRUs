@@ -1,3 +1,0 @@
-type UserEntity = {
-    username: String;
-};

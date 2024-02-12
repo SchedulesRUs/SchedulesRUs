@@ -5,46 +5,50 @@
  * @format
  */
 
-import React, { useContext } from 'react';
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import LoginScreen from './src/screen/login/LoginScreen';
-import { UserContext, UserContextProvider, UserContextType } from './src/context/UserContextProvider';
+import HomeScreen from './src/screen/home/HomeScreen';
+import { AuthContextProvider, useAuthContext } from './src/context/AuthContext';
+import CalendarScreen from './src/screen/calendar/CalendarScreen';
+import SettingsScreen from './src/screen/settings/SettingsScreen';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Stack = createStackNavigator();
+const MainTab = createBottomTabNavigator();
+
+function LoginStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Login" component={LoginScreen} />
+    </Stack.Navigator>
+  );
+}
+
+function MainStack() {
+  return (
+    <MainTab.Navigator screenOptions={{ headerShown: false }}>
+      <MainTab.Screen name="Home" component={HomeScreen} />
+      <MainTab.Screen name="Calendar" component={CalendarScreen} />
+      <MainTab.Screen name="Settings" component={SettingsScreen} />
+    </MainTab.Navigator>
+  )
+}
+
+function AppContent() {
+  const { user } = useAuthContext();
+
+  return user ? <MainStack /> : <LoginStack />;
+}
 
 function App(): React.JSX.Element {
-  const { user, userInitialized } = useContext<UserContextType>(UserContext);
-
-  if (!userInitialized) {
-    return <></>;
-  }
-
-  function LoginStack() {
-    return (
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Login" component={LoginScreen} />
-      </Stack.Navigator>
-    );
-  }
-
-  function MainStack() {
-    return (<></>
-      // <Stack.Navigator>
-      //   <Stack.Screen name="Home" component={Home} />
-      //   <Stack.Screen name="Notifications" component={Notifications} />
-      //   <Stack.Screen name="Profile" component={Profile} />
-      //   <Stack.Screen name="Settings" component={Settings} />
-      // </Stack.Navigator>
-    );
-  }
-
   return (
-    <UserContextProvider>
-      <NavigationContainer>
-        {user ? <MainStack /> : <LoginStack />}
-      </NavigationContainer>
-    </UserContextProvider>
+    <NavigationContainer>
+      <AuthContextProvider>
+        <AppContent />
+      </AuthContextProvider>
+    </NavigationContainer>
   );
 }
 
