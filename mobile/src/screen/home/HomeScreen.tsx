@@ -1,56 +1,51 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
     View,
     Text,
     ScrollView,
     FlatList,
     StyleSheet,
+    RefreshControl,
     TouchableOpacity
 } from 'react-native';
 import ShiftItem from './ShiftItem';
 import { AppStatusBar } from '../../theme/StatusBar';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { getSchedule } from '../../services/ScheduleService';
+
+type Shift = {
+    id: number;
+    start: number;
+    end: number;
+    position: string;
+}
 
 const HomeScreen = () => {
     const username = 'Khang Tring'
-    const [shifts, setShifts] = useState([
-        {
-            id: 1,
-            start: 1707163200,
-            end: 1707192000,
-            position: 'Cooker',
-        },
-        {
-            id: 2,
-            start: 1707242400,
-            end: 1707271200,
-            position: 'Server',
-        },
-        {
-            id: 3,
-            start: 1707339600,
-            end: 1707357600,
-            position: 'Cleaner',
-        },
-        {
-            id: 4,
-            start: 1707418800,
-            end: 1707433200,
-            position: 'Kitchen Helper',
-        },
-        {
-            id: 5,
-            start: 1707163200,
-            end: 1707192000,
-            position: 'Server',
-        },
-        {
-            id: 6,
-            start: 1707163200,
-            end: 1707192000,
-            position: 'Cashier, Server',
-        }
-    ])
+    const [refreshing, setRefreshing] = useState(false);
+    const [shifts, setShifts] = useState<Shift[]>([])
+
+    const fetchSchedule = async () => {
+        const result = await getSchedule()
+        const list: Shift[] = result.map((item) => ({
+            id: item.id,
+            start: Date.parse(item.start) / 1000,
+            end: Date.parse(item.end) / 1000,
+            position: item.title,
+        }));
+
+        setShifts(list)
+    }
+
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        fetchSchedule();
+        setRefreshing(false);
+    }, []);
+
+    useEffect(() => {
+        fetchSchedule();
+    }, [])
 
     return (
         <View style={{ flex: 1 }}>
@@ -59,11 +54,14 @@ const HomeScreen = () => {
                 <TouchableOpacity style={styles.menuButton}>
                     <Icon name="menu" size={24} color="white" />
                 </TouchableOpacity>
-                <Text style={styles.headerTitle}>Home</Text>
-                <View style={{ width: 24 }} />
+                <Text style={styles.headerTitle}>Welcome {username}</Text>
             </View>
-            <ScrollView contentContainerStyle={{ flex: 1 }}>
-                <Text>Upcoming Shift for {username}</Text>
+            <ScrollView
+                contentContainerStyle={{ flex: 1, margin: 20 }}
+                refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                }>
+                <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 10 }}>Upcoming Shift</Text>
                 <FlatList
                     data={shifts}
                     renderItem={({ item }) => <ShiftItem shift={item} />}
@@ -90,7 +88,7 @@ const styles = StyleSheet.create({
     },
     menuButton: {
         position: 'absolute',
-        left: 10,
+        left: 20,
     },
 });
 

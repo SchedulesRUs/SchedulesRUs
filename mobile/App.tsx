@@ -14,6 +14,7 @@ import { AuthContextProvider, useAuthContext } from './src/context/AuthContext';
 import CalendarScreen from './src/screen/calendar/CalendarScreen';
 import SettingsScreen from './src/screen/settings/SettingsScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const Stack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
@@ -29,9 +30,24 @@ function LoginStack() {
 function MainStack() {
   return (
     <MainTab.Navigator screenOptions={{ headerShown: false }}>
-      <MainTab.Screen name="Home" component={HomeScreen} />
-      <MainTab.Screen name="Calendar" component={CalendarScreen} />
-      <MainTab.Screen name="Settings" component={SettingsScreen} />
+      <MainTab.Screen name="Home" component={HomeScreen} options={{
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ color, size }) => (
+          <Icon name="menu" size={size} color={color} />
+        ),
+      }} />
+      <MainTab.Screen name="Calendar" component={CalendarScreen} options={{
+        tabBarLabel: 'Calendar',
+        tabBarIcon: ({ color, size }) => (
+          <Icon name="calendar" size={size} color={color} />
+        ),
+      }} />
+      <MainTab.Screen name="Settings" component={SettingsScreen} options={{
+        tabBarLabel: 'Settings',
+        tabBarIcon: ({ color, size }) => (
+          <Icon name="account-settings-outline" size={size} color={color} />
+        ),
+      }} />
     </MainTab.Navigator>
   )
 }
