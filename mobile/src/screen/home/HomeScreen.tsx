@@ -21,17 +21,17 @@ type Shift = {
 }
 
 const HomeScreen = () => {
-    const username = 'Khang Tring'
+    const username = 'Khit'
     const [refreshing, setRefreshing] = useState(false);
     const [shifts, setShifts] = useState<Shift[]>([])
 
     const fetchSchedule = async () => {
         const result = await getSchedule()
-        const list: Shift[] = result.map((item) => ({
+        const list: Shift[] = result.filter(item => item.title.toLowerCase().includes(username.toLowerCase())).map((item) => ({
             id: item.id,
             start: Date.parse(item.start) / 1000,
             end: Date.parse(item.end) / 1000,
-            position: item.title,
+            position: `Cashier`,
         }));
 
         setShifts(list)
@@ -61,7 +61,7 @@ const HomeScreen = () => {
                 refreshControl={
                     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                 }>
-                <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 10 }}>Upcoming Shift</Text>
+                <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 10 }}>Your Upcoming Shift</Text>
                 <FlatList
                     data={shifts}
                     renderItem={({ item }) => <ShiftItem shift={item} />}

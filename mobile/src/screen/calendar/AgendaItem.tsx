@@ -32,9 +32,9 @@ const AgendaItem = (props: ItemProps) => {
                 <Text style={styles.itemDurationText}>{item.duration}</Text>
             </View>
             <Text style={styles.itemTitleText}>{item.title}</Text>
-            <View style={styles.itemButtonContainer}>
+            {/* <View style={styles.itemButtonContainer}>
                 <Button color={'grey'} title={'Info'} onPress={buttonPressed} />
-            </View>
+            </View> */}
         </TouchableOpacity>
     );
 };

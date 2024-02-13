@@ -33,7 +33,7 @@ function MainStack() {
       <MainTab.Screen name="Home" component={HomeScreen} options={{
         tabBarLabel: 'Home',
         tabBarIcon: ({ color, size }) => (
-          <Icon name="menu" size={size} color={color} />
+          <Icon name="home" size={size} color={color} />
         ),
       }} />
       <MainTab.Screen name="Calendar" component={CalendarScreen} options={{

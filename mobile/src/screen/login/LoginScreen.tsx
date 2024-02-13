@@ -23,7 +23,7 @@ function LoginScreen() {
     const login = async () => {
         try {
             const user: User = {
-                username: 'Khang'
+                username: 'Khit'
             }
 
             saveUser(user)

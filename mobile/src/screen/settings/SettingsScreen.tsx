@@ -58,7 +58,7 @@ const SettingsScreen: React.FC = () => {
             <View style={styles.header}>
                 <Text style={styles.headerTitle}>Settings</Text>
                 <View style={styles.userSection}>
-                    <Text style={styles.userName}>Hello Khang</Text>
+                    <Text style={styles.userName}>Hello Khit</Text>
                 </View>
             </View>
             <ScrollView>
