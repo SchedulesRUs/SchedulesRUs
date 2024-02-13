@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Switch, StyleSheet, TouchableOpacity, ScrollView, StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppColor } from '../../theme/Colors';
+import { AppStatusBar } from '../../theme/StatusBar';
 
 const SettingsOption = ({ title, onPress, isSwitch, onToggle, isEnabled }: {
     title: string,
@@ -52,24 +53,27 @@ const SettingsScreen: React.FC = () => {
     const navigateToTermsAndConditions = () => console.log('Navigate to Terms and Conditions');
 
     return (
-        <SafeAreaView style={{ display: 'flex', flex: 1, backgroundColor: AppColor }}>
+        <View style={{ flex: 1 }}>
+            <AppStatusBar />
             <View style={styles.header}>
                 <Text style={styles.headerTitle}>Settings</Text>
                 <View style={styles.userSection}>
                     <Text style={styles.userName}>Hello Khang</Text>
                 </View>
             </View>
-            <View style={styles.optionsSection}>
-                <SettingsOption title="Edit profile" onPress={navigateToEditProfile} />
-                <SettingsOption title="Change password" onPress={navigateToChangePassword} />
-                <SettingsOption title="Add a payment method" onPress={navigateToAddPaymentMethod} />
-                <SettingsOption title="Push notifications" isSwitch onToggle={togglePushNotifications} isEnabled={isPushNotificationsEnabled} />
-                <SettingsOption title="Dark mode" isSwitch onToggle={toggleDarkMode} isEnabled={isDarkModeEnabled} />
-                <SettingsOption title="About us" onPress={navigateToAboutUs} />
-                <SettingsOption title="Privacy policy" onPress={navigateToPrivacyPolicy} />
-                <SettingsOption title="Terms and conditions" onPress={navigateToTermsAndConditions} />
-            </View>
-        </SafeAreaView>
+            <ScrollView>
+                <View style={styles.optionsSection}>
+                    <SettingsOption title="Edit profile" onPress={navigateToEditProfile} />
+                    <SettingsOption title="Change password" onPress={navigateToChangePassword} />
+                    <SettingsOption title="Add a payment method" onPress={navigateToAddPaymentMethod} />
+                    <SettingsOption title="Push notifications" isSwitch onToggle={togglePushNotifications} isEnabled={isPushNotificationsEnabled} />
+                    <SettingsOption title="Dark mode" isSwitch onToggle={toggleDarkMode} isEnabled={isDarkModeEnabled} />
+                    <SettingsOption title="About us" onPress={navigateToAboutUs} />
+                    <SettingsOption title="Privacy policy" onPress={navigateToPrivacyPolicy} />
+                    <SettingsOption title="Terms and conditions" onPress={navigateToTermsAndConditions} />
+                </View>
+            </ScrollView>
+        </View>
     );
 };
 

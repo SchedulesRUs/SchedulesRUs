@@ -9,6 +9,7 @@ import AgendaItem from './AgendaItem';
 import { MarkedDates } from 'react-native-calendars/src/types';
 import { format } from 'date-fns';
 import { AgendaList, CalendarProvider, WeekCalendar } from 'react-native-calendars';
+import { AppStatusBar } from '../../theme/StatusBar';
 
 export const agendaItems = [
     {
@@ -74,7 +75,8 @@ const CalendarScreen = () => {
     }, []);
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
+            <AppStatusBar />
             <CalendarProvider
                 style={{ backgroundColor: 'white' }}
                 date={selectedDate}
@@ -91,7 +93,7 @@ const CalendarScreen = () => {
                 // dayFormat={'yyyy-MM-d'}
                 />
             </CalendarProvider>
-        </SafeAreaView >
+        </View >
     )
 }
 

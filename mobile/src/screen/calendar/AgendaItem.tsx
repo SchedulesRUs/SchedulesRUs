@@ -1,4 +1,3 @@
-import isEmpty from 'lodash/isEmpty';
 import React, { useCallback } from 'react';
 import { StyleSheet, Alert, View, Text, TouchableOpacity, Button } from 'react-native';
 
@@ -18,7 +17,7 @@ const AgendaItem = (props: ItemProps) => {
         Alert.alert(item.title);
     }, []);
 
-    if (isEmpty(item)) {
+    if (item == null) {
         return (
             <View style={styles.emptyItem}>
                 <Text style={styles.emptyItemText}>No Events Planned Today</Text>
