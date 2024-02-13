@@ -20,18 +20,14 @@ export class UserService {
   }
 
   async createUser(createUserDto: any): Promise<User[]> {
-    const { password, ...rest } = createUserDto;
-    const hashedPassword = await bcrypt.hash(password, 6); // Adjust the salt rounds as needed
     const userColor = generateHexColor()
-    const newUser = this.userRepository.create({ ...rest, password: hashedPassword, userColor:userColor });
+    const newUser = this.userRepository.create({ ...createUserDto, userColor:userColor });
     return this.userRepository.save(newUser);
   }
-  
 
   async validateLogin(username: string, password: string): Promise<User> {
     try {
       console.log('Received credentials:', username, password);
-  
       const user = await this.userRepository.findOne({ where: { username } });
   
       if (!user) {
@@ -39,9 +35,12 @@ export class UserService {
         throw new NotFoundException('User not found');
       }
   
-      const isPasswordValid = await bcrypt.compare(password, user.password);
+      // Here, you would compare the plain-text password provided by the user
+      // with the hashed password stored in the user record using a secure method
+      // For example, you can use a different hashing algorithm like SHA-256
   
-      if (!isPasswordValid) {
+      // Example of comparing passwords without bcrypt (not recommended for production)
+      if (password !== user.password) {
         console.log('Invalid password');
         throw new UnauthorizedException('Invalid password');
       }
@@ -53,6 +52,7 @@ export class UserService {
       throw error; // Rethrow the error for further analysis
     }
   }
+  
 }
 function generateHexColor(): string {
   // Generate random RGB values

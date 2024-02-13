@@ -1,6 +1,7 @@
 // database.module.ts
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import ScheduleInfo from 'src/entities/scheduleInfo.entity';
 import User from 'src/entities/user.entity';
 
 
@@ -14,7 +15,7 @@ import User from 'src/entities/user.entity';
       password:'admin123@',
       database: 'schedulerus',
       logging: true,
-      entities: [User],
+      entities: [User,ScheduleInfo],
       synchronize: true,
     } ),
   ],

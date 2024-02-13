@@ -10,9 +10,13 @@ export default class User {
 
   @Column()
   password: string;
-  
+
   @Column()
   email: string;
+
+  @Column({ nullable: true })
+  userColor:string;
+
 
   @Column({ nullable: true }) 
   phone: string;
@@ -21,13 +25,13 @@ export default class User {
   isAdmin: string;
 
   @Column({ nullable: true }) 
-  isActive: string;
+  role: string;
 
   @Column({ nullable: true }) 
   address: string;
 
-  @Column()
-  userColor:string
+  @Column({ nullable: true }) 
+  image: string;
 
 //After modifying your entity, remember to synchronize your database schema using TypeORM:
 //npx typeorm schema:sync

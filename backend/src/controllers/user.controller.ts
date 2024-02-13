@@ -45,6 +45,6 @@ async loginUser(
 
 class LoginRespond {
   success: boolean;
-  error:String  ;
+  error:String;
   username: string;
 }

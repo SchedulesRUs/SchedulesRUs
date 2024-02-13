@@ -9,11 +9,35 @@ export default function Home() {
   const [enteredUsername, setEnteredUsername] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [validateIsSuccess, setValidateIsSuccess] = useState(false);
 
   const handleLogin = async () => {
     const correctUsername = "Admin123";
     const correctPassword = "manager123";
     if (enteredUsername === correctUsername && enteredPassword === correctPassword) {
+      window.location.href = '/dashboard';
+    } else {
+      setErrorMessage('Wrong username or password, please try again!'); 
+    }
+  };
+
+  const validateLogin = async ({username,password}) => {
+    async function fetchGetAllUser() {
+      try {
+        const response = await fetch(`http://localhost:1000/user/login?username=${username}&password=${password}`);
+        const data = await response.json();
+        console.log("test", data);
+        console.dir(data);
+        if(data.success == true){
+          setValidateIsSuccess(true)
+        }
+        // setAllUser(data);
+      } catch (error) {
+      }
+    }
+    fetchGetAllUser();
+
+    if (validateIsSuccess) {
       window.location.href = '/dashboard';
     } else {
       setErrorMessage('Wrong username or password, please try again!'); 
@@ -67,7 +91,7 @@ export default function Home() {
           </div>
           <div>
             <button
-              onClick={handleLogin}
+                onClick={() => validateLogin({username: "ngoc", password: "ngoc"})}
               type="button"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-950 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >

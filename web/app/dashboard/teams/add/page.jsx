@@ -1,3 +1,18 @@
+"use client";
+import { React, useState, useEffect } from "react";
+class User {
+  constructor(username, password, email, image, address, role, isAdmin, phone) {
+    this.username = username;
+    this.password = password;
+    this.email = email;
+    this.image = image;
+    this.address = address;
+    this.role = role;
+    this.isAdmin = isAdmin;
+    this.phone = phone
+
+  }
+}
 "use client"
 
 import React, { useState } from 'react'
@@ -5,6 +20,46 @@ import { s,s1,s2,s3,s4,s5,s6,s7 } from '@/app/asset';
 import Image from 'next/image';
 
 const AddUser = () => {
+  const [user, setUser] = useState(new User("This is test", "", "", "", "", "", "", ""));
+  const [userToPost, setUserToPost] = useState(user);
+
+
+  // Function to update user state
+  const updateUser = (field, value) => {
+    setUser(prevUser => ({
+      ...prevUser,
+      [field]: value
+    }));
+  };
+
+  async function createUser() {
+    const requestBody = JSON.stringify(userToPost);
+    try {
+      const response = await fetch("http://localhost:1000/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: requestBody
+      });
+      const data = await response.json();
+      console.log("test", data);
+
+    } catch (error) {
+      console.log("fail", data);
+
+    }
+
+  }
+
+  useEffect(() => {
+    console.log("user", user);
+    setUserToPost(user)
+    console.log("userToPost", userToPost);
+
+  }, [user]);
+
+
   const [selectedImage, setSelectedImage] = useState(s6);
 
   // Function to handle image selection
@@ -14,6 +69,13 @@ const AddUser = () => {
 
   return (
     <div className="p-5 rounded-lg mt-5 bg-[#f1efefe9]">
+      <form onSubmit={createUser} action="" className="flex flex-wrap justify-between">
+
+        <input onChange={e => updateUser("username", e.target.value)} className="w-[45%] m-4 p-2 rounded-md" type="text" placeholder="username" name="username" required />
+        <input onChange={e => updateUser("email", e.target.value)} className="w-[45%] m-4 p-2 rounded-md" type="email" placeholder="email" name="email" required />
+        <input onChange={e => updateUser("password", e.target.value)} className="w-[45%] m-4 p-2 rounded-md" type="password" placeholder="password" name="password" required />
+        <input className="w-[45%] m-4 p-2 rounded-md" type="phone" placeholder="phone" name="phone" />
+
       <form action="" className="flex flex-wrap justify-between">
           <input className="w-[45%] m-4 p-2 rounded-md" type="text" placeholder="Username" name="username" required />
           <input className="w-[45%] m-4 p-2 rounded-md" type="email" placeholder="Email" name="email" required />

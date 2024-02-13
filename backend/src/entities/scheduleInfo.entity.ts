@@ -6,23 +6,23 @@ export default class ScheduleInfo {
   id: number;
 
   @Column()
-  allDay: boolean;
-
-  @Column()
-  backgroundColor: string;
-
-  @Column()
-  borderColor: String;
-
-  @Column()
-  start: boolean;
+  userId: number;
   
-  @Column()
-  end: boolean;
-
   @Column()
   title: string;
   
+  @Column({ nullable: true })
+  allDay: boolean;
+
+  @Column({ nullable: true })
+  color: String;
+
+  @Column({ nullable: true })
+  start: String;
+  
+  @Column({ nullable: true })
+  end: String;
+
 
 //After modifying your entity, remember to synchronize your database schema using TypeORM:
 //npx typeorm schema:sync
