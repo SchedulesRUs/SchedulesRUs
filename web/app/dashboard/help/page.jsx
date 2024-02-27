@@ -1,5 +1,9 @@
 "use client"
 import React, { useState } from "react";
+import { user3 } from "@/app/asset";
+import { user4 } from "@/app/asset";
+import { user5 } from "@/app/asset";
+import Image from "next/image";
 
 const Page = () => {
     const [isHovering, setIsHovering] = useState({
@@ -94,7 +98,7 @@ const Page = () => {
                         </p>
                     </div>
                     <div style={styles.imageContainer}>
-                        <img src="/user3.jpg" alt="Paradon Meeanan" style={styles.image} />
+                        <Image src={user3} alt="Paradon Meeanan" style={styles.image} />
                     </div>
                 </div>
                 
@@ -117,7 +121,7 @@ const Page = () => {
                         </p>
                     </div>
                     <div style={styles.imageContainer}>
-                        <img src="/user4.jpg" alt="Felix Zhang" style={styles.image} />
+                        <Image src={user4} alt="Felix Zhang" style={styles.image} />
                     </div>
                 </div>
 
@@ -140,7 +144,7 @@ const Page = () => {
                         </p>
                     </div>
                     <div style={styles.imageContainer}>
-                        <img src="/user5.jpg" alt="Khit Klinsang" style={styles.image} />
+                        <Image src={user5} alt="Khit Klinsang" style={styles.image} />
                     </div>
                 </div>
             </div>

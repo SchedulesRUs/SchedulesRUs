@@ -47,7 +47,7 @@ const RequestsPage = () => {
               <td>{request.status}</td>
               <td>
                 {request.status === 'Pending' && (
-                  <div className="flex justify-around">
+                  <div className="flex justify-start space-x-2">
                     <button 
                       className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600 mr-2"
                       onClick={() => changeStatus(request.id, 'Approved')}
