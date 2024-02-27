@@ -9,7 +9,7 @@ export default function Home() {
   const [enteredUsername, setEnteredUsername] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [validateIsSuccess, setValidateIsSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     const correctUsername = "Admin123";
@@ -22,29 +22,35 @@ export default function Home() {
   };
 
   const validateLogin = async ({username,password}) => {
-    async function fetchGetAllUser() {
       try {
+        setLoading(true);
         const response = await fetch(`http://localhost:1000/user/login?username=${username}&password=${password}`);
         const data = await response.json();
         console.log("test", data);
         console.dir(data);
         if(data.success == true){
-          setValidateIsSuccess(true)
+          window.location.href = '/dashboard';
+          setLoading(false);
+        }
+        else{
+          setErrorMessage('Wrong username or password, please try again!'); 
         }
         // setAllUser(data);
       } catch (error) {
-      }
-    }
-    fetchGetAllUser();
+        setLoading(false);
+        setErrorMessage('Wrong username or password, please try again!'); 
 
-    if (validateIsSuccess) {
-      window.location.href = '/dashboard';
-    } else {
-      setErrorMessage('Wrong username or password, please try again!'); 
-    }
+      }
+
   };
 
   return (
+    loading ? (
+      // Show Loading Spinner or Message
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-indigo-500"></div>
+      </div>
+    ) : (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
       <div className="flex-grow flex max-w-4xl w-full justify-around items-center">
         <div className='flex-1 flex justify-center '>
@@ -91,7 +97,7 @@ export default function Home() {
           </div>
           <div>
             <button
-                onClick={() => validateLogin({username: "ngoc", password: "ngoc"})}
+                onClick={() => validateLogin({username:enteredUsername, password:enteredPassword})}
               type="button"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-950 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
@@ -99,10 +105,58 @@ export default function Home() {
             </button>
           </div>
         </div>
+          
       </div>
+   
       <footer className="text-center py-4 text-gray-600">
         <p>Schedule "R" Us © 2024 - <a href='https://github.com/JustKhit/SchedulesRUs' target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-900 focus:ring-indigo-800">GitHub</a></p>
       </footer>
     </div>
-  );
-}
+  )
+  )
+};
+
+const styles = {
+  container: {
+    textAlign: 'center',
+    backgroundColor: 'white',
+    padding: '20px',
+    borderRadius: '8px',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    maxWidth: '400px',
+    margin: '0 auto',
+  },
+  title: {
+    fontSize: '24px',
+    marginBottom: '20px',
+  },
+  loading: {
+    fontSize: '18px',
+    color: '#555',
+  },
+  fact: {
+    fontSize: '18px',
+    color: '#333',
+  },
+  button: {
+    fontSize: '16px',
+    padding: '10px 20px',
+    backgroundColor: '#007bff',
+    color: 'white',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    marginTop: '20px',
+    marginRight: '10px',
+  },
+  logoutButton: {
+    fontSize: '16px',
+    padding: '10px 20px',
+    backgroundColor: 'red',
+    color: 'white',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    marginTop: '20px',
+  },
+};
