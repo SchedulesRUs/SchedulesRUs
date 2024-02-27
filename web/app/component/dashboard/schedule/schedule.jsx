@@ -65,16 +65,16 @@ const Schedule = () => {
     }
   }
 
-  async function getScheduleById(id) {
-    try {
-      const response = await fetch(`http://localhost:1000/scheduleInfo/${id}`);
-      const data = await response.json();
-      console.log("Fetch Schedule by ID:", data);
-      setSchedule(data);
-    } catch (error) {
-      console.log("fail", error);
-    }
-  }
+  // async function getScheduleById(id) {
+  //   try {
+  //     const response = await fetch(`http://localhost:1000/scheduleInfo/${id}`);
+  //     const data = await response.json();
+  //     console.log("Fetch Schedule by ID:", data);
+  //     setSchedule(data);
+  //   } catch (error) {
+  //     console.log("fail", error);
+  //   }
+  // }
 
   useEffect(() => {
     fetchSchedule();
@@ -92,7 +92,8 @@ const Schedule = () => {
         body: requestBody,
       });
       const data = await response.json();
-      // setSchedule([...schedule,data])
+      setSchedule([...schedule, data])
+
       console.log("Add Schedule to DB:", data);
     } catch (error) {
       console.log("Add Schedule to DB:", error);
@@ -108,6 +109,7 @@ const Schedule = () => {
   }, [scheduleToPost]);
 
   async function updateEventTime(id, start, end) {
+    console.log(id, start, end);
     try {
       await fetch(`http://localhost:1000/scheduleInfo/${id}`, {
         method: "PUT",
@@ -116,7 +118,10 @@ const Schedule = () => {
         },
         body: JSON.stringify({ start, end }),
       });
+      console.log("Event resized successfully");
+      
     } catch (error) {
+      console.log("Error updating event time:", error);
       throw new Error(`Unable to update event time: ${error.message}`);
     }
   }
@@ -127,7 +132,7 @@ const Schedule = () => {
   
     try {
       await updateEventTime(id, start, end);
-      console.log("Event Dropped:", "ID", id, "Start:", start, "End:", end);
+      console.log("Event Dropped with ID:", id, "Start:", start, "End:", end);
     } catch (error) {
       console.error("Error updating event time:", error);
     }
@@ -199,6 +204,9 @@ const Schedule = () => {
     newScheduleInfo.allDay = data.allDay;
     console.log("addEvent:", newScheduleInfo);
     setScheduleToPost(newScheduleInfo);
+
+    
+
   }
 
   function handleDeleteModal(data) {
