@@ -1,13 +1,13 @@
 import React from "react";
 import Image from "next/image";
 
-
 const SingleUserPage = ({ user }) => {
+
   return (
     <div className="flex gap-4 mt-4">
       <div className="flex-1 bg-[#f1efefe9] rounded-xl h-max">
         <div className="relative p-3">
-          <Image src={user.img} alt="" width={400} height={300} className="rounded-xl mb-2" />
+          <Image src={user.Image} alt="" width={400} height={300} className="rounded-xl mb-2" />
         </div>
         <div className="flex justify-center items-center mb-4 font-bold">{user.title}</div>
       </div>
@@ -38,3 +38,4 @@ const SingleUserPage = ({ user }) => {
 };
 
 export default SingleUserPage;
+

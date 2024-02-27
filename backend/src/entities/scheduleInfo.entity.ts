@@ -15,13 +15,13 @@ export default class ScheduleInfo {
   allDay: boolean;
 
   @Column({ nullable: true })
-  color: String;
+  color: string;
 
   @Column({ nullable: true })
-  start: String;
+  start: string;
   
   @Column({ nullable: true })
-  end: String;
+  end: string;
 
 
 //After modifying your entity, remember to synchronize your database schema using TypeORM:

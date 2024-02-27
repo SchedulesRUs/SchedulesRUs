@@ -1,53 +1,42 @@
-// src/controllers/user.controller.ts
-import { Controller, Get, Post, Body, Query, HttpException, HttpStatus } from '@nestjs/common';
-import { UserService } from '../services/user.service';
+
+import { Controller, Get, Post, Patch, Body, Delete, Param, Put } from '@nestjs/common';
 import { ScheduleInfoService } from '../services/scheduleInfo.service';
+import { CreateScheduleDto } from 'src/dto/create-schedule.dto';
+import { UpdateScheduleDto } from 'src/dto/update-schedule.dto';
 
-import ScheduleInfo from '../entities/scheduleInfo.entity';
-
-
-@Controller('ScheduleInfo')
+@Controller('scheduleInfo')
 export class ScheduleInfoController {
-  constructor(private readonly ScheduleInfoService: ScheduleInfoService) { }
+  constructor(private readonly scheduleInfoService: ScheduleInfoService) { }
 
   @Get()
   getScheduleInfoService() {
-    return [
-      {
-        "id": 76,
-        "userId": 5,
-        "title": "Khit",
-        "allDay": false,
-        "color": "#ff5733",
-        "start": "2024-02-09T15:00:00.000Z",
-        "end": "2024-02-09T24:00:00.000Z"
-      },
-      {
-        "id": 77,
-        "userId": 5,
-        "title": "Don",
-        "allDay": false,
-        "color": "#ff5733",
-        "start": "2024-02-09T15:00:00.000Z",
-        "end": "2024-02-09T24:00:00.000Z"
-      },
-      {
-        "id": 78,
-        "userId": 38,
-        "title": "Felix",
-        "allDay": true,
-        "color": "#a133ff",
-        "start": "2024-02-07T07:00:00.000Z",
-        "end": "2024-02-07T07:00:00.000Z"
-      }
-    ]
+    return this.scheduleInfoService.getScheduleInfo();
   }
 
-  @Post('createSchedule')
-  createScheduleInfo(@Body() createScheduleDto: any) {
-    return this.ScheduleInfoService.createScheduleInfo(createScheduleDto);
+  @Get(':id')
+  findOne(@Param('id') id: number) {
+    return this.scheduleInfoService.findOne(id);
   }
 
+  @Post()
+  createScheduleInfo(@Body() createScheduleDto: CreateScheduleDto) {
+    return this.scheduleInfoService.createScheduleInfo(createScheduleDto);
+  }
+  
+  @Put(':id')
+  update(
+    @Param('id') id: number, 
+    @Body() updateScheduleDto: UpdateScheduleDto,
+    @Body('start') start: string, 
+    @Body('end') end: string,     
+  ) {
+    return this.scheduleInfoService.update(id, updateScheduleDto, start, end);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: number) {
+    return this.scheduleInfoService.removeScheduleById(id);
+  }
 
 }
 

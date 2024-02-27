@@ -1,7 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import ScheduleInfo from 'src/entities/scheduleInfo.entity';
+import { UpdateScheduleDto } from 'src/dto/update-schedule.dto';
+import { CreateScheduleDto } from 'src/dto/create-schedule.dto';
 
 @Injectable()
 export class ScheduleInfoService {
@@ -10,17 +12,30 @@ export class ScheduleInfoService {
     private readonly scheduleInfoRepository: Repository<ScheduleInfo>,
   ) {}
 
-  async getScheduleInfo(): Promise<ScheduleInfo[]> {
+  getScheduleInfo(): Promise<ScheduleInfo[]> {
     try {
-      return await this.scheduleInfoRepository.find();
+      return this.scheduleInfoRepository.find();
     } catch (error) {
       // Handle database errors gracefully
       throw new Error(`Unable to fetch schedule information: ${error.message}`);
     }
   }
 
-  async createScheduleInfo(createScheduleInfoDto: any): Promise<ScheduleInfo[]> {
-    const newSchedule = this.scheduleInfoRepository.create({ ...createScheduleInfoDto });
-    return this.scheduleInfoRepository.save(newSchedule);
+  findOne(id: number): Promise<ScheduleInfo| null> {
+    return this.scheduleInfoRepository.findOneBy({ id });
   }
+
+  async update(id: number, updateScheduleDto: UpdateScheduleDto, start: string, end: string) {
+    return await this.scheduleInfoRepository.update(id, { ...updateScheduleDto, start, end });
+  }
+  
+  async createScheduleInfo(createScheduleInfoDto: CreateScheduleDto): Promise<ScheduleInfo> {
+    const newScheduleInfo = this.scheduleInfoRepository.create(createScheduleInfoDto);
+    return await this.scheduleInfoRepository.save(newScheduleInfo);
+  }
+
+  async removeScheduleById(id : number): Promise<void> {
+    await this.scheduleInfoRepository.delete(id);
+  }
+
 }

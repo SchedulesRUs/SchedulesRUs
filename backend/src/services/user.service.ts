@@ -19,6 +19,10 @@ export class UserService {
     return this.userRepository.find();
   }
 
+  async removeUserById(id : number): Promise<void> {
+    await this.userRepository.delete(id);
+  }
+
   async createUser(createUserDto: any): Promise<User[]> {
     const userColor = generateHexColor()
     const newUser = this.userRepository.create({ ...createUserDto, userColor:userColor });

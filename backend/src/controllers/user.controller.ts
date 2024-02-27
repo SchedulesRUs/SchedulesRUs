@@ -1,5 +1,5 @@
 // src/controllers/user.controller.ts
-import { Controller, Get ,Post,Body,Query, HttpException, HttpStatus} from '@nestjs/common';
+import { Controller, Get ,Post,Body,Query, HttpException, HttpStatus, Delete, Param} from '@nestjs/common';
 import { UserService } from '../services/user.service';
 import User from '../entities/user.entity';
 
@@ -16,6 +16,11 @@ export class UserController {
   @Post()
   createUser(@Body() createUserDto: any) {
     return this.userService.createUser(createUserDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: number) {
+    return this.userService.removeUserById(id);
   }
 
   @Get('login') // New endpoint for login
