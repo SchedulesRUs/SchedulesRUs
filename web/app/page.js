@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { logo, logo1 } from './asset';
 import Image from 'next/image';
+import config from '../next.config'
 
 
 export default function Home() {
@@ -10,6 +11,8 @@ export default function Home() {
   const [enteredPassword, setEnteredPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [validateIsSuccess, setValidateIsSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+
 
   const handleLogin = async () => {
     const correctUsername = "Admin123";
@@ -24,29 +27,33 @@ export default function Home() {
   const validateLogin = async ({username,password}) => {
     async function fetchGetAllUser() {
       try {
-        const response = await fetch(`http://localhost:1000/user/login?username=${username}&password=${password}`);
+        const response = await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/user/login?username=${username}&password=${password}`);
         const data = await response.json();
         console.log("test", data);
         console.dir(data);
         if(data.success == true){
           setValidateIsSuccess(true)
+          window.location.href = '/dashboard';
+
+        }
+        else{
+          setErrorMessage('Wrong username or password, please try again!'); 
+
         }
         // setAllUser(data);
       } catch (error) {
       }
     }
     fetchGetAllUser();
-
-    if (validateIsSuccess) {
-      window.location.href = '/dashboard';
-    } else {
-      setErrorMessage('Wrong username or password, please try again!'); 
-    }
   };
 
   return (
+    
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
       <div className="flex-grow flex max-w-4xl w-full justify-around items-center">
+      {loading ? (        <p style={styles.loading}>Loading...</p>
+    ):(      
+      <div>  
         <div className='flex-1 flex justify-center '>
           <Image src={logo1} alt='Image' className="max-w-xs" />
         </div>
@@ -91,7 +98,7 @@ export default function Home() {
           </div>
           <div>
             <button
-                onClick={() => validateLogin({username: "ngoc", password: "ngoc"})}
+                onClick={() => validateLogin({username: enteredUsername, password:enteredPassword})}
               type="button"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-950 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
@@ -99,6 +106,8 @@ export default function Home() {
             </button>
           </div>
         </div>
+        </div>
+    )}
       </div>
       <footer className="text-center py-4 text-gray-600">
         <p>Schedule "R" Us © 2024 - <a href='https://github.com/JustKhit/SchedulesRUs' target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-900 focus:ring-indigo-800">GitHub</a></p>
@@ -106,3 +115,12 @@ export default function Home() {
     </div>
   );
 }
+
+
+
+const styles = {
+loading: {
+  fontSize: '18px',
+  color: '#555',
+}
+};

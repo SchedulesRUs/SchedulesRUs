@@ -40,7 +40,7 @@ const Schedule = () => {
 
   async function fetchGetAllUser() {
     try {
-      const response = await fetch(`http://localhost:1000/user`);
+      const response = await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/user`);
       const data = await response.json();
       // console.log("test", data);
       // console.dir(data);
@@ -56,7 +56,7 @@ const Schedule = () => {
 
   async function fetchSchedule() {
     try {
-      const response = await fetch("http://localhost:1000/scheduleInfo");
+      const response = await fetch("https://schedules-r-us-78b737cd078f.herokuapp.com/scheduleInfo");
       const data = await response.json();
       console.log("Fetch Schedule:", data);
       setSchedule(data);
@@ -84,7 +84,7 @@ const Schedule = () => {
   async function createSchedule() {
     const requestBody = JSON.stringify(scheduleToPost);
     try {
-      const response = await fetch("http://localhost:1000/scheduleInfo", {
+      const response = await fetch("https://schedules-r-us-78b737cd078f.herokuapp.com/scheduleInfo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -111,7 +111,7 @@ const Schedule = () => {
   async function updateEventTime(id, start, end) {
     console.log(id, start, end);
     try {
-      await fetch(`http://localhost:1000/scheduleInfo/${id}`, {
+      await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/scheduleInfo/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -217,7 +217,7 @@ const Schedule = () => {
 
   async function handleDelete(id) {
     try {
-      await fetch(`http://localhost:1000/scheduleInfo/${id}`, {
+      await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/scheduleInfo/${id}`, {
         method: "DELETE",
       });
       console.log("Event deleted:", id);

@@ -5,7 +5,7 @@ export default function getAllUser() {
   useEffect(() => {
     async function fetchGetAllUser() {
       try {
-        const response = await fetch(`http://localhost:1000/user`);
+        const response = await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/user`);
         const data = await response.json();
         console.log("test", data);
         console.dir(data);
