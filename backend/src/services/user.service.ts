@@ -3,7 +3,6 @@ import { Injectable , NotFoundException, UnauthorizedException} from '@nestjs/co
 import User from '../entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import * as bcrypt from 'bcrypt'; // Add bcrypt for password hashing
 
 
 @Injectable()
