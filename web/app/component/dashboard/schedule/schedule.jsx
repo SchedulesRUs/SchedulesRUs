@@ -103,7 +103,7 @@ const Schedule = () => {
   useEffect(() => {
     if (scheduleToPost != null) {
       createSchedule();
-      // setScheduleToPost(null);
+      setScheduleToPost(null);
     }
     // console.log("createSchedule:schedule", schedule);
   }, [scheduleToPost]);
@@ -204,7 +204,6 @@ const Schedule = () => {
     newScheduleInfo.allDay = data.allDay;
     console.log("addEvent:", newScheduleInfo);
     setScheduleToPost(newScheduleInfo);
-
     
 
   }
