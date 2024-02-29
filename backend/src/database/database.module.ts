@@ -8,15 +8,14 @@ import User from 'src/entities/user.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mssql',
-      host:  'schedulerus.database.windows.net',
-      port: 1433,
-      username:'schedulerus',
-      password:'admin123@',
-      database: 'schedulerus',
-      logging: true,
+      url: process.env.DATABASE_URL,
+      type: 'postgres',
+      ssl: {
+        rejectUnauthorized: false,
+      },
       entities: [User,ScheduleInfo],
       synchronize: true,
+      autoLoadEntities: true,
     } ),
   ],
 })
