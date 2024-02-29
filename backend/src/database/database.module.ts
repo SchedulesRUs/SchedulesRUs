@@ -13,10 +13,10 @@ import User from 'src/entities/user.entity';
       ssl: {
         rejectUnauthorized: false,
       },
-      entities: [User,ScheduleInfo],
+      entities: [User, ScheduleInfo],
       synchronize: true,
       autoLoadEntities: true,
-    } ),
+    }),
   ],
 })
-export class DatabaseModule {}
+export class DatabaseModule { }

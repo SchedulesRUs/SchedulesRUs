@@ -17,13 +17,13 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [DatabaseModule,
-    TypeOrmModule.forFeature([User,ScheduleInfo]),
+    TypeOrmModule.forFeature([User, ScheduleInfo]),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env', // optional, if you are using environment variables
     }),
   ],
-  controllers: [AppController,UserController,ScheduleInfoController],
-  providers: [AppService,UserService,ScheduleInfoService, UserRepository,ScheduleInfoRepository],
+  controllers: [AppController, UserController, ScheduleInfoController],
+  providers: [AppService, UserService, ScheduleInfoService, UserRepository, ScheduleInfoRepository],
 })
-export class AppModule {}
+export class AppModule { }
