@@ -4,7 +4,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import ScheduleInfo from 'src/entities/scheduleInfo.entity';
 import User from 'src/entities/user.entity';
 
-
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -19,4 +18,4 @@ import User from 'src/entities/user.entity';
     }),
   ],
 })
-export class DatabaseModule { }
+export class DatabaseModule {}

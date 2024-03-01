@@ -21,21 +21,33 @@ export class ScheduleInfoService {
     }
   }
 
-  findOne(id: number): Promise<ScheduleInfo| null> {
+  findOne(id: number): Promise<ScheduleInfo | null> {
     return this.scheduleInfoRepository.findOneBy({ id });
   }
 
-  async update(id: number, updateScheduleDto: UpdateScheduleDto, start: string, end: string) {
-    return await this.scheduleInfoRepository.update(id, { ...updateScheduleDto, start, end });
+  async update(
+    id: number,
+    updateScheduleDto: UpdateScheduleDto,
+    start: string,
+    end: string,
+  ) {
+    return await this.scheduleInfoRepository.update(id, {
+      ...updateScheduleDto,
+      start,
+      end,
+    });
   }
-  
-  async createScheduleInfo(createScheduleInfoDto: CreateScheduleDto): Promise<ScheduleInfo> {
-    const newScheduleInfo = this.scheduleInfoRepository.create(createScheduleInfoDto);
+
+  async createScheduleInfo(
+    createScheduleInfoDto: CreateScheduleDto,
+  ): Promise<ScheduleInfo> {
+    const newScheduleInfo = this.scheduleInfoRepository.create(
+      createScheduleInfoDto,
+    );
     return await this.scheduleInfoRepository.save(newScheduleInfo);
   }
 
-  async removeScheduleById(id : number): Promise<void> {
+  async removeScheduleById(id: number): Promise<void> {
     await this.scheduleInfoRepository.delete(id);
   }
-
 }
