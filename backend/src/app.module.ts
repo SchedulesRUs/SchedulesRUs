@@ -16,7 +16,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [DatabaseModule,
+  imports: [
+    DatabaseModule,
     TypeOrmModule.forFeature([User, ScheduleInfo]),
     ConfigModule.forRoot({
       isGlobal: true,
@@ -24,6 +25,12 @@ import { ConfigModule } from '@nestjs/config';
     }),
   ],
   controllers: [AppController, UserController, ScheduleInfoController],
-  providers: [AppService, UserService, ScheduleInfoService, UserRepository, ScheduleInfoRepository],
+  providers: [
+    AppService,
+    UserService,
+    ScheduleInfoService,
+    UserRepository,
+    ScheduleInfoRepository,
+  ],
 })
-export class AppModule { }
+export class AppModule {}

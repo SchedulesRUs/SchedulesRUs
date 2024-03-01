@@ -1,4 +1,4 @@
-export class CreateScheduleDto {  
+export class CreateScheduleDto {
   id: number;
   userId: number;
   title: string;

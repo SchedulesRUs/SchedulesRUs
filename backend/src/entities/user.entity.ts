@@ -15,25 +15,23 @@ export default class User {
   email: string;
 
   @Column({ nullable: true })
-  userColor:string;
+  userColor: string;
 
-
-  @Column({ nullable: true }) 
+  @Column({ nullable: true })
   phone: string;
 
-  @Column({ nullable: true }) 
+  @Column({ nullable: true })
   isAdmin: string;
 
-  @Column({ nullable: true }) 
+  @Column({ nullable: true })
   role: string;
 
-  @Column({ nullable: true }) 
+  @Column({ nullable: true })
   address: string;
 
-  @Column({ nullable: true }) 
+  @Column({ nullable: true })
   image: string;
 
-//After modifying your entity, remember to synchronize your database schema using TypeORM:
-//npx typeorm schema:sync
-
+  //After modifying your entity, remember to synchronize your database schema using TypeORM:
+  //npx typeorm schema:sync
 }
