@@ -6,7 +6,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Pagination from "@/app/component/dashboard/pagination/pagination";
-import SingleUserPage from "./[id]/page";
 
 const Users = () => {
 
@@ -87,14 +86,15 @@ fetchGetAllUser();
               <td>{user.isAdmin}</td>
               <td>
                 <div className="flex">
-                  <Link href="/dashboard/teams/test">
+                  <Link href={`/dashboard/teams/${user.id}`}>
                     <button className="bg-green-600 text-white text-[12px] rounded-lg p-1 mr-2">
                       View
                     </button>
+                  </Link>
                     <button className="bg-red-700 text-white text-[12px] rounded-lg p-1">
                       Delete
                     </button>
-                  </Link>
+                  
                 </div>
               </td>
             </tr>
@@ -103,9 +103,6 @@ fetchGetAllUser();
         
       </table>
       <Pagination />
-      <div className="mt-10">
-      {/* {selectedUser && <SingleUserPage user={selectedUser} />} */}
-      </div>
     </div>
   );
 };
