@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -8,7 +8,7 @@ import {
   ScrollView,
   StatusBar,
   Alert,
-} from "react-native";
+} from 'react-native';
 
 const NewBookOffRequestPage = () => {
   const [date, setDate] = useState('');
@@ -19,7 +19,7 @@ const NewBookOffRequestPage = () => {
   const handleSubmit = async () => {
     // Validate input data
     if (!date || !startTime || !endTime || !reason) {
-      Alert.alert("Please fill in all fields");
+      Alert.alert('Please fill in all fields');
       return;
     }
     const requestData = {
@@ -28,18 +28,17 @@ const NewBookOffRequestPage = () => {
       endTime,
       reason,
     };
-      // Send the request to your backend
+    // Send the request to your backend
     try {
       // await sendBookOffRequest(requestData);
       console.log(requestData); // Remove this in production
-      Alert.alert("Request submitted successfully!");
+      Alert.alert('Request submitted successfully!');
     } catch (error) {
       console.error(error);
-      Alert.alert("Failed to submit request");
+      Alert.alert('Failed to submit request');
     }
   };
 
-  
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#000080" barStyle="light-content" />
@@ -103,35 +102,35 @@ const NewBookOffRequestPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
   header: {
-    backgroundColor: "#000080",
+    backgroundColor: '#000080',
     paddingTop: StatusBar.currentHeight + 10,
     paddingBottom: 10,
     paddingHorizontal: 10,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   menuButton: {
-    position: "absolute",
+    position: 'absolute',
     top: StatusBar.currentHeight + 10,
     left: 10,
   },
   headerTitle: {
-    color: "#fff",
-    fontWeight: "bold",
+    color: '#fff',
+    fontWeight: 'bold',
     fontSize: 20,
   },
   tabContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    backgroundColor: "#000099",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#000099',
     borderRadius: 20,
     marginTop: 10,
     paddingVertical: 4,
-    width: "100%",
+    width: '100%',
   },
   tab: {
     paddingVertical: 10,
@@ -139,10 +138,10 @@ const styles = StyleSheet.create({
   },
   activeTab: {
     borderBottomWidth: 3,
-    borderBottomColor: "#fff",
+    borderBottomColor: '#fff',
   },
   tabText: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 16,
   },
   scrollView: {
@@ -153,13 +152,13 @@ const styles = StyleSheet.create({
   },
   formTitle: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 20,
   },
   inputGroup: {
     marginBottom: 10,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   label: {
     flex: 1,
@@ -167,25 +166,25 @@ const styles = StyleSheet.create({
   input: {
     flex: 2,
     borderWidth: 1,
-    borderColor: "#ddd",
+    borderColor: '#ddd',
     padding: 10,
     marginRight: 10,
   },
   textArea: {
     height: 100,
-    textAlignVertical: "top",
+    textAlignVertical: 'top',
   },
   submitButton: {
-    backgroundColor: "#000080",
+    backgroundColor: '#000080',
     padding: 15,
     borderRadius: 5,
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: 20,
   },
   submitButtonText: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 });
 
