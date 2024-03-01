@@ -7,10 +7,10 @@ export default class ScheduleInfo {
 
   @Column()
   userId: number;
-  
+
   @Column()
   title: string;
-  
+
   @Column({ nullable: true })
   allDay: boolean;
 
@@ -19,12 +19,10 @@ export default class ScheduleInfo {
 
   @Column({ nullable: true })
   start: string;
-  
+
   @Column({ nullable: true })
   end: string;
 
-
-//After modifying your entity, remember to synchronize your database schema using TypeORM:
-//npx typeorm schema:sync
-
+  //After modifying your entity, remember to synchronize your database schema using TypeORM:
+  //npx typeorm schema:sync
 }

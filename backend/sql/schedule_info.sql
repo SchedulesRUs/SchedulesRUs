@@ -5,9 +5,9 @@ DROP TABLE IF EXISTS public.schedule_info;
 CREATE TABLE public.schedule_info (
     "allDay" BOOLEAN NOT NULL,
     color VARCHAR NOT NULL,
-    "end" TIMESTAMP NOT NULL,
+    "end" VARCHAR NOT NULL,
     id SERIAL PRIMARY KEY,
-    "start" TIMESTAMP NOT NULL,
+    "start" VARCHAR NOT NULL,
     title VARCHAR NOT NULL,
     "userId" INTEGER NOT NULL
 );
