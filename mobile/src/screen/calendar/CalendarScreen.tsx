@@ -12,7 +12,7 @@ import { MarkedDates } from 'react-native-calendars/src/types';
 import { format } from 'date-fns';
 import { AgendaList, CalendarProvider, WeekCalendar } from 'react-native-calendars';
 import { AppStatusBar } from '../../theme/StatusBar';
-import { getSchedule } from '../../services/ScheduleService';
+import { getSchedule } from '../../remote/ScheduleService';
 import { Shift } from '../../model/Shift';
 import { ScheduleResponse } from '../../model/response/ScheduleResponse';
 

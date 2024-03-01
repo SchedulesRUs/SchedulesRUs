@@ -11,7 +11,7 @@ import {
 import ShiftItem from './ShiftItem';
 import { AppStatusBar } from '../../theme/StatusBar';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { getSchedule } from '../../services/ScheduleService';
+import { getSchedule } from '../../remote/ScheduleService';
 
 type Shift = {
     id: number;

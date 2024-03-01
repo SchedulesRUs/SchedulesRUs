@@ -15,6 +15,7 @@ import CalendarScreen from './src/screen/calendar/CalendarScreen';
 import SettingsScreen from './src/screen/settings/SettingsScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import Toast from 'react-native-toast-message';
 
 const Stack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
@@ -54,7 +55,6 @@ function MainStack() {
 
 function AppContent() {
   const { user } = useAuthContext();
-
   return user ? <MainStack /> : <LoginStack />;
 }
 
@@ -63,6 +63,7 @@ function App(): React.JSX.Element {
     <NavigationContainer>
       <AuthContextProvider>
         <AppContent />
+        <Toast />
       </AuthContextProvider>
     </NavigationContainer>
   );
