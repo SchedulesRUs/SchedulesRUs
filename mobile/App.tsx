@@ -16,6 +16,7 @@ import SettingsScreen from './src/screen/settings/SettingsScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Toast from 'react-native-toast-message';
+import BookOffRequestScreen from './src/screens/BookOffRequest/BookOffRequest';
 
 const Stack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
@@ -56,6 +57,16 @@ function MainStack() {
         component={SettingsScreen}
         options={{
           tabBarLabel: 'Settings',
+          tabBarIcon: ({color, size}) => (
+            <Icon name="account-settings-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <MainTab.Screen
+        name="BookOff"
+        component={BookOffRequestScreen}
+        options={{
+          tabBarLabel: 'BookOff',
           tabBarIcon: ({color, size}) => (
             <Icon name="account-settings-outline" size={size} color={color} />
           ),
