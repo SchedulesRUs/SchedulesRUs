@@ -44,3 +44,16 @@ npm install @headlessui/react
 ## Documentation
 
 For full documentation, please visit[headlessui.com](https://headlessui.com)
+
+# 4.@react-native-community/datetimepicker
+The @react-native-community/datetimepicker is a React Native library that provides date and time picker components for iOS and Android platforms. It offers a simple and efficient way to incorporate native date and time selection functionality in your React Native applications. With this library, developers can easily implement user interfaces that require date or time input without the need for custom-built solutions or third-party plugins.
+
+## Installation
+To add the DateTimePicker to your React Native project, run the following command:
+npm install @react-native-community/datetimepicker --save
+
+or if you using Yarn:
+yarn add @react-native-community/datetimepicker
+
+## Documentation
+Detailed documentation and usage instructions for the @react-native-community/datetimepicker can be found on the GitHub repository: https://github.com/react-native-datetimepicker/datetimepicker. The repository includes information on installation, API reference, and examples for both iOS and Android.
