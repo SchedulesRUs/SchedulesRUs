@@ -20,6 +20,11 @@ export class UserService {
     return this.userRepository.find();
   }
 
+  
+  findOne(id: number): Promise<User | null> {
+    return this.userRepository.findOneBy({ id });
+  }
+
   async removeUserById(id: number): Promise<void> {
     await this.userRepository.delete(id);
   }

@@ -39,13 +39,15 @@ export class ScheduleInfoService {
   }
 
   async createScheduleInfo(
-    createScheduleInfoDto: CreateScheduleDto,
-  ): Promise<ScheduleInfo> {
+    createScheduleInfoDto: any,
+  ): Promise<ScheduleInfo[]> {
     const newScheduleInfo = this.scheduleInfoRepository.create(
       createScheduleInfoDto,
     );
-    return await this.scheduleInfoRepository.save(newScheduleInfo);
+    
+    return this.scheduleInfoRepository.save(newScheduleInfo);
   }
+
 
   async removeScheduleById(id: number): Promise<void> {
     await this.scheduleInfoRepository.delete(id);

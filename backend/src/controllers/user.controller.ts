@@ -31,6 +31,10 @@ export class UserController {
   remove(@Param('id') id: number) {
     return this.userService.removeUserById(id);
   }
+  @Get()
+  findOne(@Param('userid') id: number) {
+    return this.userService.findOne(id);
+  }
 
   @Get('login') // New endpoint for login
   async loginUser(
@@ -44,6 +48,7 @@ export class UserController {
       loginResponse.success = true;
       loginResponse.error = ''; // Assuming you want to leave the error field empty for a successful login
       loginResponse.username = user.username;
+      loginResponse.userid = user.id;
       return loginResponse;
     } catch (error) {
       // Handle validation errors
@@ -60,4 +65,5 @@ class LoginRespond {
   success: boolean;
   error: String;
   username: string;
+  userid: number|null;
 }
