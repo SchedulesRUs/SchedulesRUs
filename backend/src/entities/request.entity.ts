@@ -1,5 +1,4 @@
 
-
 import { Column, Entity, IntegerType, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()

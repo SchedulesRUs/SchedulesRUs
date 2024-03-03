@@ -1,15 +1,14 @@
-// src/controllers/user.controller.ts
+// src/controllers/request.controller.ts
 import { Controller, Get ,Post,Body,Query, HttpException, HttpStatus, Delete, Param} from '@nestjs/common';
 import { RequestService } from '../services/request.service';
-import Request from '../entities/request.enity';
 
 
 @Controller('request')
-export class UserController {
+export class RequestController {
   constructor(private readonly requestService: RequestService) {}
 
   @Get()
-  getUsers() {
+  getRequest() {
     return this.requestService.getRequest();
   }
 

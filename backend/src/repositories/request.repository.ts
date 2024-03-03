@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm';
-import Request from '../entities/request.enity';
+import Request from '../entities/request.entity';
 
-export class UserRepository extends Repository<Request> {
+export class RequestRepository extends Repository<Request> {
     async findAll(): Promise<Request[]> {
         return this.find();
       }

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import Request from '../entities/request.enity';
+import Request from '../entities/request.entity';
 
 @Injectable()
 export class RequestService {
@@ -10,17 +10,12 @@ export class RequestService {
     private readonly requestRepository: Repository<Request>,
   ) {}
 
-  getRequest(): Promise<Request[]> {
-    
-    try {
-      return this.requestRepository.find();
-    } catch (error) {
-      // Handle database errors gracefully
-      throw new Error(`Unable to fetch schedule information: ${error.message}`);
-    }
+  async getRequest(): Promise<Request[]> {
+    return this.requestRepository.find();
+
   }
 
-  findOneRequest(user_id: number): Promise<Request| null> {
+  async findOneRequest(user_id: number): Promise<Request| null> {
     return this.requestRepository.findOneBy({ user_id });
   }
 

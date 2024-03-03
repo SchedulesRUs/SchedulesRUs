@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
-    "start-backend": "cd backend && npm run start",
+    "start-backend": "cd backend && heroku local",
     "start-frontend": "cd web && npm run dev"
   }
 }
