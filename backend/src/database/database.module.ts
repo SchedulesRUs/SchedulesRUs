@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import ScheduleInfo from 'src/entities/scheduleInfo.entity';
 import User from 'src/entities/user.entity';
+import Request from 'src/entities/request.entity';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import User from 'src/entities/user.entity';
       ssl: {
         rejectUnauthorized: false,
       },
-      entities: [User, ScheduleInfo],
+      entities: [User, ScheduleInfo,Request],
       synchronize: true,
       autoLoadEntities: true,
     }),
