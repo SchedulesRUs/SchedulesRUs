@@ -10,49 +10,45 @@ export default function Home() {
   const [enteredUsername, setEnteredUsername] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [validateIsSuccess, setValidateIsSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isValidationSuccess, setIsValidationSuccess] = useState(false);
 
 
-  const handleLogin = async () => {
-    const correctUsername = "Admin123";
-    const correctPassword = "manager123";
-    if (enteredUsername === correctUsername && enteredPassword === correctPassword) {
-      window.location.href = '/dashboard';
-    } else {
-      setErrorMessage('Wrong username or password, please try again!'); 
-    }
-  };
 
   const validateLogin = async ({username,password}) => {
+    
     async function fetchGetAllUser() {
+      setLoading(true)
+      setIsValidationSuccess(false)
       try {
         const response = await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/user/login?username=${username}&password=${password}`);
         const data = await response.json();
         console.log("test", data);
         console.dir(data);
         if(data.success == true){
-          setValidateIsSuccess(true)
           window.location.href = '/dashboard';
-
+          useEffect(() => {
+            setLoading(false);
+          }, 1000);
         }
         else{
+          setLoading(false)
           setErrorMessage('Wrong username or password, please try again!'); 
-
         }
         // setAllUser(data);
       } catch (error) {
+        setErrorMessage('Wrong username or password, please try again!'); 
       }
     }
-    fetchGetAllUser();
+    fetchGetAllUser()
   };
+  
 
   return (
     
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
       <div className="flex-grow flex max-w-4xl w-full justify-around items-center">
-      {loading ? (        <p style={styles.loading}>Loading...</p>
-    ):(      
+      {loading ? (<div style={styles.loading}></div>):(      
       <div>  
         <div className='flex-1 flex justify-center '>
           <Image src={logo1} alt='Image' className="max-w-xs" />
@@ -116,11 +112,31 @@ export default function Home() {
   );
 }
 
-
-
 const styles = {
-loading: {
-  fontSize: '18px',
-  color: '#555',
-}
+  loading: {
+    border: '4px solid rgba(0, 0, 0, 0.1)',
+    borderRadius: '50%',
+    borderTop: '4px solid #3498db',
+    width: '80px',
+    height: '80px',
+    animation: 'spin 1s linear infinite',
+    margin: '20px auto',
+  },
 };
+
+// Add the keyframes for the spin animation
+const spinKeyframes = `
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
+// Append the spinKeyframes to the head of the document
+const styleEl = document.createElement('style');
+styleEl.appendChild(document.createTextNode(spinKeyframes));
+document.head.appendChild(styleEl);
