@@ -10,6 +10,7 @@ import {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 type BookOffRequestState = {
   date: Date;
@@ -17,9 +18,18 @@ type BookOffRequestState = {
   endTime: Date;
   reason: string;
 };
+type RootStackParamList = {
+  Home: undefined;
+  BookOffList: undefined;
+  BookOffRequest: undefined;
+  Confirmation: undefined;
+
+};
+
+type BookOffRequestNavigationProp = StackNavigationProp<RootStackParamList, 'BookOffRequest'>;
 
 const BookOffRequestScreen: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<BookOffRequestNavigationProp>();
   const [request, setRequest] = useState<BookOffRequestState>({
     date: new Date(),
     startTime: new Date(),
@@ -69,6 +79,7 @@ const BookOffRequestScreen: React.FC = () => {
 
   const handleSubmit = () => {
     console.log('Book Off Request:', request);
+    navigation.navigate('Confirmation');
   };
 
   const formatDate = (date: Date) => {

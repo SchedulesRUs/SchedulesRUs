@@ -24,15 +24,19 @@ import SettingsScreen from './src/screen/settings/SettingsScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Toast from 'react-native-toast-message';
-import BookOffRequestScreen from './src/screen/bookoff/BookOffRequestScreen';
-import CreateNewAvailability from './src/screen/NewAvailbilityRequest';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import BookOffListScreen from './src/screen/bookoff/BookOffListScreen';
+import ConfirmationScreen from './src/screen/bookoff/ConfirmationScreen';
+import BookOffRequestScreen from './src/screen/bookoff/BookOffRequestScreen';
+import CreateNewAvailability from './src/screen/availability/NewAvailbilityRequest';
+import ViewAvailabilityScreen from './src/screen/availability/AvailabilityListScreen';
+import ConfirmationAvailabilityScreen from './src/screen/availability/ConfirmationAvailabilityScreen';
 
 const LoginStack = createStackNavigator();
 const BookOffStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
 const HomeDrawer = createDrawerNavigator();
+const AvailabilityStack = createStackNavigator();
 
 function LoginStackNavigator() {
   return (
@@ -44,8 +48,8 @@ function LoginStackNavigator() {
 
 type BookOffStackParamList = {
   BookOffList: undefined;
-  BookOffRequest: undefined; // Add other parameters here if needed
-  // ... other screens
+  BookOffRequest: undefined;
+  Confirmation: undefined;
 };
 
 export type BookOffStackNavigationProp =
@@ -55,28 +59,43 @@ function BookOffStackNavigator() {
   return (
     <BookOffStack.Navigator screenOptions={{headerShown: false}}>
       <BookOffStack.Screen name="BookOffList" component={BookOffListScreen} />
-      <BookOffStack.Screen
-        name="BookOffRequest"
-        component={BookOffRequestScreen}
-      />
+      <BookOffStack.Screen name="BookOffRequest" component={BookOffRequestScreen}/>
+      <BookOffStack.Screen name="Confirmation" component={ConfirmationScreen} />
+
     </BookOffStack.Navigator>
   );
 }
+
+type AvailabilityStackParamList = {
+  AvailabilityList: undefined;
+  NewAvailability: undefined;
+  ConfirmationAvailability: undefined;
+};
+export type AvailabilityStackNavigationProp = StackNavigationProp<AvailabilityStackParamList>;
+
+function AvailabilityStackNavigator() {
+  return(
+    <AvailabilityStack.Navigator screenOptions={{headerShown: false}}>
+      <AvailabilityStack.Screen name="AvailabilityList" component={ViewAvailabilityScreen} />
+      <AvailabilityStack.Screen name="CreateNewAvailability" component={CreateNewAvailability} />
+      <AvailabilityStack.Screen name="ConfirmationAvailability" component={ConfirmationAvailabilityScreen} />
+    </AvailabilityStack.Navigator>
+  );
+}
+
 
 function HomeDrawerNavigator() {
   return (
     <HomeDrawer.Navigator
       initialRouteName="Home"
-      screenOptions={{headerShown: false}}>
+      screenOptions={{ headerShown: false }}>
       <HomeDrawer.Screen name="Home" component={HomeScreen} />
       <HomeDrawer.Screen name="Book Off" component={BookOffStackNavigator} />
-      <HomeDrawer.Screen
-        name="Availability"
-        component={CreateNewAvailability}
-      />
+      <HomeDrawer.Screen name="Availability" component={AvailabilityStackNavigator} />
     </HomeDrawer.Navigator>
   );
 }
+
 
 function MainStackNavigator() {
   return (

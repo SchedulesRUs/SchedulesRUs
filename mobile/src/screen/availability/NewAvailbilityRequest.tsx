@@ -9,8 +9,9 @@ import {
 } from 'react-native';
 import {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
-// Define a type for the availability state
 type DailyAvailability = {
   from: Date;
   to: Date;
@@ -20,6 +21,12 @@ type WeeklyAvailability = {
   [key: string]: DailyAvailability;
 };
 
+type RootStackParamList = {
+  Home: undefined;
+  AvailabilityList: undefined;
+  CreateNewAvailability: undefined;
+  ConfirmationAvailability: undefined;
+};
 const defaultAvailability: DailyAvailability = {
   from: new Date(new Date().setHours(11, 0, 0, 0)),
   to: new Date(new Date().setHours(20, 0, 0, 0)),
@@ -34,8 +41,12 @@ const weekDays = [
   'Saturday',
   'Sunday',
 ];
-
+type AvailabilityStackNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'CreateNewAvailability'
+>;
 const CreateNewAvailability: React.FC = () => {
+  const navigation = useNavigation<AvailabilityStackNavigationProp>();
   const [weeklyAvailability, setWeeklyAvailability] =
     useState<WeeklyAvailability>({
       Monday: defaultAvailability,
@@ -85,6 +96,7 @@ const CreateNewAvailability: React.FC = () => {
   const handleSubmit = () => {
     // Handle the submission of the availability
     console.log(weeklyAvailability);
+    navigation.navigate('ConfirmationAvailability');
     // Submit the availability here
   };
 
