@@ -1,12 +1,19 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+
+type BookOffRequestState = {
+  date: Date;
+  startTime: Date;
+  endTime: Date;
+  reason: string;
+};
 
 type BookOffStackParamList = {
   BookOffRequest: undefined;
   BookOffList: undefined;
-  Confirmation: undefined;
+  Confirmation: { request: BookOffRequestState };
 };
 
 type ConfirmationScreenNavigationProp = StackNavigationProp<
@@ -16,7 +23,19 @@ type ConfirmationScreenNavigationProp = StackNavigationProp<
 
 const ConfirmationScreen: React.FC = () => {
   const navigation = useNavigation<ConfirmationScreenNavigationProp>();
+  const route = useRoute<RouteProp<BookOffStackParamList, 'Confirmation'>>();
+  
+  // Extract the request data from the navigation parameters
+  const { request } = route.params;
 
+  // Format the date and time to strings
+  const formatDate = (date: Date) => {
+    return `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + date.getDate()).slice(-2)}`;
+  };
+
+  const formatTime = (date: Date) => {
+    return `${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}`;
+  };
 
   const handleEdit = () => {
     navigation.navigate('BookOffRequest');
@@ -29,14 +48,30 @@ const ConfirmationScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.confirmationText}>Your Request has been submitted</Text>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={handleEdit}>
-          <Text style={styles.buttonText}>Edit</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={handleConfirm}>
-          <Text style={styles.buttonText}>Confirm</Text>
-        </TouchableOpacity>
+
+      <View style={styles.detailContainer}>
+        <Text style={styles.label}>Your Request Date:</Text>
+        <Text style={styles.detail}>{formatDate(request.date)}</Text>
       </View>
+
+      <View style={styles.detailContainer}>
+        <Text style={styles.label}>Your Request Start Time:</Text>
+        <Text style={styles.detail}>{formatTime(request.startTime)}</Text>
+      </View>
+
+      <View style={styles.detailContainer}>
+        <Text style={styles.label}>Your Request End Time:</Text>
+        <Text style={styles.detail}>{formatTime(request.endTime)}</Text>
+      </View>
+
+      <View style={styles.detailContainer}>
+        <Text style={styles.label}>Your Reason:</Text>
+        <Text style={styles.detail}>{request.reason}</Text>
+      </View>
+
+      <TouchableOpacity style={styles.confirmButton} onPress={handleConfirm}>
+        <Text style={styles.confirmButtonText}>Confirm</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -44,38 +79,43 @@ const ConfirmationScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     padding: 20,
     backgroundColor: '#FFF',
   },
   confirmationText: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 30,
     textAlign: 'center',
-    color: '#000000',
   },
-  buttonContainer: {
-    width: '80%',
-    alignSelf: 'center',
+  detailContainer: {
+    width: '100%',
+    backgroundColor: '#E8E8E8',
+    padding: 15,
+    borderRadius: 5,
+    marginBottom: 10,
   },
-  button: {
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  detail: {
+    fontSize: 18,
+    marginTop: 5,
+  },
+  confirmButton: {
     backgroundColor: '#0D1282',
-    borderRadius: 4,
     paddingVertical: 12,
     paddingHorizontal: 30,
+    borderRadius: 4,
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 10,
-    minWidth: 100,
-    height: 50,
+    marginTop: 20,
   },
-  buttonText: {
-    color: '#FFFFFF',
+  confirmButtonText: {
+    color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
-    textAlign: 'center',
   },
 });
 

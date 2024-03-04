@@ -12,7 +12,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import {useNavigation} from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-type BookOffRequestState = {
+export type BookOffRequestState = {
   date: Date;
   startTime: Date;
   endTime: Date;
@@ -22,9 +22,12 @@ type RootStackParamList = {
   Home: undefined;
   BookOffList: undefined;
   BookOffRequest: undefined;
-  Confirmation: undefined;
+  Confirmation: {
+    request: BookOffRequestState;
+  };
 
 };
+
 
 type BookOffRequestNavigationProp = StackNavigationProp<RootStackParamList, 'BookOffRequest'>;
 
@@ -79,7 +82,7 @@ const BookOffRequestScreen: React.FC = () => {
 
   const handleSubmit = () => {
     console.log('Book Off Request:', request);
-    navigation.navigate('Confirmation');
+    navigation.navigate('Confirmation', { request });
   };
 
   const formatDate = (date: Date) => {

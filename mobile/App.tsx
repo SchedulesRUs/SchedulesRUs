@@ -25,6 +25,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Toast from 'react-native-toast-message';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import { BookOffRequestState } from './src/screen/bookoff/BookOffRequestScreen';
 import BookOffListScreen from './src/screen/bookoff/BookOffListScreen';
 import ConfirmationScreen from './src/screen/bookoff/ConfirmationScreen';
 import BookOffRequestScreen from './src/screen/bookoff/BookOffRequestScreen';
@@ -49,7 +50,9 @@ function LoginStackNavigator() {
 type BookOffStackParamList = {
   BookOffList: undefined;
   BookOffRequest: undefined;
-  Confirmation: undefined;
+  Confirmation: {
+    request: BookOffRequestState;
+  };
 };
 
 export type BookOffStackNavigationProp =
