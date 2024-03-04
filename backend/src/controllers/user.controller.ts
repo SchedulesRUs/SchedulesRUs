@@ -1,15 +1,15 @@
 // src/controllers/user.controller.ts
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Query,
-  HttpException,
-  HttpStatus,
-  Delete,
-  Param,
-} from '@nestjs/common';
+  import {
+    Controller,
+    Get,
+    Post,
+    Body,
+    Query,
+    HttpException,
+    HttpStatus,
+    Delete,
+    Param,
+  } from '@nestjs/common';
 import { UserService } from '../services/user.service';
 import User from '../entities/user.entity';
 

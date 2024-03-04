@@ -22,6 +22,13 @@ export default class Request {
       
   @Column({ nullable: true })
   reason:string;
+  
+  @Column()
+  status:string;
+
+  @Column()
+  username:string;
+
 
 //After modifying your entity, remember to synchronize your database schema using TypeORM:
 //npx typeorm schema:sync
