@@ -13,6 +13,7 @@ import { AppStatusBar } from '../../theme/StatusBar';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getSchedule } from '../../remote/ScheduleService';
 import { useAuthContext } from '../../context/AuthContext';
+import { DrawerActions, useNavigation } from '@react-navigation/native';
 
 type Shift = {
   id: number;
@@ -23,6 +24,7 @@ type Shift = {
 
 const HomeScreen = () => {
   const { user } = useAuthContext();
+  const navigation = useNavigation();
 
   const [refreshing, setRefreshing] = useState(false);
   const [shifts, setShifts] = useState<Shift[]>([]);
@@ -37,7 +39,7 @@ const HomeScreen = () => {
         id: item.id,
         start: Date.parse(item.start) / 1000,
         end: Date.parse(item.end) / 1000,
-        position: `Cashier`,
+        position: ``,
       }));
 
     setShifts(list);
@@ -57,7 +59,7 @@ const HomeScreen = () => {
     <View style={{ flex: 1 }}>
       <AppStatusBar />
       <View style={styles.header}>
-        <TouchableOpacity style={styles.menuButton}>
+        <TouchableOpacity style={styles.menuButton} onPress={() => { navigation.dispatch(DrawerActions.openDrawer()); }}>
           <Icon name="menu" size={24} color="white" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Welcome {user.username}</Text>

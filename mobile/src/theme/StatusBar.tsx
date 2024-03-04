@@ -12,7 +12,7 @@ export const AppStatusBar = () => {
         height: insets.top,
         backgroundColor: AppColor,
       }}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="light-content" backgroundColor={AppColor} />
     </View>
   );
 };

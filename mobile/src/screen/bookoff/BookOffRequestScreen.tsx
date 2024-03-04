@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,8 +6,10 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native';
 
 type BookOffRequestState = {
   date: Date;
@@ -17,6 +19,7 @@ type BookOffRequestState = {
 };
 
 const BookOffRequestScreen: React.FC = () => {
+  const navigation = useNavigation();
   const [request, setRequest] = useState<BookOffRequestState>({
     date: new Date(),
     startTime: new Date(),
@@ -29,7 +32,7 @@ const BookOffRequestScreen: React.FC = () => {
       value: request.date,
       onChange: (event, date) => {
         if (date) {
-          setRequest({...request, date});
+          setRequest({ ...request, date });
         }
       },
       mode: 'date',
@@ -41,7 +44,7 @@ const BookOffRequestScreen: React.FC = () => {
       value: request.startTime,
       onChange: (event, date) => {
         if (date) {
-          setRequest({...request, startTime: date});
+          setRequest({ ...request, startTime: date });
         }
       },
       mode: 'time',
@@ -53,7 +56,7 @@ const BookOffRequestScreen: React.FC = () => {
       value: request.endTime,
       onChange: (event, date) => {
         if (date) {
-          setRequest({...request, endTime: date});
+          setRequest({ ...request, endTime: date });
         }
       },
       mode: 'time',
@@ -61,7 +64,7 @@ const BookOffRequestScreen: React.FC = () => {
   };
 
   const handleReasonChange = (text: string) => {
-    setRequest({...request, reason: text});
+    setRequest({ ...request, reason: text });
   };
 
   const handleSubmit = () => {
@@ -83,9 +86,11 @@ const BookOffRequestScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Icon name="menu" size={24} color="#FFFFFF" />
-        <Text style={styles.headerTitle}>Shift & Schedule</Text>
-        <Icon name="menu" size={24} color="transparent" />
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Icon name="arrow-back-ios-new" size={24} color="#FFFFFF" />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Request Book Off</Text>
+        <Icon name="" size={24} color="transparent" />
       </View>
 
       <View style={styles.body}>
@@ -95,7 +100,7 @@ const BookOffRequestScreen: React.FC = () => {
           <Text style={styles.label}>Choose Date To Request:</Text>
           <TouchableOpacity style={styles.inputField} onPress={showDatePicker}>
             <Text style={styles.input}>{formatDate(request.date)}</Text>
-            <Icon name="calendar" size={24} color="#000" />
+            <MaterialCommunityIcon name="calendar" size={24} color="#000" />
           </TouchableOpacity>
         </View>
 
@@ -105,7 +110,7 @@ const BookOffRequestScreen: React.FC = () => {
             style={styles.inputField}
             onPress={showStartTimePicker}>
             <Text style={styles.input}>{formatTime(request.startTime)}</Text>
-            <Icon name="clock" size={24} color="#000" />
+            <MaterialCommunityIcon name="clock" size={24} color="#000" />
           </TouchableOpacity>
         </View>
 
@@ -115,7 +120,7 @@ const BookOffRequestScreen: React.FC = () => {
             style={styles.inputField}
             onPress={showEndTimePicker}>
             <Text style={styles.input}>{formatTime(request.endTime)}</Text>
-            <Icon name="clock" size={24} color="#000" />
+            <MaterialCommunityIcon name="clock" size={24} color="#000" />
           </TouchableOpacity>
         </View>
 
