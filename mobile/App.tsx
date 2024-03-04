@@ -5,9 +5,11 @@
  * @format
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StackNavigationProp, createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer, getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { Alert, PermissionsAndroid, Platform } from 'react-native';
+import messaging from '@react-native-firebase/messaging';
 import LoginScreen from './src/screen/login/LoginScreen';
 import HomeScreen from './src/screen/home/HomeScreen';
 import { AuthContextProvider, useAuthContext } from './src/context/AuthContext';
@@ -108,7 +110,42 @@ function AppContent() {
   return user ? <MainStackNavigator /> : <LoginStackNavigator />;
 }
 
+async function requestUserPermission() {
+  const authStatus = await messaging().requestPermission();
+  const enabled =
+    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+    authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+  if (enabled) {
+    console.log('Authorization status:', authStatus);
+  }
+}
+
 function App(): React.JSX.Element {
+  if (Platform.OS === 'ios') {
+    requestUserPermission()
+  } else {
+    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
+  }
+
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      await messaging().registerDeviceForRemoteMessages();
+      const token = await messaging().getToken();
+      console.log(token)
+    }
+
+    fetchToken();
+  }, []);
+
   return (
     <NavigationContainer>
       <AuthContextProvider>

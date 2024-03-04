@@ -1,6 +1,7 @@
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
+#import <Firebase.h>
 
 /**
  Deletes all Keychain items accessible by this app if this is the first time the user launches the app
@@ -31,6 +32,7 @@ static void ClearKeychainIfNecessary() {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [FIRApp configure];
   // Add this line to call the above function
   ClearKeychainIfNecessary();
 

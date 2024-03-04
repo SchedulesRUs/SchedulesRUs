@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "694858008727",
+    "project_id": "schedulesrus",
+    "storage_bucket": "schedulesrus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694858008727:android:9a1c40b57a677f53e801d2",
+        "android_client_info": {
+          "package_name": "ca.schedulesrus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbGMIiPrwKwOP2dxZ0tajUd0k-wub6WHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
