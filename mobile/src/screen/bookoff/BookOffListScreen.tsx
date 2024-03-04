@@ -1,11 +1,40 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { BookOffStackNavigationProp } from '../../../App';
+import { useAuthContext } from '../../context/AuthContext';
+import bookOffService, { BookOffResponse } from '../../remote/BookOffService';
 
 const BookOffListScreen = () => {
     const navigation = useNavigation<BookOffStackNavigationProp>();
+
+    const { user } = useAuthContext();
+
+    const [refreshing, setRefreshing] = useState(false);
+    const [bookOffs, setBookOffs] = useState<BookOffResponse[] | null>(null);
+
+    if (user == null) return (<></>)
+
+    const fetchBookOffs = async () => {
+        const result = await bookOffService.getBookOffs()
+        if (result == null) return setBookOffs([])
+
+        const list: BookOffResponse[] = result
+            .filter(item => item.user_id == user.id)
+
+        setBookOffs(list);
+    };
+
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        fetchBookOffs();
+        setRefreshing(false);
+    }, []);
+
+    useEffect(() => {
+        fetchBookOffs();
+    }, []);
 
     // Dummy data for the list of BookOff requests
     const bookOffData = [

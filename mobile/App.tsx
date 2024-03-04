@@ -61,15 +61,6 @@ function HomeDrawerNavigator() {
   );
 }
 
-// function HomeStackNavigator() {
-//   return (
-//     < screenOptions={{ headerShown: false }}>
-//       <HomeStack.Screen name="Home" component={HomeScreen} />
-//       <HomeStack.Screen name="Drawer" component={HomeDrawer} />
-//     </HomeStack.Navigator>
-//   );
-// }
-
 function MainStackNavigator() {
   return (
     <MainTab.Navigator screenOptions={({ route }) => ({
