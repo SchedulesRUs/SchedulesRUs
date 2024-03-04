@@ -3,10 +3,10 @@ DROP TABLE IF EXISTS public.schedule_info;
 
 -- Create the table with the appropriate case and data types
 CREATE TABLE public.schedule_info (
+        id SERIAL PRIMARY KEY,
     "allDay" BOOLEAN NOT NULL,
     color VARCHAR NOT NULL,
     "end" VARCHAR NOT NULL,
-    id SERIAL PRIMARY KEY,
     "start" VARCHAR NOT NULL,
     title VARCHAR NOT NULL,
     "userId" INTEGER NOT NULL

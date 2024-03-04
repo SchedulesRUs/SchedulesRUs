@@ -6,6 +6,9 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Pagination from "@/app/component/dashboard/pagination/pagination";
+import SingleUserPage from "./[id]/page";
+import userImage from '../../asset/user.jpg'; // Adjust the path to match the folder structure
+
 
 const Users = () => {
 
@@ -24,7 +27,7 @@ const Users = () => {
   async function fetchGetAllUser() {
     try {
       const response = await fetch(
-        `http://localhost:1000/user`
+        `https://schedules-r-us-78b737cd078f.herokuapp.com/user`
       );
       const data = await response.json();
       console.log("test", data);
@@ -71,7 +74,7 @@ fetchGetAllUser();
               <td>
                 <div className="flex items-center gap-4">
                   <Image
-                    src={user.image}
+                    src={user.image||userImage}
                     alt=""
                     width={40}
                     height={40}
@@ -86,15 +89,14 @@ fetchGetAllUser();
               <td>{user.isAdmin}</td>
               <td>
                 <div className="flex">
-                  <Link href={`/dashboard/teams/${user.id}`}>
+                  <Link href="/dashboard/teams/test">
                     <button className="bg-green-600 text-white text-[12px] rounded-lg p-1 mr-2">
                       View
                     </button>
-                  </Link>
                     <button className="bg-red-700 text-white text-[12px] rounded-lg p-1">
                       Delete
                     </button>
-                  
+                  </Link>
                 </div>
               </td>
             </tr>
@@ -103,6 +105,9 @@ fetchGetAllUser();
         
       </table>
       <Pagination />
+      <div className="mt-10">
+      {/* {selectedUser && <SingleUserPage user={selectedUser} />} */}
+      </div>
     </div>
   );
 };
