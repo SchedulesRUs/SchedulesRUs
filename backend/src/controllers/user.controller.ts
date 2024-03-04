@@ -31,9 +31,15 @@ export class UserController {
   remove(@Param('id') id: number) {
     return this.userService.removeUserById(id);
   }
-  @Get()
-  findOne(@Param('userid') id: number) {
-    return this.userService.findOne(id);
+  @Get('getuser')
+  findOne(@Query('id') id: number) {
+    try {
+    const user = this.userService.findOne(id)
+    return user
+  }
+  catch (error) {
+    return "User Not Found"
+  }
   }
 
   @Get('login') // New endpoint for login
