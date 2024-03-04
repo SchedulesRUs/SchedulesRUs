@@ -1,25 +1,66 @@
 "use client"; 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Search from "@/app/component/dashboard/search/search";
 import Image from "next/image";
 import { userRequests } from "@/app/constants"; // Ensure correct import path
+import { user } from '@/app/asset';
 
 const RequestsPage = () => {
-  const [requests, setRequests] = useState(userRequests.map(request => ({
-    ...request,
-    status: 'Pending' // Initialize all requests as Pending
-  })));
+  const [allRequest, setAllRequest] = useState([]);
+  const [isError, setErrorStatus] = useState(true);
 
-  // Function to change the status of a request
-  const changeStatus = (id, newStatus) => {
-    const updatedRequests = requests.map(request => {
+
+  async function fetchAllRequest() {
+    try {
+      const response = await fetch(
+        `https://schedules-r-us-78b737cd078f.herokuapp.com/request`
+      );
+      
+      const data = await response.json();
+     setAllRequest(data)
+      console.log("setAllRequest", data);
+
+      // return data;
+    } catch (error) {
+    }
+  }
+useEffect(() => {
+  fetchAllRequest();
+}, []);
+
+async function changeStatusOnDB(id, newStatus) {
+  try {
+    const response = await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/request/update-request?id=${id}&newStatus=${newStatus}`,{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      }});
+    const data = await response.json();
+    console.log("test", data);
+  } catch (error) {
+    console.log("fail", data);
+  }
+}
+
+async function changeStatus (id, newStatus) {
+  try{
+    changeStatusOnDB(id,newStatus)
+    const updatedRequests = allRequest.map(request => {
       if (request.id === id) {
+        // Update the status of the matched request
         return { ...request, status: newStatus };
       }
+      // For requests that don't match the id, return them unchanged
       return request;
     });
-    setRequests(updatedRequests);
-  };
+    // Set the updated requests to state
+    setAllRequest(updatedRequests);
+  }
+  catch(error){
+      throw error
+  }
+  
+};
 
   return (
     <div className="bg-[#f1efefe9] rounded-lg p-4 mt-4">
@@ -30,20 +71,22 @@ const RequestsPage = () => {
         <thead>
           <tr className="font-bold items-center">
             <td>Requested Date</td>
-            <td>Type</td>
-            <td>Period</td>
+            <td>From</td>
+            <td>To</td>
             <td>Staff Name</td>
+            <td>Reason</td>
             <td>Status</td>
             <td>Actions</td>
           </tr>
         </thead>
         <tbody>
-          {requests.map(request => (
+          {allRequest.map(request => (
             <tr key={request.id}>
-              <td>{request.requestedDate}</td>
-              <td>{request.type}</td>
-              <td>{request.period}</td>
-              <td>{request.staff.title}</td>
+              <td>{request.created_date}</td>
+              <td>{request.start}</td>
+              <td>{request.end}</td>
+              <td>{request.username}</td>
+              <td>{request.reason}</td>
               <td>{request.status}</td>
               <td>
                 {request.status === 'Pending' && (

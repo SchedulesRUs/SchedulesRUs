@@ -9,7 +9,7 @@ const SingleUserPage = async ({ params }) => {
 
   async function fetchUserId(id) {
     try {
-      const response = await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/user/${id}`);
+      const response = await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/user/getuser?id=${id}`);
       const data = await response.json();
       console.log("fetchUserId:", data);
       // return data;
