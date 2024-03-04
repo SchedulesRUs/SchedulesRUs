@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import {useContext, useState} from 'react';
 import {
   View,
   Text,
@@ -8,14 +8,14 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { assertIsError } from '../../extension/ErrorExt';
-import { useAuthContext } from '../../context/AuthContext';
+import {assertIsError} from '../../extension/ErrorExt';
+import {useAuthContext} from '../../context/AuthContext';
 import userService from '../../remote/UserService';
-import { errorToast } from '../../component/Toast';
-import { AppStatusBar } from '../../theme/StatusBar';
+import {errorToast} from '../../component/Toast';
+import {AppStatusBar} from '../../theme/StatusBar';
 
 function LoginScreen() {
-  const { user, saveUser } = useAuthContext();
+  const {user, saveUser} = useAuthContext();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -41,7 +41,7 @@ function LoginScreen() {
             username: infoResult.username,
             email: infoResult.email,
             role: infoResult.role,
-            image: infoResult.image
+            image: infoResult.image,
           });
         } else {
           errorToast(

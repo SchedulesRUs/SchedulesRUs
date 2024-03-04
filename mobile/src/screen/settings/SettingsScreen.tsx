@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -8,10 +8,10 @@ import {
   ScrollView,
   StatusBar,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { AppColor } from '../../theme/Colors';
-import { AppStatusBar } from '../../theme/StatusBar';
-import { useAuthContext } from '../../context/AuthContext';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {AppColor} from '../../theme/Colors';
+import {AppStatusBar} from '../../theme/StatusBar';
+import {useAuthContext} from '../../context/AuthContext';
 
 const SettingsOption = ({
   title,
@@ -19,7 +19,7 @@ const SettingsOption = ({
   isSwitch,
   onToggle,
   isEnabled,
-  labelColor
+  labelColor,
 }: {
   title: string;
   onPress?: () => void;
@@ -33,10 +33,13 @@ const SettingsOption = ({
       style={styles.option}
       onPress={onPress}
       disabled={isSwitch}>
-      <Text style={[styles.optionText, { color: labelColor ? labelColor : 'black' }]}>{title}</Text>
+      <Text
+        style={[styles.optionText, {color: labelColor ? labelColor : 'black'}]}>
+        {title}
+      </Text>
       {isSwitch ? (
         <Switch
-          trackColor={{ false: '#767577', true: '#81b0ff' }}
+          trackColor={{false: '#767577', true: '#81b0ff'}}
           thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
           onValueChange={onToggle}
           value={isEnabled}
@@ -49,7 +52,7 @@ const SettingsOption = ({
 };
 
 const SettingsScreen: React.FC = () => {
-  const { clearUser } = useAuthContext();
+  const {clearUser} = useAuthContext();
 
   const [isPushNotificationsEnabled, setIsPushNotificationsEnabled] =
     useState(false);
@@ -76,10 +79,10 @@ const SettingsScreen: React.FC = () => {
     console.log('Navigate to Terms and Conditions');
   const logout = () => {
     clearUser();
-  }
+  };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{flex: 1}}>
       <AppStatusBar />
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Settings</Text>
@@ -122,11 +125,7 @@ const SettingsScreen: React.FC = () => {
             title="Terms and conditions"
             onPress={navigateToTermsAndConditions}
           />
-          <SettingsOption
-            title="Logout"
-            labelColor='red'
-            onPress={logout}
-          />
+          <SettingsOption title="Logout" labelColor="red" onPress={logout} />
         </View>
       </ScrollView>
     </View>

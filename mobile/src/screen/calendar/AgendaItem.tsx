@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, {useCallback} from 'react';
 import {
   StyleSheet,
   Alert,
@@ -13,7 +13,7 @@ interface ItemProps {
 }
 
 const AgendaItem = (props: ItemProps) => {
-  const { item } = props;
+  const {item} = props;
 
   const buttonPressed = useCallback(() => {
     Alert.alert('Show me more');
@@ -32,7 +32,9 @@ const AgendaItem = (props: ItemProps) => {
   }
 
   return (
-    <TouchableOpacity onPress={itemPressed} style={[styles.item, { backgroundColor: item.color }]}>
+    <TouchableOpacity
+      onPress={itemPressed}
+      style={[styles.item, {backgroundColor: item.color}]}>
       <View>
         <Text style={styles.itemHourText}>{item.hour}</Text>
         <Text style={styles.itemDurationText}>{item.duration}</Text>

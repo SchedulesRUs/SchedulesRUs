@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -6,10 +6,10 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+import {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 type BookOffRequestState = {
   date: Date;
@@ -32,7 +32,7 @@ const BookOffRequestScreen: React.FC = () => {
       value: request.date,
       onChange: (event, date) => {
         if (date) {
-          setRequest({ ...request, date });
+          setRequest({...request, date});
         }
       },
       mode: 'date',
@@ -44,7 +44,7 @@ const BookOffRequestScreen: React.FC = () => {
       value: request.startTime,
       onChange: (event, date) => {
         if (date) {
-          setRequest({ ...request, startTime: date });
+          setRequest({...request, startTime: date});
         }
       },
       mode: 'time',
@@ -56,7 +56,7 @@ const BookOffRequestScreen: React.FC = () => {
       value: request.endTime,
       onChange: (event, date) => {
         if (date) {
-          setRequest({ ...request, endTime: date });
+          setRequest({...request, endTime: date});
         }
       },
       mode: 'time',
@@ -64,7 +64,7 @@ const BookOffRequestScreen: React.FC = () => {
   };
 
   const handleReasonChange = (text: string) => {
-    setRequest({ ...request, reason: text });
+    setRequest({...request, reason: text});
   };
 
   const handleSubmit = () => {
