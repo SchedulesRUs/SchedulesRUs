@@ -22,6 +22,18 @@ export class RequestService {
     return this.requestRepository.findOneBy({ user_id });
   }
 
+  
+  async updateStatusById(id: number, newStatus: string): Promise<Request> {
+    const request = await this.requestRepository.findOneBy({id});
+
+    if (!request) {
+      throw new NotFoundException('Request not found');
+    }
+
+    request.status = newStatus;
+    return this.requestRepository.save(request);
+  }
+
   async createRequest(createRequestDto: any): Promise<Request[]> {
     try {
       const user = await this.userService.findOne(createRequestDto.user_id);
