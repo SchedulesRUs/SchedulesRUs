@@ -32,14 +32,17 @@ const AgendaItem = (props: ItemProps) => {
   }
 
   return (
-    <TouchableOpacity
-      onPress={itemPressed}
-      style={[styles.item, {backgroundColor: item.color}]}>
+    <TouchableOpacity onPress={itemPressed} style={[styles.item]}>
       <View>
         <Text style={styles.itemHourText}>{item.hour}</Text>
         <Text style={styles.itemDurationText}>{item.duration}</Text>
       </View>
-      <Text style={styles.itemTitleText}>{item.title}</Text>
+      <View>
+        <Text style={[styles.itemTitleText, {color: item.color}]}>
+          {item.title}
+        </Text>
+        <Text style={styles.itemTitleText}>{item.range}</Text>
+      </View>
     </TouchableOpacity>
   );
 };
@@ -55,16 +58,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   itemHourText: {
-    color: 'white',
+    color: 'black',
   },
   itemDurationText: {
-    color: 'white',
+    color: 'black',
     fontSize: 12,
     marginTop: 4,
     marginLeft: 4,
   },
   itemTitleText: {
-    color: 'white',
+    color: 'black',
     marginLeft: 16,
     fontWeight: 'bold',
     fontSize: 16,

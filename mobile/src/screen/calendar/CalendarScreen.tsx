@@ -38,6 +38,7 @@ const CalendarScreen = () => {
     hour: string;
     duration: string;
     title: string;
+    range: string;
     color: string;
   }
 
@@ -50,9 +51,8 @@ const CalendarScreen = () => {
       acc[dateKey].data.push({
         hour: 'Total',
         duration: calculateDuration(item.start, item.end),
-        title:
-          item.title +
-          `\nFrom ${formatHour(item.start)} - ${formatHour(item.end)}`,
+        title: item.title,
+        range: `From ${formatHour(item.start)} - ${formatHour(item.end)}`,
         color: item.color,
       });
       return acc;
