@@ -9,9 +9,9 @@ export default class Request {
   @Column()
   user_id: number;
 
-  
-  @Column({ nullable: true })
-  date:string;
+
+  @Column()
+  created_date:string;
     
   @Column({ nullable: true })
   start:string;

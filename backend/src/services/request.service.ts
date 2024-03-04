@@ -28,7 +28,9 @@ export class RequestService {
       if (!user) {
         throw new NotFoundException('User not found');
       }
-      const newRequest = this.requestRepository.create({ ...createRequestDto, status: 'Pending', username: user.username });
+      
+      const created_date = this.formatDate(new Date())
+      const newRequest = this.requestRepository.create({ ...createRequestDto, status: 'Pending', username: user.username,created_date: created_date });
       return this.requestRepository.save(newRequest);
     }
     catch (error) {
@@ -36,4 +38,11 @@ export class RequestService {
     }
 
   }
+  formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
 }
+
