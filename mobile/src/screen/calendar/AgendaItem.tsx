@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, { useCallback } from 'react';
 import {
   StyleSheet,
   Alert,
@@ -13,7 +13,7 @@ interface ItemProps {
 }
 
 const AgendaItem = (props: ItemProps) => {
-  const {item} = props;
+  const { item } = props;
 
   const buttonPressed = useCallback(() => {
     Alert.alert('Show me more');
@@ -32,15 +32,12 @@ const AgendaItem = (props: ItemProps) => {
   }
 
   return (
-    <TouchableOpacity onPress={itemPressed} style={styles.item}>
+    <TouchableOpacity onPress={itemPressed} style={[styles.item, { backgroundColor: item.color }]}>
       <View>
         <Text style={styles.itemHourText}>{item.hour}</Text>
         <Text style={styles.itemDurationText}>{item.duration}</Text>
       </View>
       <Text style={styles.itemTitleText}>{item.title}</Text>
-      {/* <View style={styles.itemButtonContainer}>
-                <Button color={'grey'} title={'Info'} onPress={buttonPressed} />
-            </View> */}
     </TouchableOpacity>
   );
 };
@@ -56,16 +53,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   itemHourText: {
-    color: 'black',
+    color: 'white',
   },
   itemDurationText: {
-    color: 'grey',
+    color: 'white',
     fontSize: 12,
     marginTop: 4,
     marginLeft: 4,
   },
   itemTitleText: {
-    color: 'black',
+    color: 'white',
     marginLeft: 16,
     fontWeight: 'bold',
     fontSize: 16,

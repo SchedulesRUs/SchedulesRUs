@@ -7,6 +7,8 @@ import {
   StyleSheet,
   RefreshControl,
   TouchableOpacity,
+  ActivityIndicator,
+  Dimensions,
 } from 'react-native';
 import ShiftItem from './ShiftItem';
 import { AppStatusBar } from '../../theme/StatusBar';
@@ -27,7 +29,7 @@ const HomeScreen = () => {
   const navigation = useNavigation();
 
   const [refreshing, setRefreshing] = useState(false);
-  const [shifts, setShifts] = useState<Shift[]>([]);
+  const [shifts, setShifts] = useState<Shift[] | null>(null);
 
   if (user == null) return (<></>)
 
@@ -39,7 +41,7 @@ const HomeScreen = () => {
         id: item.id,
         start: Date.parse(item.start) / 1000,
         end: Date.parse(item.end) / 1000,
-        position: ``,
+        position: user.role,
       }));
 
     setShifts(list);
@@ -72,11 +74,23 @@ const HomeScreen = () => {
         <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 10 }}>
           Your Upcoming Shift
         </Text>
-        <FlatList
-          data={shifts}
-          renderItem={({ item }) => <ShiftItem shift={item} />}
-          keyExtractor={item => item.id.toString()}
-        />
+        {
+          shifts && shifts.length > 0 ? (
+            <FlatList
+              data={shifts}
+              renderItem={({ item }) => <ShiftItem shift={item} />}
+              keyExtractor={item => item.id.toString()}
+            />
+          ) : shifts && shifts.length === 0 ? (
+            <View style={styles.centeredView}>
+              <Text style={{ fontSize: 16, textAlign: 'center' }}>You haven't been assigned any shifts yet.</Text>
+            </View>
+          ) : (
+            <View style={styles.centeredView}>
+              <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+          )
+        }
       </ScrollView>
     </View>
   );
@@ -99,6 +113,11 @@ const styles = StyleSheet.create({
   menuButton: {
     position: 'absolute',
     left: 20,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

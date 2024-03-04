@@ -1,4 +1,4 @@
-import {useContext, useState} from 'react';
+import { useContext, useState } from 'react';
 import {
   View,
   Text,
@@ -8,13 +8,14 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {assertIsError} from '../../extension/ErrorExt';
-import {useAuthContext} from '../../context/AuthContext';
+import { assertIsError } from '../../extension/ErrorExt';
+import { useAuthContext } from '../../context/AuthContext';
 import userService from '../../remote/UserService';
-import {errorToast} from '../../component/Toast';
+import { errorToast } from '../../component/Toast';
+import { AppStatusBar } from '../../theme/StatusBar';
 
 function LoginScreen() {
-  const {user, saveUser} = useAuthContext();
+  const { user, saveUser } = useAuthContext();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +34,21 @@ function LoginScreen() {
       setLoading(true);
       const result = await userService.authenticate(username, password);
       if (result.success) {
-        saveUser({username: result.username});
+        const infoResult = await userService.getUserInfo(result.userid);
+        if (infoResult != null) {
+          return saveUser({
+            id: infoResult.id,
+            username: infoResult.username,
+            email: infoResult.email,
+            role: infoResult.role,
+            image: infoResult.image
+          });
+        } else {
+          errorToast(
+            'Unable to get user info',
+            'Please check your internet connection or contact customer support',
+          );
+        }
       } else {
         errorToast(
           'Unable to log in with the provided credentials',
@@ -51,6 +66,7 @@ function LoginScreen() {
 
   return (
     <View style={styles.container}>
+      <AppStatusBar />
       <Text style={styles.title}>Schedule "R" Us</Text>
       <TextInput
         style={styles.input}
