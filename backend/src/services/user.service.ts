@@ -10,6 +10,7 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
+  // private users = ['This my this text'];
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
