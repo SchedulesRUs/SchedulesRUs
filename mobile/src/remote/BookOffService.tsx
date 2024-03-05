@@ -1,6 +1,6 @@
 import axios from 'axios';
-import {BASE_URL} from './Config';
-import {assertIsError} from '../extension/ErrorExt';
+import { BASE_URL } from './Config';
+import { assertIsError } from '../extension/ErrorExt';
 
 export interface BookOffResponse {
   id: number;
@@ -9,6 +9,7 @@ export interface BookOffResponse {
   start: string;
   end: string;
   reason: string;
+  status: string;
 }
 
 class BookOffService {
