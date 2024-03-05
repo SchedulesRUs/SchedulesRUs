@@ -7,10 +7,12 @@ import {
   StyleSheet,
 } from 'react-native';
 import {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
+import { Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { errorToast } from '../../component/Toast';
 
 export type BookOffRequestState = {
   date: Date;
@@ -81,6 +83,10 @@ const BookOffRequestScreen: React.FC = () => {
   };
 
   const handleSubmit = () => {
+    if (request.endTime <= request.startTime) {
+      errorToast('Invalid Time', 'End Time must be greater than Start Time.');
+      return;
+    }
     console.log('Book Off Request:', request);
     navigation.navigate('Confirmation', { request });
   };
