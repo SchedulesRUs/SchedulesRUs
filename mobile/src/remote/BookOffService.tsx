@@ -26,7 +26,6 @@ class BookOffService {
 
   public async requestBookOff(
     userId: number,
-    date: string,
     start: string,
     end: string,
     reason: string,
@@ -36,7 +35,6 @@ class BookOffService {
         `${BASE_URL}/request`,
         {
           user_id: userId,
-          date: date,
           start: start,
           end: end,
           reason: reason,

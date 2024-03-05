@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import bookOffService from '../../remote/BookOffService';
+import { useAuthContext } from '../../context/AuthContext';
+import { errorToast, successToast } from '../../component/Toast';
 
 type BookOffRequestState = {
   date: Date;
@@ -22,9 +25,13 @@ type ConfirmationScreenNavigationProp = StackNavigationProp<
 >;
 
 const ConfirmationScreen: React.FC = () => {
+  const { user } = useAuthContext();
   const navigation = useNavigation<ConfirmationScreenNavigationProp>();
   const route = useRoute<RouteProp<BookOffStackParamList, 'Confirmation'>>();
-  
+  const [sending, setSending] = useState(false);
+
+  if (user == null) return <></>;
+
   // Extract the request data from the navigation parameters
   const { request } = route.params;
 
@@ -41,13 +48,25 @@ const ConfirmationScreen: React.FC = () => {
     navigation.navigate('BookOffRequest');
   };
 
-  const handleConfirm = () => {
-    navigation.navigate('BookOffList');
+  const handleConfirm = async () => {
+    const result = await bookOffService.requestBookOff(
+      user.id,
+      request.startTime.getTime().toString(),
+      request.endTime.getTime().toString(),
+      request.reason
+    )
+
+    if (result) {
+      successToast('Successfully request day off')
+      navigation.goBack()
+    } else {
+      errorToast('Fail to request day off. Please try again')
+    }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.confirmationText}>Your Request has been submitted</Text>
+      <Text style={styles.confirmationText}>Your request</Text>
 
       <View style={styles.detailContainer}>
         <Text style={styles.label}>Your Request Date:</Text>
