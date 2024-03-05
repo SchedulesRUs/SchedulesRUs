@@ -5,7 +5,6 @@ const nextConfig = {
             {hostname: "drive.google.com"},
             {hostname: "img.freepik.com"},
     ],
-    },
+    }
 }
-
 module.exports = nextConfig

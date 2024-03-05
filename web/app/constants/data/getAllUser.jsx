@@ -8,7 +8,7 @@ export default function getAllUser() {
         const [isError, setErrorStatus] = useState(true);
         try {
           const response = await fetch(
-            `http://localhost:1000/user`
+            `https://schedules-r-us-78b737cd078f.herokuapp.com/user`
           );
           const data = await response.json();
           console.log("test", data);

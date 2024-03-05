@@ -40,7 +40,7 @@ const Schedule = () => {
 
   async function fetchGetAllUser() {
     try {
-      const response = await fetch(`http://localhost:1000/user`);
+      const response = await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/user`);
       const data = await response.json();
       // console.log("test", data);
       // console.dir(data);
@@ -56,7 +56,7 @@ const Schedule = () => {
 
   async function fetchSchedule() {
     try {
-      const response = await fetch("http://localhost:1000/scheduleInfo");
+      const response = await fetch("https://schedules-r-us-78b737cd078f.herokuapp.com/scheduleInfo");
       const data = await response.json();
       console.log("Fetch Schedule:", data);
       setSchedule(data);
@@ -65,16 +65,16 @@ const Schedule = () => {
     }
   }
 
-  async function getScheduleById(id) {
-    try {
-      const response = await fetch(`http://localhost:1000/scheduleInfo/${id}`);
-      const data = await response.json();
-      console.log("Fetch Schedule by ID:", data);
-      setSchedule(data);
-    } catch (error) {
-      console.log("fail", error);
-    }
-  }
+  // async function getScheduleById(id) {
+  //   try {
+  //     const response = await fetch(`http://localhost:1000/scheduleInfo/${id}`);
+  //     const data = await response.json();
+  //     console.log("Fetch Schedule by ID:", data);
+  //     setSchedule(data);
+  //   } catch (error) {
+  //     console.log("fail", error);
+  //   }
+  // }
 
   useEffect(() => {
     fetchSchedule();
@@ -84,7 +84,7 @@ const Schedule = () => {
   async function createSchedule() {
     const requestBody = JSON.stringify(scheduleToPost);
     try {
-      const response = await fetch("http://localhost:1000/scheduleInfo", {
+      const response = await fetch("https://schedules-r-us-78b737cd078f.herokuapp.com/scheduleInfo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -92,7 +92,8 @@ const Schedule = () => {
         body: requestBody,
       });
       const data = await response.json();
-      // setSchedule([...schedule,data])
+      setSchedule([...schedule, data])
+
       console.log("Add Schedule to DB:", data);
     } catch (error) {
       console.log("Add Schedule to DB:", error);
@@ -102,21 +103,25 @@ const Schedule = () => {
   useEffect(() => {
     if (scheduleToPost != null) {
       createSchedule();
-      // setScheduleToPost(null);
+      setScheduleToPost(null);
     }
     // console.log("createSchedule:schedule", schedule);
   }, [scheduleToPost]);
 
   async function updateEventTime(id, start, end) {
+    console.log(id, start, end);
     try {
-      await fetch(`http://localhost:1000/scheduleInfo/${id}`, {
+      await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/scheduleInfo/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ start, end }),
       });
+      console.log("Event resized successfully");
+      
     } catch (error) {
+      console.log("Error updating event time:", error);
       throw new Error(`Unable to update event time: ${error.message}`);
     }
   }
@@ -127,7 +132,7 @@ const Schedule = () => {
   
     try {
       await updateEventTime(id, start, end);
-      console.log("Event Dropped:", "ID", id, "Start:", start, "End:", end);
+      console.log("Event Dropped with ID:", id, "Start:", start, "End:", end);
     } catch (error) {
       console.error("Error updating event time:", error);
     }
@@ -199,6 +204,8 @@ const Schedule = () => {
     newScheduleInfo.allDay = data.allDay;
     console.log("addEvent:", newScheduleInfo);
     setScheduleToPost(newScheduleInfo);
+    
+
   }
 
   function handleDeleteModal(data) {
@@ -209,7 +216,7 @@ const Schedule = () => {
 
   async function handleDelete(id) {
     try {
-      await fetch(`http://localhost:1000/scheduleInfo/${id}`, {
+      await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/scheduleInfo/${id}`, {
         method: "DELETE",
       });
       console.log("Event deleted:", id);

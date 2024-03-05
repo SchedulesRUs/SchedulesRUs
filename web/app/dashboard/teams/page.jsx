@@ -7,6 +7,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Pagination from "@/app/component/dashboard/pagination/pagination";
 import SingleUserPage from "./[id]/page";
+import userImage from '../../asset/user.jpg'; // Adjust the path to match the folder structure
+
 
 const Users = () => {
 
@@ -25,7 +27,7 @@ const Users = () => {
   async function fetchGetAllUser() {
     try {
       const response = await fetch(
-        `http://localhost:1000/user`
+        `https://schedules-r-us-78b737cd078f.herokuapp.com/user`
       );
       const data = await response.json();
       console.log("test", data);
@@ -72,7 +74,7 @@ fetchGetAllUser();
               <td>
                 <div className="flex items-center gap-4">
                   <Image
-                    src={user.image}
+                    src={user.image||userImage}
                     alt=""
                     width={40}
                     height={40}

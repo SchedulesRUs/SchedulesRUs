@@ -23,12 +23,37 @@ Check out the [FullCalendar Documentation](https://fullcalendar.io/docs) for mor
 
 Nivo is a well-known library for building data visualizations in React applications. It offers a rich set of graph components, including standard charts like bar, line, pie, scatter, and more complex visualizations like heatmaps, radar charts, and network diagrams. Nivo is built on top of D3.js, which is a powerful and flexible tool for creating complex data visualizations in the browser, but Nivo simplifies the process by providing pre-built, customizable components that are easy to integrate into React applications.
 
- Please install the below packgage:
+## Installation
+
+Please install the below packgage:
    
-  npm i @nivo/line
+npm i @nivo/line
+
+## Documentation
+
+The Nivo documentation is hosted on its official website, which you can visit at https://nivo.rocks. This site provides an overview of all the available charts and features.
 
 # 3.Headless UI
 
-  npm install @headlessui/react
+Headless UI is a library of completely unstyled, fully accessible UI components, designed to integrate seamlessly with Tailwind CSS. It's developed by the creators of Tailwind CSS to provide developers with the core functionality of various UI components without any default styling. This approach allows developers to build their own unique UI designs on top of robust, accessible components without having to fight against pre-existing styles.
+
+## Installation
+
+npm install @headlessui/react
+
+## Documentation
 
 For full documentation, please visit[headlessui.com](https://headlessui.com)
+
+# 4.@react-native-community/datetimepicker
+The @react-native-community/datetimepicker is a React Native library that provides date and time picker components for iOS and Android platforms. It offers a simple and efficient way to incorporate native date and time selection functionality in your React Native applications. With this library, developers can easily implement user interfaces that require date or time input without the need for custom-built solutions or third-party plugins.
+
+## Installation
+To add the DateTimePicker to your React Native project, run the following command:
+npm install @react-native-community/datetimepicker --save
+
+or if you using Yarn:
+yarn add @react-native-community/datetimepicker
+
+## Documentation
+Detailed documentation and usage instructions for the @react-native-community/datetimepicker can be found on the GitHub repository: https://github.com/react-native-datetimepicker/datetimepicker. The repository includes information on installation, API reference, and examples for both iOS and Android.

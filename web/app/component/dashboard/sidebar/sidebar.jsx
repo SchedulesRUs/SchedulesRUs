@@ -4,13 +4,15 @@ import MenuLink from "./menuLink/menuLink";
 import Image from "next/image";
 import { MdLogout } from "react-icons/md";
 import Link from "next/link";
+import { s, s1, s2, s3, s4, s5, s6, s7 } from "@/app/asset";
+
 
 const Sidebar = () => {
   return (
     <div className="min-w-max">
       <div className="flex items-center gap-5 mb-8">
         <Image
-          src="/user2.jpg"
+          src={s7}
           alt="user"
           width="100"
           height="100"
