@@ -9,9 +9,9 @@ export default class Request {
   @Column()
   user_id: number;
 
-  
-  @Column({ nullable: true })
-  date:string;
+
+  @Column()
+  created_date:string;
     
   @Column({ nullable: true })
   start:string;
@@ -22,6 +22,12 @@ export default class Request {
       
   @Column({ nullable: true })
   reason:string;
+
+  @Column()
+  status:string;
+
+  @Column()
+  username:string;
 
 //After modifying your entity, remember to synchronize your database schema using TypeORM:
 //npx typeorm schema:sync
