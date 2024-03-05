@@ -59,7 +59,7 @@ const BookOffListScreen = () => {
                 break;
             case 'Pending':
                 iconName = 'hourglass-empty';
-                iconColor = 'orange';
+                iconColor = 'grey';
                 break;
             default:
                 iconName = 'help-outline'; // A default icon for unknown statuses
