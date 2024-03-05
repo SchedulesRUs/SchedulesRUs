@@ -8,8 +8,8 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin, { Draggable } from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
-import DeleteModal from "./deleteModal/deleteModel";
-import AddEvent from "./addEvent/addEvent";
+import DeleteModal from "../deleteModal/deleteModel";
+import AddEvent from "../addEvent/addEvent";
 
 class ScheduleData {
   constructor(userId, title, allDay, color, start, end) {
