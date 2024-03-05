@@ -6,15 +6,19 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Pagination from "@/app/component/dashboard/pagination/pagination";
-import SingleUserPage from "./[id]/page";
-import userImage from '../../asset/user.jpg'; // Adjust the path to match the folder structure
-
+import userImage from "../../asset/user.jpg"; // Adjust the path to match the folder structure
+import DeleteModal from "@/app/component/dashboard/deleteModal/deleteModel";
 
 const Users = () => {
-
   const [allUser, setAllUser] = useState([]);
   const [searchUser, setSearchUser] = useState("");
-  
+
+  //Delete user action
+  const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [idToDelete, setIdToDelete] = useState(null);
+
+
   const handleSearchUser = (event) => {
     setSearchUser(event.target.value);
   };
@@ -22,7 +26,6 @@ const Users = () => {
   const filteredStaffMembers = allUser.filter((staff) =>
     staff.username.toLowerCase().includes(searchUser.toLowerCase())
   );
-
 
   async function fetchGetAllUser() {
     try {
@@ -34,13 +37,43 @@ const Users = () => {
       console.dir(data);
       setAllUser(data);
       // return data;
+    } catch (error) {}
+  }
+
+  useEffect(() => {
+    fetchGetAllUser();
+  }, []);
+
+  //Step No.1
+  function handleDeleteModal(user) {
+    setShowDeleteModal(true);
+    setIdToDelete(Number(user.id));
+    // console.log('handleDeleteModal:', idToDelete);
+  }
+
+  function handleCloseModal() {
+    setShowModal(false);
+    setShowDeleteModal(false);
+    setIdToDelete(null);
+  }
+
+  async function handleDelete(id) {
+    try {
+      await fetch(
+        `https://schedules-r-us-78b737cd078f.herokuapp.com/user/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      console.log("User deleted:", id);
+      // Update the local schedule state after deletion
+      setAllUser(allUser.filter(user => user.id !== id));
+      setShowDeleteModal(false);
+      setIdToDelete(null);
     } catch (error) {
+      console.error("Error handling delete:", error);
     }
   }
-  
-useEffect(() => {
-fetchGetAllUser();
-}, []);
 
   return (
     <div className="bg-[#f1efefe9] rounded-lg p-4 mt-4">
@@ -67,14 +100,14 @@ fetchGetAllUser();
             <td>Action</td>
           </tr>
         </thead>
-        
+
         <tbody>
-        {filteredStaffMembers.map((user) => (
+          {filteredStaffMembers.map((user) => (
             <tr key={user.id}>
               <td>
                 <div className="flex items-center gap-4">
                   <Image
-                    src={user.image||userImage}
+                    src={user.image || userImage}
                     alt=""
                     width={40}
                     height={40}
@@ -89,25 +122,27 @@ fetchGetAllUser();
               <td>{user.isAdmin}</td>
               <td>
                 <div className="flex">
-                  <Link href="/dashboard/teams/test">
+                  <Link href={`/dashboard/teams/${user.id}`}>
                     <button className="bg-green-600 text-white text-[12px] rounded-lg p-1 mr-2">
                       View
                     </button>
-                    <button className="bg-red-700 text-white text-[12px] rounded-lg p-1">
-                      Delete
-                    </button>
                   </Link>
+                  <button className="bg-red-700 text-white text-[12px] rounded-lg p-1" onClick={() => handleDeleteModal(user)}>
+                    Delete
+                  </button>
                 </div>
               </td>
             </tr>
           ))}
         </tbody>
-        
       </table>
       <Pagination />
-      <div className="mt-10">
-      {/* {selectedUser && <SingleUserPage user={selectedUser} />} */}
-      </div>
+      <DeleteModal
+        showModal={showDeleteModal}
+        handleDelete={handleDelete}
+        handleCloseModal={handleCloseModal}
+        idToDelete={idToDelete}
+      />
     </div>
   );
 };
