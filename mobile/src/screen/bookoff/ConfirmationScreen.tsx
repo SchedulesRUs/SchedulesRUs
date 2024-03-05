@@ -62,7 +62,7 @@ const ConfirmationScreen: React.FC = () => {
 
     if (result) {
       successToast('Successfully request day off');
-      navigation.goBack();
+      navigation.navigate('BookOffList');
     } else {
       errorToast('Fail to request day off. Please try again');
     }
