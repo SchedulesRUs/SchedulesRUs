@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { BASE_URL } from './Config';
-import { assertIsError } from '../extension/ErrorExt';
+import {BASE_URL} from './Config';
+import {assertIsError} from '../extension/ErrorExt';
 
 export interface BookOffResponse {
   id: number;
   user_id: number;
-  date: string;
+  created_date: string;
   start: string;
   end: string;
   reason: string;
@@ -27,8 +27,8 @@ class BookOffService {
 
   public async requestBookOff(
     userId: number,
-    start: string,
-    end: string,
+    start: number,
+    end: number,
     reason: string,
   ): Promise<BookOffResponse | null> {
     try {
@@ -36,8 +36,8 @@ class BookOffService {
         `${BASE_URL}/request`,
         {
           user_id: userId,
-          start: start,
-          end: end,
+          start: `${start}`,
+          end: `${end}`,
           reason: reason,
         },
       );

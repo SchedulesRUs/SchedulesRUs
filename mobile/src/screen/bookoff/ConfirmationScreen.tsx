@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
+import React, {useState} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {useNavigation, useRoute, RouteProp} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 import bookOffService from '../../remote/BookOffService';
-import { useAuthContext } from '../../context/AuthContext';
-import { errorToast, successToast } from '../../component/Toast';
+import {useAuthContext} from '../../context/AuthContext';
+import {errorToast, successToast} from '../../component/Toast';
 
 type BookOffRequestState = {
   date: Date;
@@ -16,7 +16,7 @@ type BookOffRequestState = {
 type BookOffStackParamList = {
   BookOffRequest: undefined;
   BookOffList: undefined;
-  Confirmation: { request: BookOffRequestState };
+  Confirmation: {request: BookOffRequestState};
 };
 
 type ConfirmationScreenNavigationProp = StackNavigationProp<
@@ -25,7 +25,7 @@ type ConfirmationScreenNavigationProp = StackNavigationProp<
 >;
 
 const ConfirmationScreen: React.FC = () => {
-  const { user } = useAuthContext();
+  const {user} = useAuthContext();
   const navigation = useNavigation<ConfirmationScreenNavigationProp>();
   const route = useRoute<RouteProp<BookOffStackParamList, 'Confirmation'>>();
   const [sending, setSending] = useState(false);
@@ -33,15 +33,19 @@ const ConfirmationScreen: React.FC = () => {
   if (user == null) return <></>;
 
   // Extract the request data from the navigation parameters
-  const { request } = route.params;
+  const {request} = route.params;
 
   // Format the date and time to strings
   const formatDate = (date: Date) => {
-    return `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + date.getDate()).slice(-2)}`;
+    return `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${(
+      '0' + date.getDate()
+    ).slice(-2)}`;
   };
 
   const formatTime = (date: Date) => {
-    return `${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}`;
+    return `${('0' + date.getHours()).slice(-2)}:${(
+      '0' + date.getMinutes()
+    ).slice(-2)}`;
   };
 
   const handleEdit = () => {
@@ -51,16 +55,16 @@ const ConfirmationScreen: React.FC = () => {
   const handleConfirm = async () => {
     const result = await bookOffService.requestBookOff(
       user.id,
-      request.startTime.getTime().toString(),
-      request.endTime.getTime().toString(),
-      request.reason
-    )
+      Math.floor(request.startTime.getTime() / 1000),
+      Math.floor(request.endTime.getTime() / 1000),
+      request.reason,
+    );
 
     if (result) {
-      successToast('Successfully request day off')
-      navigation.goBack()
+      successToast('Successfully request day off');
+      navigation.goBack();
     } else {
-      errorToast('Fail to request day off. Please try again')
+      errorToast('Fail to request day off. Please try again');
     }
   };
 
