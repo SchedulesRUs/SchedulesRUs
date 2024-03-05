@@ -17,11 +17,10 @@ class User {
   }
 }
 
+
 const AddUser = () => {
-  const [user, setUser] = useState(
-    new User("This is test", "", "", "", "", "", "", "")
-  );
-  const [userToPost, setUserToPost] = useState(user);
+  const [user, setUser] = useState(new User("This is test", "", "", "", "", "", "", ""));
+
 
   // Function to update user state
   const updateUser = (field, value) => {
@@ -32,7 +31,7 @@ const AddUser = () => {
   };
 
   async function createUser() {
-    const requestBody = JSON.stringify(userToPost);
+    const requestBody = JSON.stringify(user);
     try {
       const response = await fetch("https://schedules-r-us-78b737cd078f.herokuapp.com/user", {
         method: "POST",
@@ -43,15 +42,17 @@ const AddUser = () => {
       });
       const data = await response.json();
       console.log("test", data);
+      
     } catch (error) {
       console.log("fail", data);
     }
+
+    
+
   }
 
   useEffect(() => {
     console.log("user", user);
-    setUserToPost(user);
-    console.log("userToPost", userToPost);
   }, [user]);
 
   const [selectedImage, setSelectedImage] = useState(s6);
@@ -67,7 +68,6 @@ const AddUser = () => {
     <div className="p-5 rounded-lg mt-5 bg-[#f1efefe9]">
       <form
         onSubmit={createUser}
-        action=""
         className="flex flex-wrap justify-between"
       >
         <input
@@ -109,7 +109,7 @@ const AddUser = () => {
           name="role"
         />
         <select
-          onChange={(e) => updateUser("isAdmin", e.target.value)}
+          onChange={(e) => updateUser("isAdmin", e.target.value === "true")}
           className="w-[45%] m-4 p-2 rounded-md"
           name="isAdmin"
           id="isAdmin"
@@ -126,6 +126,7 @@ const AddUser = () => {
           name="image"
           id="image"
           onChange={handleImageChange}
+          defaultValue={s6}
         >
           <option value={s6}>Select Image</option>
           <option value={s}>User</option>

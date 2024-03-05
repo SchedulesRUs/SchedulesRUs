@@ -1,41 +1,56 @@
-import React from "react";
-import Image from "next/image";
+"use client";
 
-const SingleUserPage = async ({ params }) => {
-  
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import { s6 } from "@/app/asset";
+
+const SingleUserPage = ({ params }) => {
   const { id } = params;
-  const user = await fetchUserId(id);
-  // const [user, setUser] = useState("")
+  const [userData, setUserData] = useState(null);
 
   async function fetchUserId(id) {
     try {
       const response = await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/user/getuser?id=${id}`);
       const data = await response.json();
-      console.log("fetchUserId:", data);
-      // return data;
+      console.log(data);
+      setUserData(data);
     } catch (error) {
       console.log("Error:", error);
     }
   }
 
-  // useEffect(() => {
-  //   fetchUserId(id);
-  //   }, []);
+  useEffect(() => {
+    if (id) {
+      fetchUserId(id);
+    }
+  }, [id]);
 
   return (
     <div className="flex gap-4 mt-4">
       <div className="flex-1 bg-[#f1efefe9] rounded-xl h-max">
         <div className="relative p-3">
-          <Image
-            src={user.image}
-            alt=""
-            width={400}
-            height={300}
-            className="rounded-xl mb-2"
-          />
+          {userData && userData.image && (
+            <Image
+              src={userData.image}
+              alt="userProfile"
+              width={400}
+              height={300}
+              className="rounded-xl mb-2"
+            />
+          )}
+          {!userData ||
+            (!userData.image && (
+              <Image
+                src={s6}
+                alt=""
+                width={400}
+                height={300}
+                className="rounded-xl mb-2"
+              />
+            ))}
         </div>
         <div className="flex justify-center items-center mb-4 font-bold">
-          {user.username}
+          {userData && userData.username}
         </div>
       </div>
       <div className="flex-[3] bg-[#f1efefe9] p-3 rounded-xl">
@@ -44,42 +59,42 @@ const SingleUserPage = async ({ params }) => {
           <input
             type="text"
             name="username"
-            placeholder={user.username}
+            placeholder={userData ? userData.username : ""}
             className="rounded-md p-2 mb-2"
           />
           <label className="mb-2 font-bold">Email</label>
           <input
             type="text"
             name="email"
-            placeholder={user.email}
+            placeholder={userData ? userData.email : ""}
             className="rounded-md p-2 mb-2"
           />
           <label className="mb-2 font-bold">Password</label>
           <input
             type="text"
             name="password"
-            placeholder={user.password}
+            placeholder={userData ? userData.password : ""}
             className="rounded-md p-2 mb-2"
           />
           <label className="mb-2 font-bold">Phone</label>
           <input
             type="text"
             name="phone"
-            placeholder={user.phone}
+            placeholder={userData ? userData.phone : ""}
             className="rounded-md p-2 mb-2"
           />
           <label className="mb-2 font-bold">Role</label>
           <input
             type="text"
             name="role"
-            placeholder={user.role}
+            placeholder={userData ? userData.role : ""}
             className="rounded-md p-2 mb-2"
           />
           <label className="mb-2 font-bold">Address</label>
           <textarea
             type="text"
             name="address"
-            placeholder={user.address}
+            placeholder={userData ? userData.address : ""}
             className="rounded-md p-2 mb-2"
           />
           <label className="mb-2 font-bold">Is Admin?</label>
