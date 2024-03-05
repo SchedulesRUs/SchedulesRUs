@@ -83,8 +83,8 @@ async function changeStatus (id, newStatus) {
           {allRequest.map(request => (
             <tr key={request.id}>
               <td>{request.created_date}</td>
-              <td>{request.start}</td>
-              <td>{request.end}</td>
+              <td>{new Date(request.start * 1000).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' })}</td>
+              <td>{new Date(request.end * 1000).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' })}</td>
               <td>{request.username}</td>
               <td>{request.reason}</td>
               <td>{request.status}</td>
