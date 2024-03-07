@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { s6 } from "@/app/asset";
+import { s, s1, s2, s3, s4, s5, s6, s7 } from "@/app/asset";
 
 const SingleUserPage = ({ params }) => {
   const { id } = params;
@@ -14,7 +14,8 @@ const SingleUserPage = ({ params }) => {
     phone: "",
     role: "",
     address: "",
-    isAdmin: false
+    isAdmin: false,
+    image: "",
   });
 
   const [successMessage, setSuccessMessage] = useState("");
@@ -41,7 +42,8 @@ const SingleUserPage = ({ params }) => {
         phone: data.phone,
         role: data.role,
         address: data.address,
-        isAdmin: data.isAdmin
+        isAdmin: data.isAdmin,
+        image: data.image,
       });
     } catch (error) {
       console.log("Error:", error);
@@ -54,13 +56,13 @@ const SingleUserPage = ({ params }) => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:5001/user/getuser?id=${id}`,
+        `https://schedules-r-us-78b737cd078f.herokuapp.com/user/getuser?id=${id}`,
         {
           method: "PUT",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData)
+          body: JSON.stringify(formData),
         }
       );
       if (response.ok) {
@@ -70,6 +72,7 @@ const SingleUserPage = ({ params }) => {
         console.log("User updated successfully:", updatedUserData);
       } else {
         console.error("Failed to update user:", response.statusText);
+        setSuccessMessage("User updated failed!!!");
       }
     } catch (error) {
       console.error("Error updating user:", error);
@@ -78,12 +81,17 @@ const SingleUserPage = ({ params }) => {
     }
   }
 
+  const [selectedImage, setSelectedImage] = useState(s6);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
+    if (name === "image") {
+      setSelectedImage(value); // Update selected image
+    }
   };
 
   const handleSubmit = (e) => {
@@ -120,7 +128,6 @@ const SingleUserPage = ({ params }) => {
         </div>
       </div>
       <div className="flex-[3] bg-[#f1efefe9] p-3 rounded-xl">
-      
         <form onSubmit={handleSubmit} className="flex flex-col p-2">
           <label className="mb-2 font-bold">Username</label>
           <input
@@ -178,10 +185,46 @@ const SingleUserPage = ({ params }) => {
             onChange={handleInputChange}
             className="rounded-md p-2 mb-2"
           />
-          {loading && <div className="text-red-700 mb-2 font-bold flex justify-center items-center">Loading...</div>}
-          {successMessage && (
-          <div className="text-green-600 mb-2 font-bold flex justify-center items-center">{successMessage}</div>
-        )}
+
+          <div className="flex items-center mt-2 mb-2 mr-10">
+            <h1 className="mr-5 font-bold">Update Image</h1>
+            <select
+              className="mr-10 p-2 rounded-md"
+              name="image"
+              id="image"
+              onChange={handleInputChange}
+              defaultValue={s6}
+            >
+              <option value={s6}>Select Image</option>
+              <option value={s}>User</option>
+              <option value={s1}>User 1</option>
+              <option value={s2}>User 2</option>
+              <option value={s3}>User 3</option>
+              <option value={s4}>User 4</option>
+              <option value={s5}>User 5</option>
+              <option value={s7}>User 6</option>
+            </select>
+            {selectedImage && (
+              <Image
+                src={selectedImage}
+                alt="Selected User"
+                width={140}
+                height={140}
+                className="object-cover rounded-md"
+              />
+            )}
+          </div>
+          {loading ? (
+            <div className="text-red-700 mb-2 font-bold flex justify-center items-center">
+              Loading...
+            </div>
+          ) : (
+            successMessage && (
+              <div className="text-green-600 mb-2 font-bold flex justify-center items-center">
+                {successMessage}
+              </div>
+            )
+          )}
           <button
             type="submit"
             className="w-full p-4 bg-indigo-950 text-white font-bold mt-3 rounded-lg"
