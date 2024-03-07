@@ -83,8 +83,25 @@ async function changeStatus (id, newStatus) {
           {allRequest.map(request => (
             <tr key={request.id}>
               <td>{request.created_date}</td>
-              <td>{request.start}</td>
-              <td>{request.end}</td>
+              <td>
+                {new Date(request.start * 1000).getFullYear() + '-' +
+                ('0' + (new Date(request.start * 1000).getMonth() + 1)).slice(-2) + '-' +
+                ('0' + new Date(request.start * 1000).getDate()).slice(-2) + ' ' +
+                ('0' + new Date(request.start * 1000).getHours()).slice(-2) + ':' +
+                ('0' + new Date(request.start * 1000).getMinutes()).slice(-2) + ':' +
+                ('0' + new Date(request.start * 1000).getSeconds()).slice(-2) + ' ' +
+                (new Date(request.start * 1000).getHours() >= 12 ? 'PM' : 'AM')}
+              </td>
+              <td>
+                {new Date(request.end * 1000).getFullYear() + '-' +
+                ('0' + (new Date(request.end * 1000).getMonth() + 1)).slice(-2) + '-' +
+                ('0' + new Date(request.end * 1000).getDate()).slice(-2) + ' ' +
+                ('0' + new Date(request.end * 1000).getHours()).slice(-2) + ':' +
+                ('0' + new Date(request.end * 1000).getMinutes()).slice(-2) + ':' +
+                ('0' + new Date(request.end * 1000).getSeconds()).slice(-2) + ' ' +
+                (new Date(request.end * 1000).getHours() >= 12 ? 'PM' : 'AM')}
+              </td>
+
               <td>{request.username}</td>
               <td>{request.reason}</td>
               <td>{request.status}</td>
