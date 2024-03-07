@@ -1,17 +1,8 @@
 // src/controllers/user.controller.ts
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Query,
-  HttpException,
-  HttpStatus,
-  Delete,
-  Param,
-} from '@nestjs/common';
+import {  Controller,  Get,  Post,  Body,  Query,  Delete, Put,  Param, Patch } from '@nestjs/common';
 import { UserService } from '../services/user.service';
-import User from '../entities/user.entity';
+import { CreateUserDto } from 'src/dto/create-user.dto';
+import { UpdateUserDto } from 'src/dto/update-user.dto';
 
 @Controller('user')
 export class UserController {
@@ -26,20 +17,31 @@ export class UserController {
   createUser(@Body() createUserDto: any) {
     return this.userService.createUser(createUserDto);
   }
+  
+  @Put('getuser')
+  updateUser(@Query('id') id: number, @Body() updateUserDto: any) {
+    try {
+      const updatedUser = this.userService.updateUser(id, updateUserDto);
+      return updatedUser;
+    } catch (error) {
+      return "Failed to update user details";
+    }
+  }
 
   @Delete(':id')
   remove(@Param('id') id: number) {
     return this.userService.removeUserById(id);
   }
+
   @Get('getuser')
   findOne(@Query('id') id: number) {
     try {
     const user = this.userService.findOne(id)
     return user
-  }
+    }
   catch (error) {
     return "User Not Found"
-  }
+    }
   }
 
   @Get('login') // New endpoint for login
