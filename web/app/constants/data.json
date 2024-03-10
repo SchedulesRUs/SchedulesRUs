@@ -1,272 +1,182 @@
 [
-    {
-      "id": "Paradon",
-      "color": "hsl(202, 70%, 50%)",
-      "data": [
-        {
-          "x": "Jan",
-          "y": 190
-        },
-        {
-          "x": "Feb",
-          "y": 151
-        },
-        {
-          "x": "Mar",
-          "y": 275
-        },
-        {
-          "x": "Apr",
-          "y": 286
-        },
-        {
-          "x": "May",
-          "y": 82
-        },
-        {
-          "x": "Jun",
-          "y": 252
-        },
-        {
-          "x": "July",
-          "y": 171
-        },
-        {
-          "x": "Aug",
-          "y": 97
-        },
-        {
-          "x": "Sep",
-          "y": 46
-        },
-        {
-          "x": "Oct",
-          "y": 207
-        },
-        {
-          "x": "Nov",
-          "y": 108
-        },
-        {
-          "x": "Dec",
-          "y": 149
-        }
-      ]
-    },
-    {
-      "id": "Khitikhun",
-      "color": "hsl(45, 70%, 50%)",
-      "data": [
-        {
-          "x": "Jan",
-          "y": 110
-        },
-        {
-          "x": "Feb",
-          "y": 242
-        },
-        {
-          "x": "Mar",
-          "y": 188
-        },
-        {
-          "x": "Apr",
-          "y": 13
-        },
-        {
-          "x": "May",
-          "y": 259
-        },
-        {
-          "x": "Jun",
-          "y": 92
-        },
-        {
-          "x": "July",
-          "y": 129
-        },
-        {
-          "x": "Aug",
-          "y": 71
-        },
-        {
-          "x": "Sep",
-          "y": 236
-        },
-        {
-          "x": "Oct",
-          "y": 203
-        },
-        {
-          "x": "Nov",
-          "y": 245
-        },
-        {
-          "x": "Dec",
-          "y": 271
-        }
-      ]
-    },
-    {
-      "id": "Thu Ngoc Nguyen",
-      "color": "hsl(98, 70%, 50%)",
-      "data": [
-        {
-          "x": "Jan",
-          "y": 114
-        },
-        {
-          "x": "Feb",
-          "y": 238
-        },
-        {
-          "x": "Mar",
-          "y": 288
-        },
-        {
-          "x": "Apr",
-          "y": 60
-        },
-        {
-          "x": "May",
-          "y": 8
-        },
-        {
-          "x": "Jun",
-          "y": 275
-        },
-        {
-          "x": "July",
-          "y": 225
-        },
-        {
-          "x": "Aug",
-          "y": 182
-        },
-        {
-          "x": "Sep",
-          "y": 48
-        },
-        {
-          "x": "Oct",
-          "y": 78
-        },
-        {
-          "x": "Nov",
-          "y": 8
-        },
-        {
-          "x": "Dec",
-          "y": 110
-        }
-      ]
-    },
-    {
-      "id": "Khang Trinh",
-      "color": "hsl(131, 70%, 50%)",
-      "data": [
-        {
-          "x": "Jan",
-          "y": 284
-        },
-        {
-          "x": "Feb",
-          "y": 105
-        },
-        {
-          "x": "Mar",
-          "y": 287
-        },
-        {
-          "x": "Apr",
-          "y": 3
-        },
-        {
-          "x": "May",
-          "y": 27
-        },
-        {
-          "x": "Jun",
-          "y": 10
-        },
-        {
-          "x": "July",
-          "y": 118
-        },
-        {
-          "x": "Aug",
-          "y": 214
-        },
-        {
-          "x": "Sep",
-          "y": 197
-        },
-        {
-          "x": "Oct",
-          "y": 88
-        },
-        {
-          "x": "Nov",
-          "y": 138
-        },
-        {
-          "x": "Dec",
-          "y": 181
-        }
-      ]
-    },
-    {
-      "id": "Felix Zhang",
-      "color": "hsl(312, 70%, 50%)",
-      "data": [
-        {
-          "x": "Jan",
-          "y": 253
-        },
-        {
-          "x": "Feb",
-          "y": 77
-        },
-        {
-          "x": "Mar",
-          "y": 98
-        },
-        {
-          "x": "Apr",
-          "y": 86
-        },
-        {
-          "x": "May",
-          "y": 61
-        },
-        {
-          "x": "Jun",
-          "y": 133
-        },
-        {
-          "x": "July",
-          "y": 64
-        },
-        {
-          "x": "Aug",
-          "y": 129
-        },
-        {
-          "x": "Sep",
-          "y": 9
-        },
-        {
-          "x": "Oct",
-          "y": 41
-        },
-        {
-          "x": "Nov",
-          "y": 42
-        },
-        {
-          "x": "Dec",
-          "y": 167
-        }
-      ]
-    }
-  ]
+  {
+    "month": "JAN",
+    "Paradon M.": 35,
+    "Paradon M.Color": "hsl(263, 70%, 50%)",
+    "Thu N.": 53,
+    "Thu N.Color": "hsl(321, 70%, 50%)",
+    "Khit K.": 80,
+    "Khit K.Color": "hsl(336, 70%, 50%)",
+    "Khang T.": 60,
+    "Khang T.Color": "hsl(77, 70%, 50%)",
+    "Felix Z.": 75,
+    "Felix Z.Color": "hsl(7, 70%, 50%)",
+    "Sailor W.": 99,
+    "Sailor W.Color": "hsl(311, 70%, 50%)"
+  },
+  {
+    "month": "FEB",
+    "Paradon M.": 94,
+    "Paradon M.Color": "hsl(101, 70%, 50%)",
+    "Thu N.": 42,
+    "Thu N.Color": "hsl(326, 70%, 50%)",
+    "Khit K.": 105,
+    "Khit K.Color": "hsl(339, 70%, 50%)",
+    "Khang T.": 188,
+    "Khang T.Color": "hsl(129, 70%, 50%)",
+    "Felix Z.": 12,
+    "Felix Z.Color": "hsl(315, 70%, 50%)",
+    "Sailor W.": 114,
+    "Sailor W.Color": "hsl(25, 70%, 50%)"
+  },
+  {
+    "month": "MAR",
+    "Paradon M.": 100,
+    "Paradon M.Color": "hsl(236, 70%, 50%)",
+    "Thu N.": 90,
+    "Thu N.Color": "hsl(84, 70%, 50%)",
+    "Khit K.": 80,
+    "Khit K.Color": "hsl(199, 70%, 50%)",
+    "Khang T.": 85,
+    "Khang T.Color": "hsl(57, 70%, 50%)",
+    "Felix Z.": 90,
+    "Felix Z.Color": "hsl(175, 70%, 50%)",
+    "Sailor W.": 60,
+    "Sailor W.Color": "hsl(189, 70%, 50%)"
+  },
+  {
+    "month": "APR",
+    "Paradon M.": 87,
+    "Paradon M.Color": "hsl(191, 70%, 50%)",
+    "Thu N.": 89,
+    "Thu N.Color": "hsl(291, 70%, 50%)",
+    "Khit K.": 82,
+    "Khit K.Color": "hsl(112, 70%, 50%)",
+    "Khang T.": 99,
+    "Khang T.Color": "hsl(208, 70%, 50%)",
+    "Felix Z.": 118,
+    "Felix Z.Color": "hsl(320, 70%, 50%)",
+    "Sailor W.": 107,
+    "Sailor W.Color": "hsl(181, 70%, 50%)"
+  },
+  {
+    "month": "MAY",
+    "Paradon M.": 105,
+    "Paradon M.Color": "hsl(269, 70%, 50%)",
+    "Thu N.": 116,
+    "Thu N.Color": "hsl(314, 70%, 50%)",
+    "Khit K.": 169,
+    "Khit K.Color": "hsl(254, 70%, 50%)",
+    "Khang T.": 23,
+    "Khang T.Color": "hsl(224, 70%, 50%)",
+    "Felix Z.": 14,
+    "Felix Z.Color": "hsl(10, 70%, 50%)",
+    "Sailor W.": 64,
+    "Sailor W.Color": "hsl(283, 70%, 50%)"
+  },
+  {
+    "month": "JUN",
+    "Paradon M.": 94,
+    "Paradon M.Color": "hsl(28, 70%, 50%)",
+    "Thu N.": 88,
+    "Thu N.Color": "hsl(275, 70%, 50%)",
+    "Khit K.": 98,
+    "Khit K.Color": "hsl(212, 70%, 50%)",
+    "Khang T.": 81,
+    "Khang T.Color": "hsl(285, 70%, 50%)",
+    "Felix Z.": 100,
+    "Felix Z.Color": "hsl(54, 70%, 50%)",
+    "Sailor W.": 113,
+    "Sailor W.Color": "hsl(325, 70%, 50%)"
+  },
+  {
+    "month": "JUL",
+    "Paradon M.": 88,
+    "Paradon M.Color": "hsl(125, 70%, 50%)",
+    "Thu N.": 100,
+    "Thu N.Color": "hsl(221, 70%, 50%)",
+    "Khit K.": 95,
+    "Khit K.Color": "hsl(129, 70%, 50%)",
+    "Khang T.": 91,
+    "Khang T.Color": "hsl(284, 70%, 50%)",
+    "Felix Z.": 68,
+    "Felix Z.Color": "hsl(150, 70%, 50%)",
+    "Sailor W.": 89,
+    "Sailor W.Color": "hsl(295, 70%, 50%)"
+  },
+  {
+    "month": "AUG",
+    "Paradon M.": 88,
+    "Paradon M.Color": "hsl(125, 70%, 50%)",
+    "Thu N.": 70,
+    "Thu N.Color": "hsl(221, 70%, 50%)",
+    "Khit K.": 95,
+    "Khit K.Color": "hsl(129, 70%, 50%)",
+    "Khang T.": 61,
+    "Khang T.Color": "hsl(284, 70%, 50%)",
+    "Felix Z.": 68,
+    "Felix Z.Color": "hsl(150, 70%, 50%)",
+    "Sailor W.": 95,
+    "Sailor W.Color": "hsl(295, 70%, 50%)"
+  },
+  {
+    "month": "SEP",
+    "Paradon M.": 98,
+    "Paradon M.Color": "hsl(125, 70%, 50%)",
+    "Thu N.": 100,
+    "Thu N.Color": "hsl(221, 70%, 50%)",
+    "Khit K.": 95,
+    "Khit K.Color": "hsl(129, 70%, 50%)",
+    "Khang T.": 61,
+    "Khang T.Color": "hsl(284, 70%, 50%)",
+    "Felix Z.": 82,
+    "Felix Z.Color": "hsl(150, 70%, 50%)",
+    "Sailor W.": 99,
+    "Sailor W.Color": "hsl(295, 70%, 50%)"
+  },
+  {
+    "month": "OCT",
+    "Paradon M.": 98,
+    "Paradon M.Color": "hsl(125, 70%, 50%)",
+    "Thu N.": 80,
+    "Thu N.Color": "hsl(221, 70%, 50%)",
+    "Khit K.": 95,
+    "Khit K.Color": "hsl(129, 70%, 50%)",
+    "Khang T.": 61,
+    "Khang T.Color": "hsl(284, 70%, 50%)",
+    "Felix Z.": 82,
+    "Felix Z.Color": "hsl(150, 70%, 50%)",
+    "Sailor W.": 99,
+    "Sailor W.Color": "hsl(295, 70%, 50%)"
+  },
+  {
+    "month": "NOV",
+    "Paradon M.": 78,
+    "Paradon M.Color": "hsl(125, 70%, 50%)",
+    "Thu N.": 100,
+    "Thu N.Color": "hsl(221, 70%, 50%)",
+    "Khit K.": 88,
+    "Khit K.Color": "hsl(129, 70%, 50%)",
+    "Khang T.": 91,
+    "Khang T.Color": "hsl(284, 70%, 50%)",
+    "Felix Z.": 82,
+    "Felix Z.Color": "hsl(150, 70%, 50%)",
+    "Sailor W.": 87,
+    "Sailor W.Color": "hsl(295, 70%, 50%)"
+  },
+  {
+    "month": "DEC",
+    "Paradon M.": 45,
+    "Paradon M.Color": "hsl(125, 70%, 50%)",
+    "Thu N.": 85,
+    "Thu N.Color": "hsl(221, 70%, 50%)",
+    "Khit K.": 75,
+    "Khit K.Color": "hsl(129, 70%, 50%)",
+    "Khang T.": 66,
+    "Khang T.Color": "hsl(284, 70%, 50%)",
+    "Felix Z.": 78,
+    "Felix Z.Color": "hsl(150, 70%, 50%)",
+    "Sailor W.": 55,
+    "Sailor W.Color": "hsl(295, 70%, 50%)"
+  }
+]
