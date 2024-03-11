@@ -10,7 +10,7 @@ export default class Request {
   user_id: number;
 
 
-  @Column()
+  @Column({ nullable: true }) //Don mod cuz it return null
   created_date:string;
     
   @Column({ nullable: true })
@@ -23,10 +23,10 @@ export default class Request {
   @Column({ nullable: true })
   reason:string;
 
-  @Column()
+  @Column({ nullable: true }) //Don mod cuz it return null
   status:string;
 
-  @Column()
+  @Column({ nullable: true }) //Don mod cuz it return null
   username:string;
 
 //After modifying your entity, remember to synchronize your database schema using TypeORM:

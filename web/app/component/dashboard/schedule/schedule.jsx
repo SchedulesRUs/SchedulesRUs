@@ -42,11 +42,10 @@ const Schedule = () => {
     try {
       const response = await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/user`);
       const data = await response.json();
-      // console.log("test", data);
-      // console.dir(data);
       setAllUser(data);
-      // return data;
-    } catch (error) {}
+    } catch (error) {
+      console.log("Fetching failed",error)
+    }
   }
 
   useEffect(() => {
@@ -65,51 +64,39 @@ const Schedule = () => {
     }
   }
 
-  // async function getScheduleById(id) {
-  //   try {
-  //     const response = await fetch(`http://localhost:1000/scheduleInfo/${id}`);
-  //     const data = await response.json();
-  //     console.log("Fetch Schedule by ID:", data);
-  //     setSchedule(data);
-  //   } catch (error) {
-  //     console.log("fail", error);
-  //   }
-  // }
-
   useEffect(() => {
     fetchSchedule();
     // console.log("fetchSchedule", schedule);
   }, []);
 
   async function createSchedule() {
-    const requestBody = JSON.stringify(scheduleToPost);
     try {
       const response = await fetch("https://schedules-r-us-78b737cd078f.herokuapp.com/scheduleInfo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: requestBody,
+        body: JSON.stringify(scheduleToPost),
       });
       const data = await response.json();
       setSchedule([...schedule, data])
-
+      
       console.log("Add Schedule to DB:", data);
     } catch (error) {
-      console.log("Add Schedule to DB:", error);
+      console.log("Error add to DB:", error);
     }
   }
 
   useEffect(() => {
     if (scheduleToPost != null) {
       createSchedule();
-      setScheduleToPost(null);
+      // setScheduleToPost(null);
     }
     // console.log("createSchedule:schedule", schedule);
   }, [scheduleToPost]);
 
   async function updateEventTime(id, start, end) {
-    console.log(id, start, end);
+    
     try {
       await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/scheduleInfo/${id}`, {
         method: "PUT",
@@ -132,6 +119,7 @@ const Schedule = () => {
   
     try {
       await updateEventTime(id, start, end);
+      await fetchSchedule()
       console.log("Event Dropped with ID:", id, "Start:", start, "End:", end);
     } catch (error) {
       console.error("Error updating event time:", error);
@@ -144,11 +132,13 @@ const Schedule = () => {
 
     try {
       await updateEventTime(id, start, end);
+      await fetchSchedule();
       console.log("Event resized:", id, start, end);
     } catch (error) {
       console.error("Error updating event time:", error);
     }
   };
+
 
   const draggableElRef = useRef(null); // Ref to store the Draggable instance
   useEffect(() => {
@@ -173,38 +163,29 @@ const Schedule = () => {
     }
   }, []);
 
-  function handleDateClick(arg) {
-    setNewEvent({
-      ...newEvent,
-      start: arg.date,
-      end: arg.date,
-      allDay: arg.allDay,
-      id: new Date().getTime(),
-    });
-    setShowModal(true);
-  }
+  
 
   function addEvent(data) {
-    const colors = [
-      "#ff5733",
-      "#33ff57",
-      "#5733ff",
-      "#ff33a1",
-      "#a133ff",
-      "#33a1ff",
-      "#f6e05e",
-    ];
+    const colors = ["#ff5733", "#33ff57","#5733ff","#ff33a1","#a133ff","#33a1ff","#f6e05e"];
+    
     const newScheduleInfo = new ScheduleData();
     newScheduleInfo.allDay = data.allDay;
     newScheduleInfo.color = colors[schedule.length % colors.length];
+
+    if (data.date) {
     newScheduleInfo.start = data.date.toISOString();
     newScheduleInfo.end = data.date.toISOString();
     newScheduleInfo.title = data.draggedEl.getAttribute("title");
     newScheduleInfo.userId = data.draggedEl.getAttribute("userId");
+  } else {
+    
+    newScheduleInfo.start = new Date().toISOString();
+    newScheduleInfo.end = new Date().toISOString();
+  }
     newScheduleInfo.allDay = data.allDay;
+
     console.log("addEvent:", newScheduleInfo);
     setScheduleToPost(newScheduleInfo);
-    
 
   }
 
@@ -251,11 +232,25 @@ const Schedule = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log("Add New Event Submit:", e.target.value);
-    setSchedule([...schedule, newEvent]);
+    console.log("Add New Event Submit:", newEvent);
+    addEvent(newEvent); // Wait for the addEvent function to complete
     setShowModal(false);
     try {
-    } catch (error) {}
+      // Additional actions after submitting the form, if needed
+    } catch (error) {
+      // Error handling, if needed
+    }
+  }
+
+  function handleDateClick(arg) {
+    setNewEvent({
+      ...newEvent,
+      start: arg.date,
+      end: arg.date,
+      allDay: arg.allDay,
+      id: arg.id,
+    });
+    setShowModal(true);
   }
 
   return (
@@ -289,6 +284,7 @@ const Schedule = () => {
               eventClick={(data) => handleDeleteModal(data)}
               eventDrop={handleEventDrop}
               eventResize={handleEventResize}
+              dayMaxEvents={true}
             />
           </div>
 

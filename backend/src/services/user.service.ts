@@ -1,12 +1,10 @@
 // user.service.ts
-import {
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import User from '../entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { CreateUserDto } from 'src/dto/create-user.dto';
+import { UpdateUserDto } from 'src/dto/update-user.dto';
 
 @Injectable()
 export class UserService {
@@ -37,7 +35,13 @@ export class UserService {
     await this.userRepository.delete(id);
   }
 
-  async createUser(createUserDto: any): Promise<User[]> {
+  async updateUser(id: number, updateUserDto: UpdateUserDto) {
+    const user = await this.findOne(id);
+    const updatedUser = { ...user, ...updateUserDto };
+    return this.userRepository.save(updatedUser);
+  }
+  
+  async createUser(createUserDto: CreateUserDto) {
     const userColor = generateHexColor();
     const newUser = this.userRepository.create({
       ...createUserDto,
