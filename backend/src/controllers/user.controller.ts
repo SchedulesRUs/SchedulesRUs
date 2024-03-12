@@ -14,12 +14,12 @@ export class UserController {
   }
 
   @Post()
-  createUser(@Body() createUserDto: any) {
+  createUser(@Body() createUserDto: CreateUserDto) {
     return this.userService.createUser(createUserDto);
   }
   
   @Put('getuser')
-  updateUser(@Query('id') id: number, @Body() updateUserDto: any) {
+  updateUser(@Query('id') id: number, @Body() updateUserDto: UpdateUserDto) {
     try {
       const updatedUser = this.userService.updateUser(id, updateUserDto);
       return updatedUser;

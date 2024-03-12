@@ -200,7 +200,7 @@ const Schedule = () => {
       await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/scheduleInfo/${id}`, {
         method: "DELETE",
       });
-      console.log("Event deleted:", id);
+      console.log("Staff Deleted ID:", id);
       // Update the local schedule state after deletion
       setSchedule(schedule.filter(event => event.id !== id));
       setShowDeleteModal(false);

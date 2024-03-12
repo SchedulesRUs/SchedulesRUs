@@ -5,6 +5,10 @@ import { UserService } from './services/user.service';
 import { ScheduleInfoService } from './services/scheduleInfo.service';
 import { RequestService } from './services/request.service';
 
+import { AvailabilityService } from './services/availability.service';
+import { AvailabilityController } from './controllers/availability.controller';
+import { AvailabilityRepository } from './repositories/availability.repository';
+
 import { DatabaseModule } from './database/database.module.js';
 import { UserController } from './controllers/user.controller';
 import { UserRepository } from './repositories/user.repository';
@@ -15,27 +19,30 @@ import { RequestRepository } from './repositories/request.repository';
 import User from './entities/user.entity';
 import ScheduleInfo from './entities/scheduleInfo.entity';
 import Request from './entities/request.entity';
+import Availability from './entities/availability.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     DatabaseModule,
-    TypeOrmModule.forFeature([User, ScheduleInfo, Request]),
+    TypeOrmModule.forFeature([User, ScheduleInfo, Request, Availability]),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env', // optional, if you are using environment variables
     }),
   ],
-  controllers: [AppController, UserController, ScheduleInfoController, RequestController],
+  controllers: [AppController, UserController, ScheduleInfoController, RequestController, AvailabilityController],
   providers: [
     AppService,
     UserService,
     ScheduleInfoService,
+    AvailabilityService,
+    RequestService,
     UserRepository,
     ScheduleInfoRepository,
     RequestRepository,
-    RequestService,
+    AvailabilityRepository,
   ],
 })
 export class AppModule {}
