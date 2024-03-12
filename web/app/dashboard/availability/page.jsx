@@ -11,14 +11,16 @@ const Availability = () => {
   const [events, setEvents] = useState([
     {
       id: 1,
+      user_id: 40,
       title: "Paradon",
       allDay: false,
       start: "2024-03-10T00:00:00",
-      end: "2024-03-14T00:00:00",
+      end: "2024-03-13T00:00:00",
       color: "blue",
     },
     {
       id: 2,
+      user_id: 43,
       title: "Khit",
       start: "2024-03-11T00:00:00",
       end: "2024-03-14T00:00:00",
@@ -26,13 +28,15 @@ const Availability = () => {
     },
     {
       id: 3,
+      user_id: 31,
       title: "Thu Ngoc",
       start: "2024-03-12T00:00:00",
       end: "2024-03-15T00:00:00",
       color: "green",
     },
     {
-      id: 1,
+      id: 4,
+      user_id: 40,
       title: "Paradon",
       start: "2024-03-17T00:00:00",
       end: "2024-03-20T00:00:00",
@@ -46,7 +50,7 @@ const Availability = () => {
 
   return (
     <div className="mt-5">
-      <div className="font-bold text-[24px] mb-10">
+      <div className="flex font-bold text-[24px] mb-10 p-2 items-center justify-center bg-indigo-950 text-white rounded-sm">
         <h1>Staff Availability</h1>
       </div>
       <FullCalendar
@@ -66,7 +70,6 @@ const Availability = () => {
         selectMirror={true}
         events={events}
         select={(info) => {
-          // Handle select event
           const title = prompt("Please enter a new event title:");
           if (title) {
             addEvent({

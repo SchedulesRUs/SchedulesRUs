@@ -16,7 +16,6 @@ export class ScheduleInfoService {
     try {
       return this.scheduleInfoRepository.find();
     } catch (error) {
-      // Handle database errors gracefully
       throw new Error(`Unable to fetch schedule information: ${error.message}`);
     }
   }
@@ -39,8 +38,8 @@ export class ScheduleInfoService {
   }
 
   async createScheduleInfo(
-    createScheduleInfoDto: any,
-  ): Promise<ScheduleInfo[]> {
+    createScheduleInfoDto: CreateScheduleDto)
+    {
     const newScheduleInfo = this.scheduleInfoRepository.create(
       createScheduleInfoDto,
     );

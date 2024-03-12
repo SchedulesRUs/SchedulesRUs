@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { s, s1, s2, s3, s4, s5, s6, s7 } from "@/app/asset";
+import Link from "next/link";
 
 const SingleUserPage = ({ params }) => {
   const { id } = params;
@@ -124,7 +125,8 @@ const SingleUserPage = ({ params }) => {
             ))}
         </div>
         <div className="flex justify-center items-center mb-4 font-bold">
-          {userData && userData.username}
+          {userData && userData.username} ({formData.role})
+           
         </div>
       </div>
       <div className="flex-[3] bg-[#f1efefe9] p-3 rounded-xl">
@@ -225,12 +227,21 @@ const SingleUserPage = ({ params }) => {
               </div>
             )
           )}
-          <button
-            type="submit"
-            className="w-full p-4 bg-indigo-950 text-white font-bold mt-3 rounded-lg"
-          >
-            Update
-          </button>
+
+          <div className="flex flex-row gap-5">
+            <button
+              type="submit"
+              className="w-full p-2 bg-indigo-950 text-white font-bold mt-3 rounded-lg"
+            >
+              Update
+            </button>
+            <Link href="/dashboard/teams" className="w-full" >
+              <button className="w-full p-2 bg-red-600 text-white font-bold mt-3 rounded-lg">
+                Go Back
+              </button>
+            </Link>
+          </div>
+
         </form>
       </div>
     </div>
