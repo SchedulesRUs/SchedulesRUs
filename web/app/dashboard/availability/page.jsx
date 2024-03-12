@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -8,41 +8,22 @@ import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 
 const Availability = () => {
-  const [events, setEvents] = useState([
-    {
-      id: 1,
-      user_id: 40,
-      title: "Paradon",
-      allDay: false,
-      start: "2024-03-10T00:00:00",
-      end: "2024-03-13T00:00:00",
-      color: "blue",
-    },
-    {
-      id: 2,
-      user_id: 43,
-      title: "Khit",
-      start: "2024-03-11T00:00:00",
-      end: "2024-03-14T00:00:00",
-      color: "red",
-    },
-    {
-      id: 3,
-      user_id: 31,
-      title: "Thu Ngoc",
-      start: "2024-03-12T00:00:00",
-      end: "2024-03-15T00:00:00",
-      color: "green",
-    },
-    {
-      id: 4,
-      user_id: 40,
-      title: "Paradon",
-      start: "2024-03-17T00:00:00",
-      end: "2024-03-20T00:00:00",
-      color: "blue",
-    },
-  ]);
+  const [availability, setAvailability] = useState([]);
+
+  async function fetchAvailability () {
+    try {
+      const response = await fetch("https://schedules-r-us-78b737cd078f.herokuapp.com/availability")
+      const data = await response.json();
+      setAvailability(data)
+      console.log("Aavailability:", data)
+    } catch (error) {
+      console.log("Error:", error)
+    }
+  }
+
+  useEffect(()=>{
+    fetchAvailability();
+  },[])
 
   const addEvent = (newEvent) => {
     setEvents([...events, newEvent]);
@@ -64,11 +45,11 @@ const Availability = () => {
         themeSystem="bootstrap5"
         height={"100vh"}
         nowIndicator={true}
-        editable={false}
+        editable={true}
         droppable={true}
         selectable={true}
         selectMirror={true}
-        events={events}
+        events={availability}
         select={(info) => {
           const title = prompt("Please enter a new event title:");
           if (title) {

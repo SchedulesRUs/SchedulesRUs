@@ -16,5 +16,8 @@ export class AvailabilityController {
         return this.availabilityService.createAvailability(creatAvailability);
     }
 
-
+    @Delete(':id')
+    remove(@Param('id') id: number) {
+      return this.availabilityService.removeAvailabilityById(id);
+    }
 }
