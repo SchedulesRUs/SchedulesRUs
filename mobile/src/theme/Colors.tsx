@@ -1,1 +1,1 @@
-export const AppColor = '#0D1282'
+export const AppColor = '#0D1282';
