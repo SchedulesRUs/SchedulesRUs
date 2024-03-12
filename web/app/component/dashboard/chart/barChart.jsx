@@ -3,7 +3,7 @@
 import React from "react";
 import { ResponsiveBar } from '@nivo/bar'
 
-const Chart = ({ data }) => {
+const BarChart = ({ data }) => {
   return (
     <div className="h-[500px] w-[100%]">
       <ResponsiveBar
@@ -128,4 +128,4 @@ const Chart = ({ data }) => {
   );
 };
 
-export default Chart;
+export default BarChart;

@@ -2,7 +2,7 @@ import React from "react";
 import Card from "../component/dashboard/card/card";
 import Rightbar from "../component/dashboard/rightbar/rightbar";
 import Schedule from "../component/dashboard/schedule/schedule";
-import Chart from "../component/dashboard/chart/chart";
+import Chart from "../component/dashboard/chart/barChart";
 import data from "../constants/data.json"
 
 const Dashboard = () => {
