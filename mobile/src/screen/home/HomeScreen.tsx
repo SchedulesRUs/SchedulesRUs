@@ -41,13 +41,15 @@ const HomeScreen = () => {
       )
       .map(item => ({
         id: item.id,
-        start: Date.parse(item.start) / 1000,
-        end: Date.parse(item.end) / 1000,
+        start: Date.parse(item.start) /1000,
+        end: Date.parse(item.end) /1000,
         position: user.role,
-      }));
-
+      }))
+      .sort((a, b) => a.start - b.start);
+  
     setShifts(list);
   };
+  
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);

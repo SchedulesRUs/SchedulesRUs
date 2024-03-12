@@ -8,7 +8,10 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\""
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "reset": "rm -rf node_modules/ && npm cache clear && watchman watch-del-all && npm i",
+    "build-debug": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ && cd android && gradlew assembleDebug && cd app/src/main/res/ && rmdir /S /Q raw && rmdir /S /Q drawable-mdpi",
+    "install-debug": "adb install ./android/app/build/outputs/apk/debug/app-debug.apk"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.21.0",
