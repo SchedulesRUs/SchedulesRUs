@@ -44,6 +44,11 @@ import { user, user2, user3, user4, user5 } from "../asset";
           path: "/dashboard/request",
           icon: <BiSolidMessageRoundedError />,
         },
+        {
+          title: "Staff Availability",
+          path: "/dashboard/availability",
+          icon: <MdWork />,
+        },
       ],
     },
     {

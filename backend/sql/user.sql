@@ -1,27 +1,31 @@
 -- Drop the table if it exists
-DROP TABLE IF EXISTS Employee CASCADE;
+DROP TABLE IF EXISTS user
 
--- Create the table
-CREATE TABLE Employee (
-    ID SERIAL PRIMARY KEY,
-    EmpName VARCHAR(100) NOT NULL,
-    Email VARCHAR(255) NOT NULL,
-    PhoneNum VARCHAR(12) NOT NULL,
-    EmpAddress VARCHAR(255) NOT NULL,
-    EmpRole VARCHAR(20) NOT NULL,
-    EmpStatus VARCHAR(50) NOT NULL
-);
+CREATE TABLE IF NOT EXISTS user (
+                id SERIAL PRIMARY KEY,
+                username VARCHAR(255) NOT NULL,
+                password VARCHAR(255) NOT NULL,
+                email VARCHAR(255) NOT NULL,
+                userColor VARCHAR(255),
+                phone VARCHAR(255),
+                isAdmin VARCHAR(255),
+                role VARCHAR(255),
+                address VARCHAR(255),
+                image VARCHAR(255)
+            )
 
 -- Insert data into the table
 INSERT INTO
-    Employee (
-        ID,
-        EmpName,
-        Email,
-        PhoneNum,
-        EmpAddress,
-        EmpRole,
-        EmpStatus
+    user (
+        username,
+        password,
+        email,
+        userColor,
+        phone,
+        isAdmin,
+        role,
+        address,
+        image
     )
 VALUES
     (

@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { s, s1, s2, s3, s4, s5, s6, s7 } from "@/app/asset";
 import Image from "next/image";
 
+
+
 class User {
   constructor(username, password, email, image, address, role, isAdmin, phone) {
     this.username = username;
@@ -20,7 +22,6 @@ class User {
 
 const AddUser = () => {
   const [user, setUser] = useState(new User("This is test", "", "", "", "", "", "", ""));
-
 
   // Function to update user state
   const updateUser = (field, value) => {
@@ -42,13 +43,10 @@ const AddUser = () => {
       });
       const data = await response.json();
       console.log("test", data);
-      
+      window.history.back();
     } catch (error) {
       console.log("fail", data);
     }
-
-    
-
   }
 
   useEffect(() => {
