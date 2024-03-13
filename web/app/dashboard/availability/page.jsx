@@ -46,7 +46,7 @@ const Availability = () => {
         themeSystem="bootstrap5"
         height={"100vh"}
         nowIndicator={true}
-        editable={true}
+        editable={false}
         droppable={true}
         selectable={true}
         selectMirror={true}
