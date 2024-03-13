@@ -6,13 +6,14 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
+import { BASE_URL } from "@/app/constants/Config";
 
 const Availability = () => {
   const [availability, setAvailability] = useState([]);
 
-  async function fetchAvailability () {
+  async function fetchAvailability() {
     try {
-      const response = await fetch("https://schedules-r-us-78b737cd078f.herokuapp.com/availability")
+      const response = await fetch(`${BASE_URL}/availability`)
       const data = await response.json();
       setAvailability(data)
       console.log("Aavailability:", data)
@@ -21,9 +22,9 @@ const Availability = () => {
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchAvailability();
-  },[])
+  }, [])
 
   const addEvent = (newEvent) => {
     setEvents([...events, newEvent]);

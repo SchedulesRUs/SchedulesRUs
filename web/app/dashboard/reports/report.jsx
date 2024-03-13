@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { saveAs } from 'file-saver';
 import ExcelJS from 'exceljs';
+import { BASE_URL } from '@/app/constants/Config';
 
 const Report = () => {
   const [allUser, setAllUser] = useState([]);
@@ -18,7 +19,7 @@ const Report = () => {
   const fetchGetAllUser = async () => {
     try {
       const response = await fetch(
-        `https://schedules-r-us-78b737cd078f.herokuapp.com/user`
+        `${BASE_URL}/user`
       );
       const data = await response.json();
       console.log("Fetched Users:", data);
@@ -31,7 +32,7 @@ const Report = () => {
   const fetchGetAllProducts = async () => {
     try {
       const response = await fetch(
-        `https://schedules-r-us-78b737cd078f.herokuapp.com/products`
+        `${BASE_URL}/products`
       );
       const data = await response.json();
       console.log("Fetched Products:", data);

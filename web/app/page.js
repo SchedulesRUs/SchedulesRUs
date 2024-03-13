@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { logo1 } from './asset';
 import Image from 'next/image';
+import { BASE_URL } from './constants/Config';
 
 export default function Home() {
   const [enteredUsername, setEnteredUsername] = useState('');
@@ -15,7 +16,7 @@ export default function Home() {
     setIsValidationSuccess(false);
 
     try {
-      const response = await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/user/login?username=${username}&password=${password}`);
+      const response = await fetch(`${BASE_URL}/user/login?username=${username}&password=${password}`);
       const data = await response.json();
       console.log("test", data);
       console.dir(data);

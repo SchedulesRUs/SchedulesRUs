@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { s, s1, s2, s3, s4, s5, s6, s7 } from "@/app/asset";
 import Image from "next/image";
+import { BASE_URL } from "@/app/constants/Config";
 
 
 
@@ -34,7 +35,7 @@ const AddUser = () => {
   async function createUser() {
     const requestBody = JSON.stringify(user);
     try {
-      const response = await fetch("https://schedules-r-us-78b737cd078f.herokuapp.com/user", {
+      const response = await fetch(`${BASE_URL}/user`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

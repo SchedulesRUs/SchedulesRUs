@@ -8,6 +8,7 @@ import Image from "next/image";
 import Pagination from "@/app/component/dashboard/pagination/pagination";
 import userImage from "../../asset/user.jpg"; // Adjust the path to match the folder structure
 import DeleteModal from "@/app/component/dashboard/deleteModal/deleteModel";
+import { BASE_URL } from "@/app/constants/Config";
 
 const Users = () => {
   const [allUser, setAllUser] = useState([]);
@@ -30,14 +31,14 @@ const Users = () => {
   async function fetchGetAllUser() {
     try {
       const response = await fetch(
-        `https://schedules-r-us-78b737cd078f.herokuapp.com/user`
+        `${BASE_URL}/user`
       );
       const data = await response.json();
       console.log("test", data);
       console.dir(data);
       setAllUser(data);
       // return data;
-    } catch (error) {}
+    } catch (error) { }
   }
 
   useEffect(() => {
@@ -60,7 +61,7 @@ const Users = () => {
   async function handleDelete(id) {
     try {
       await fetch(
-        `https://schedules-r-us-78b737cd078f.herokuapp.com/user/${id}`,
+        `${BASE_URL}/user/${id}`,
         {
           method: "DELETE",
         }
