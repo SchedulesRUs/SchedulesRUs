@@ -9,6 +9,7 @@ import Pagination from "@/app/component/dashboard/pagination/pagination";
 import userImage from "../../asset/user.jpg"; // Adjust the path to match the folder structure
 import DeleteModal from "@/app/component/dashboard/deleteModal/deleteModel";
 import { BASE_URL } from "@/app/constants/Config";
+import styles from './teams.module.css'
 
 const Users = () => {
   const [allUser, setAllUser] = useState([]);
@@ -84,7 +85,7 @@ const Users = () => {
           </button>
         </Link>
       </div>
-      <table className="w-full m-3">
+      <table className={styles.tableContainer}>
         <thead>
           <tr className="font-bold items-center">
             <td>Name</td>
@@ -95,7 +96,6 @@ const Users = () => {
             <td>Action</td>
           </tr>
         </thead>
-
         <tbody>
           {filteredStaffMembers.map((user) => (
             <tr key={user.id}>
@@ -116,7 +116,7 @@ const Users = () => {
               <td>{user.role}</td>
               <td>{user.isAdmin}</td>
               <td>
-                <div className="flex">
+                <div className="flex items-center justify-center">
                   <Link href={`/dashboard/teams/${user.id}`}>
                     <button className="bg-green-600 text-white text-[12px] rounded-lg p-1 mr-2">
                       View

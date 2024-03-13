@@ -5,6 +5,7 @@ import Image from "next/image";
 import { userRequests } from "@/app/constants"; // Ensure correct import path
 import { user } from "@/app/asset";
 import { BASE_URL } from "@/app/constants/Config";
+import styles from "./request.module.css"
 
 const RequestsPage = () => {
   const [allRequest, setAllRequest] = useState([]);
@@ -62,13 +63,13 @@ const RequestsPage = () => {
   }
 
   return (
-    <div className="bg-[#f1efefe9] rounded-lg p-4 mt-4">
+    <div className="bg-[#f1efefe9] rounded-lg p-4 mt-4 sm:text-[12px] md:text-[14px] lg:text-[18px]">
       <div className="flex items-center justify-between">
         <Search placeholder="Search for a request..." />
       </div>
-      <table className="w-full m-3">
+      <table className={styles.tableContainer}>
         <thead>
-          <tr className="font-bold items-center">
+          <tr className="font-bold">
             <td>Requested Date</td>
             <td>From</td>
             <td>To</td>

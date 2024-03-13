@@ -1,12 +1,11 @@
 "use client"
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { menuItems } from "@/app/constants";
 import MenuLink from "./menuLink/menuLink";
 import Image from "next/image";
 import { MdLogout } from "react-icons/md";
 import Link from "next/link";
-import { s, s1, s2, s3, s4, s5, s6, s7 } from "@/app/asset";
 
 const Sidebar = () => {
 
@@ -16,7 +15,7 @@ const Sidebar = () => {
   const image = localStorage.getItem("image");
 
   return (
-    <div className="min-w-max">
+    <div className="min-w-min">
       
         <div className="flex items-center gap-5 mb-4">
           <div className="flex flex-col justify-center items-center">
@@ -28,7 +27,7 @@ const Sidebar = () => {
               className="rounded-md "
               priority
             />
-            <span className="text-[16px] mt-2 border-b-4 border-indigo-950">ADMIN ID: {id}</span>
+            <span className="text-[16px] mt-2">ADMIN ID: {id}</span>
           </div>
         <div className="flex flex-col items-center justify-center">
           
