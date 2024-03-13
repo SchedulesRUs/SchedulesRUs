@@ -1,5 +1,15 @@
 // src/controllers/user.controller.ts
-import {  Controller,  Get,  Post,  Body,  Query,  Delete, Put,  Param, Patch } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Query,
+  Delete,
+  Put,
+  Param,
+  Patch,
+} from '@nestjs/common';
 import { UserService } from '../services/user.service';
 import { CreateUserDto } from 'src/dto/create-user.dto';
 import { UpdateUserDto } from 'src/dto/update-user.dto';
@@ -17,14 +27,14 @@ export class UserController {
   createUser(@Body() createUserDto: CreateUserDto) {
     return this.userService.createUser(createUserDto);
   }
-  
+
   @Put('getuser')
   updateUser(@Query('id') id: number, @Body() updateUserDto: UpdateUserDto) {
     try {
       const updatedUser = this.userService.updateUser(id, updateUserDto);
       return updatedUser;
     } catch (error) {
-      return "Failed to update user details";
+      return 'Failed to update user details';
     }
   }
 
@@ -36,11 +46,10 @@ export class UserController {
   @Get('getuser')
   findOne(@Query('id') id: number) {
     try {
-    const user = this.userService.findOne(id)
-    return user
-    }
-  catch (error) {
-    return "User Not Found"
+      const user = this.userService.findOne(id);
+      return user;
+    } catch (error) {
+      return 'User Not Found';
     }
   }
 
@@ -73,5 +82,5 @@ class LoginRespond {
   success: boolean;
   error: String;
   username: string;
-  userid: number|null;
+  userid: number | null;
 }

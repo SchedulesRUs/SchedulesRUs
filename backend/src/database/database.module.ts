@@ -13,7 +13,7 @@ import Request from 'src/entities/request.entity';
       ssl: {
         rejectUnauthorized: false,
       },
-      entities: [User, ScheduleInfo,Request],
+      entities: [User, ScheduleInfo, Request],
       synchronize: true,
       autoLoadEntities: true,
     }),

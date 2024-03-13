@@ -1,5 +1,9 @@
 // user.service.ts
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import User from '../entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -18,7 +22,6 @@ export class UserService {
     return this.userRepository.find();
   }
 
-  
   async findOne(id: number): Promise<User> {
     try {
       const user = await this.userRepository.findOne({ where: { id } });
@@ -40,7 +43,7 @@ export class UserService {
     const updatedUser = { ...user, ...updateUserDto };
     return this.userRepository.save(updatedUser);
   }
-  
+
   async createUser(createUserDto: CreateUserDto) {
     const userColor = generateHexColor();
     const newUser = this.userRepository.create({

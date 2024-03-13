@@ -22,6 +22,7 @@ import Request from './entities/request.entity';
 import Availability from './entities/availability.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { NotificationService } from './services/notification.service';
 
 @Module({
   imports: [
@@ -32,7 +33,13 @@ import { ConfigModule } from '@nestjs/config';
       envFilePath: '.env', // optional, if you are using environment variables
     }),
   ],
-  controllers: [AppController, UserController, ScheduleInfoController, RequestController, AvailabilityController],
+  controllers: [
+    AppController,
+    UserController,
+    ScheduleInfoController,
+    RequestController,
+    AvailabilityController,
+  ],
   providers: [
     AppService,
     UserService,
@@ -43,6 +50,7 @@ import { ConfigModule } from '@nestjs/config';
     ScheduleInfoRepository,
     RequestRepository,
     AvailabilityRepository,
+    NotificationService,
   ],
 })
 export class AppModule {}
