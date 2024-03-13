@@ -196,7 +196,7 @@ function App(): React.JSX.Element {
     const fetchToken = async () => {
       await messaging().registerDeviceForRemoteMessages();
       const token = await messaging().getToken();
-      console.log(token);
+      console.log('fcm token', token);
     };
 
     fetchToken();
