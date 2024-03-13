@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { s, s1, s2, s3, s4, s5, s6, s7 } from "@/app/asset";
 import Link from "next/link";
+import { BASE_URL } from "@/app/constants/Config";
 
 const SingleUserPage = ({ params }) => {
   const { id } = params;
@@ -31,9 +32,7 @@ const SingleUserPage = ({ params }) => {
   async function fetchUserData(id) {
     setLoading(true);
     try {
-      const response = await fetch(
-        `https://schedules-r-us-78b737cd078f.herokuapp.com/user/getuser?id=${id}`
-      );
+      const response = await fetch(`${BASE_URL}/user/getuser?id=${id}`);
       const data = await response.json();
       setUserData(data);
       setFormData({
@@ -56,16 +55,13 @@ const SingleUserPage = ({ params }) => {
   async function updateUserInfo(id) {
     setLoading(true);
     try {
-      const response = await fetch(
-        `https://schedules-r-us-78b737cd078f.herokuapp.com/user/getuser?id=${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${BASE_URL}/user/getuser?id=${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
       if (response.ok) {
         const updatedUserData = await response.json();
         setUserData(updatedUserData);
@@ -126,7 +122,6 @@ const SingleUserPage = ({ params }) => {
         </div>
         <div className="flex justify-center items-center mb-4 font-bold">
           {userData && userData.username} ({formData.role})
-           
         </div>
       </div>
       <div className="flex-[3] bg-[#f1efefe9] p-3 rounded-xl">
@@ -235,13 +230,12 @@ const SingleUserPage = ({ params }) => {
             >
               Update
             </button>
-            <Link href="/dashboard/teams" className="w-full" >
+            <Link href="/dashboard/teams" className="w-full">
               <button className="w-full p-2 bg-red-600 text-white font-bold mt-3 rounded-lg">
                 Go Back
               </button>
             </Link>
           </div>
-
         </form>
       </div>
     </div>

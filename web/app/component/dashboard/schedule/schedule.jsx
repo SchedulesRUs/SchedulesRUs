@@ -10,6 +10,7 @@ import interactionPlugin, { Draggable } from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import DeleteModal from "../deleteModal/deleteModel";
 import AddEvent from "../addEvent/addEvent";
+import { BASE_URL } from "@/app/constants/Config";
 
 class ScheduleData {
   constructor(userId, title, allDay, color, start, end) {
@@ -40,11 +41,11 @@ const Schedule = () => {
 
   async function fetchGetAllUser() {
     try {
-      const response = await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/user`);
+      const response = await fetch(`${BASE_URL}/user`);
       const data = await response.json();
       setAllUser(data);
     } catch (error) {
-      console.log("Fetching failed",error)
+      console.log("Fetching failed", error);
     }
   }
 
@@ -55,7 +56,7 @@ const Schedule = () => {
 
   async function fetchSchedule() {
     try {
-      const response = await fetch("https://schedules-r-us-78b737cd078f.herokuapp.com/scheduleInfo");
+      const response = await fetch(`${BASE_URL}/scheduleInfo`);
       const data = await response.json();
       console.log("Fetch Schedule:", data);
       setSchedule(data);
@@ -71,7 +72,7 @@ const Schedule = () => {
 
   async function createSchedule() {
     try {
-      const response = await fetch("https://schedules-r-us-78b737cd078f.herokuapp.com/scheduleInfo", {
+      const response = await fetch(`${BASE_URL}/scheduleInfo`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,8 +80,8 @@ const Schedule = () => {
         body: JSON.stringify(scheduleToPost),
       });
       const data = await response.json();
-      setSchedule([...schedule, data])
-      
+      setSchedule([...schedule, data]);
+
       console.log("Add Schedule to DB:", data);
     } catch (error) {
       console.log("Error add to DB:", error);
@@ -96,9 +97,8 @@ const Schedule = () => {
   }, [scheduleToPost]);
 
   async function updateEventTime(id, start, end) {
-    
     try {
-      await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/scheduleInfo/${id}`, {
+      await fetch(`${BASE_URL}/scheduleInfo/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -106,7 +106,6 @@ const Schedule = () => {
         body: JSON.stringify({ start, end }),
       });
       console.log("Event resized successfully");
-      
     } catch (error) {
       console.log("Error updating event time:", error);
       throw new Error(`Unable to update event time: ${error.message}`);
@@ -116,10 +115,10 @@ const Schedule = () => {
   const handleEventDrop = async (info) => {
     const { event } = info;
     const { id, start, end } = event;
-  
+
     try {
       await updateEventTime(id, start, end);
-      await fetchSchedule()
+      await fetchSchedule();
       console.log("Event Dropped with ID:", id, "Start:", start, "End:", end);
     } catch (error) {
       console.error("Error updating event time:", error);
@@ -138,7 +137,6 @@ const Schedule = () => {
       console.error("Error updating event time:", error);
     }
   };
-
 
   const draggableElRef = useRef(null); // Ref to store the Draggable instance
   useEffect(() => {
@@ -163,30 +161,34 @@ const Schedule = () => {
     }
   }, []);
 
-  
-
   function addEvent(data) {
-    const colors = ["#ff5733", "#33ff57","#5733ff","#ff33a1","#a133ff","#33a1ff","#f6e05e"];
-    
+    const colors = [
+      "#ff5733",
+      "#33ff57",
+      "#5733ff",
+      "#ff33a1",
+      "#a133ff",
+      "#33a1ff",
+      "#f6e05e",
+    ];
+
     const newScheduleInfo = new ScheduleData();
     newScheduleInfo.allDay = data.allDay;
     newScheduleInfo.color = colors[schedule.length % colors.length];
 
     if (data.date) {
-    newScheduleInfo.start = data.date.toISOString();
-    newScheduleInfo.end = data.date.toISOString();
-    newScheduleInfo.title = data.draggedEl.getAttribute("title");
-    newScheduleInfo.userId = data.draggedEl.getAttribute("userId");
-  } else {
-    
-    newScheduleInfo.start = new Date().toISOString();
-    newScheduleInfo.end = new Date().toISOString();
-  }
+      newScheduleInfo.start = data.date.toISOString();
+      newScheduleInfo.end = data.date.toISOString();
+      newScheduleInfo.title = data.draggedEl.getAttribute("title");
+      newScheduleInfo.userId = data.draggedEl.getAttribute("userId");
+    } else {
+      newScheduleInfo.start = new Date().toISOString();
+      newScheduleInfo.end = new Date().toISOString();
+    }
     newScheduleInfo.allDay = data.allDay;
 
     console.log("addEvent:", newScheduleInfo);
     setScheduleToPost(newScheduleInfo);
-
   }
 
   function handleDeleteModal(data) {
@@ -197,12 +199,12 @@ const Schedule = () => {
 
   async function handleDelete(id) {
     try {
-      await fetch(`https://schedules-r-us-78b737cd078f.herokuapp.com/scheduleInfo/${id}`, {
+      await fetch(`${BASE_URL}/scheduleInfo/${id}`, {
         method: "DELETE",
       });
       console.log("Staff Deleted ID:", id);
       // Update the local schedule state after deletion
-      setSchedule(schedule.filter(event => event.id !== id));
+      setSchedule(schedule.filter((event) => event.id !== id));
       setShowDeleteModal(false);
       setIdToDelete(null);
     } catch (error) {

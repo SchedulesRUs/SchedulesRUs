@@ -13,6 +13,7 @@ import {BookOffStackNavigationProp} from '../../../App';
 import {useAuthContext} from '../../context/AuthContext';
 import bookOffService, {BookOffResponse} from '../../remote/BookOffService';
 import moment from 'moment';
+import {FloatingAction} from 'react-native-floating-action';
 
 const BookOffListScreen = () => {
   const navigation = useNavigation<BookOffStackNavigationProp>();
@@ -43,7 +44,7 @@ const BookOffListScreen = () => {
 
   useEffect(() => {
     fetchBookOffs();
-  }, []);
+  });
 
   const getStatusIcon = (status: string) => {
     let iconName;
@@ -71,11 +72,7 @@ const BookOffListScreen = () => {
   };
 
   return (
-    <ScrollView
-      style={styles.container}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }>
+    <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="arrow-back-ios-new" size={24} color="#FFFFFF" />
@@ -84,36 +81,58 @@ const BookOffListScreen = () => {
         <Icon name="" size={24} color="transparent" />
       </View>
 
-      <View style={styles.subHeader}>
-        <TouchableOpacity
-          style={styles.addButton}
-          onPress={() => navigation.navigate('BookOffRequest')}>
-          <Text style={styles.addButtonText}>+ Add New Book Off</Text>
-        </TouchableOpacity>
-      </View>
-
-      {bookOffs?.map((item, index) => (
-        <View key={index} style={styles.bookOffItem}>
-          <View style={styles.dateContainer}>
-            <Text style={styles.dayText}>
-              Request on{' '}
-              {moment(item.created_date, 'YYYY-MM-DD').format('DD MMM, YYYY')}
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={
+          bookOffs && bookOffs.length === 0 ? styles.scrollViewCenter : {}
+        }
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
+        {/* <View style={styles.subHeader}>
+                <TouchableOpacity
+                    style={styles.addButton}
+                    onPress={() => navigation.navigate('BookOffRequest')}>
+                    <Text style={styles.addButtonText}>+ Add New Book Off</Text>
+                </TouchableOpacity>
+            </View> */}
+        {bookOffs && bookOffs.length > 0 ? (
+          bookOffs?.map((item, index) => (
+            <View key={index} style={styles.bookOffItem}>
+              <View style={styles.dateContainer}>
+                <Text style={styles.dayText}>
+                  Request on{' '}
+                  {moment(item.created_date, 'YYYY-MM-DD').format(
+                    'DD MMM, YYYY',
+                  )}
+                </Text>
+                <Text style={styles.statusText}>
+                  From: {moment.unix(Number(item.start)).format('DD MMM, YYYY')}
+                </Text>
+                <Text style={styles.statusText}>
+                  To: {moment.unix(Number(item.end)).format('DD MMM, YYYY')}
+                </Text>
+                <Text style={styles.statusText}>Reason: {item.reason}</Text>
+              </View>
+              <View style={styles.statusContainer}>
+                {getStatusIcon(item.status)}
+                <Text style={styles.statusText}>{item.status}</Text>
+              </View>
+            </View>
+          ))
+        ) : (
+          <View style={styles.emptyMessageContainer}>
+            <Text style={styles.emptyMessageText}>
+              No book off requests found.
             </Text>
-            <Text style={styles.statusText}>
-              From: {moment.unix(Number(item.start)).format('DD MMM, YYYY')}
-            </Text>
-            <Text style={styles.statusText}>
-              To: {moment.unix(Number(item.end)).format('DD MMM, YYYY')}
-            </Text>
-            <Text style={styles.statusText}>Reason: {item.reason}</Text>
           </View>
-          <View style={styles.statusContainer}>
-            {getStatusIcon(item.status)}
-            <Text style={styles.statusText}>{item.status}</Text>
-          </View>
-        </View>
-      ))}
-    </ScrollView>
+        )}
+      </ScrollView>
+      <FloatingAction
+        actions={[]}
+        onPressMain={() => navigation.navigate('BookOffRequest')}
+      />
+    </View>
   );
 };
 
@@ -121,6 +140,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+  },
+  scrollViewCenter: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   header: {
     backgroundColor: '#0D1282',
@@ -178,6 +202,17 @@ const styles = StyleSheet.create({
   },
   statusText: {
     fontSize: 16,
+  },
+  emptyMessageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  emptyMessageText: {
+    fontSize: 16,
+    color: '#666', // Adjust the color as needed
+    textAlign: 'center',
   },
 });
 

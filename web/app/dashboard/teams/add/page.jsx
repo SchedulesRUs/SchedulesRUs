@@ -3,8 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { s, s1, s2, s3, s4, s5, s6, s7 } from "@/app/asset";
 import Image from "next/image";
-
-
+import { BASE_URL } from "@/app/constants/Config";
 
 class User {
   constructor(username, password, email, image, address, role, isAdmin, phone) {
@@ -19,9 +18,10 @@ class User {
   }
 }
 
-
 const AddUser = () => {
-  const [user, setUser] = useState(new User("This is test", "", "", "", "", "", "", ""));
+  const [user, setUser] = useState(
+    new User("This is test", "", "", "", "", "", "", ""),
+  );
 
   // Function to update user state
   const updateUser = (field, value) => {
@@ -34,7 +34,7 @@ const AddUser = () => {
   async function createUser() {
     const requestBody = JSON.stringify(user);
     try {
-      const response = await fetch("https://schedules-r-us-78b737cd078f.herokuapp.com/user", {
+      const response = await fetch(`${BASE_URL}/user`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,10 +64,7 @@ const AddUser = () => {
 
   return (
     <div className="p-5 rounded-lg mt-5 bg-[#f1efefe9]">
-      <form
-        onSubmit={createUser}
-        className="flex flex-wrap justify-between"
-      >
+      <form onSubmit={createUser} className="flex flex-wrap justify-between">
         <input
           onChange={(e) => updateUser("username", e.target.value)}
           className="w-[45%] m-4 p-2 rounded-md"

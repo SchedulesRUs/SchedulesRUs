@@ -1,8 +1,14 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {StackNavigationProp,} from '@react-navigation/stack';
-import { RouteProp } from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RouteProp} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 type WeeklyAvailability = {
@@ -35,12 +41,14 @@ type ConfirmationAvailabilityScreenRouteProp = RouteProp<
 >;
 
 const ConfirmationAvailabilityScreen: React.FC = () => {
-  const navigation = useNavigation<ConfirmationAvailabilityScreenNavigationProp>();
+  const navigation =
+    useNavigation<ConfirmationAvailabilityScreenNavigationProp>();
   const route = useRoute<ConfirmationAvailabilityScreenRouteProp>();
   const {weeklyAvailability, availabilityPeriod} = route.params;
 
   const formatDate = (date: Date) => date.toLocaleDateString();
-  const formatTime = (date: Date) => date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+  const formatTime = (date: Date) =>
+    date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
 
   const handleEdit = () => navigation.navigate('CreateNewAvailability');
   const handleConfirm = () => navigation.navigate('AvailabilityList');
@@ -55,16 +63,21 @@ const ConfirmationAvailabilityScreen: React.FC = () => {
         <Text style={styles.headerTitle}>Your Availability Request</Text>
       </View>
       <View style={styles.detailCard}>
-        <Text style={styles.detailText}>From: {formatDate(availabilityPeriod.start)} To: {formatDate(availabilityPeriod.end)}</Text>
+        <Text style={styles.detailText}>
+          From: {formatDate(availabilityPeriod.start)} To:{' '}
+          {formatDate(availabilityPeriod.end)}
+        </Text>
       </View>
-      
-      {Object.entries(weeklyAvailability).map(([day, { from, to }]) => (
+
+      {Object.entries(weeklyAvailability).map(([day, {from, to}]) => (
         <View key={day} style={styles.detailCard}>
           <Text style={styles.label}>{day}:</Text>
-          <Text style={styles.detail}>From: {formatTime(from)} To: {formatTime(to)}</Text>
+          <Text style={styles.detail}>
+            From: {formatTime(from)} To: {formatTime(to)}
+          </Text>
         </View>
       ))}
-      
+
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={handleEdit}>
           <Text style={styles.buttonText}>Edit</Text>

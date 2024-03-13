@@ -1,5 +1,5 @@
 // ReportsPage.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 // Placeholder for a custom hook or function to fetch report data
 // This should be replaced with actual data fetching logic

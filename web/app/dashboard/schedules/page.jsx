@@ -6,7 +6,7 @@ const Schedules = () => {
     <div className="mt-5">
       <Schedule />
     </div>
-  )
+  );
 };
 
 export default Schedules;

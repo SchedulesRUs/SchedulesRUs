@@ -37,16 +37,13 @@ export class ScheduleInfoService {
     });
   }
 
-  async createScheduleInfo(
-    createScheduleInfoDto: CreateScheduleDto)
-    {
+  async createScheduleInfo(createScheduleInfoDto: CreateScheduleDto) {
     const newScheduleInfo = this.scheduleInfoRepository.create(
       createScheduleInfoDto,
     );
-    
+
     return this.scheduleInfoRepository.save(newScheduleInfo);
   }
-
 
   async removeScheduleById(id: number): Promise<void> {
     await this.scheduleInfoRepository.delete(id);

@@ -2,7 +2,6 @@ import React from "react";
 import { MdSearch } from "react-icons/md";
 
 const Search = ({ placeholder, searchUser, handleSearchUser }) => {
-  
   return (
     <div className="flex gap-2 rounded-md bg-[#f1efefe9] items-center">
       <MdSearch size={30} />

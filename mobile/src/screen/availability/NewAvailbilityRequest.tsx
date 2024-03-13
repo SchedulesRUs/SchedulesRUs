@@ -52,7 +52,10 @@ type AvailabilityStackNavigationProp = StackNavigationProp<
   'CreateNewAvailability'
 >;
 const CreateNewAvailability: React.FC = () => {
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList, 'CreateNewAvailability'>>();
+  const navigation =
+    useNavigation<
+      StackNavigationProp<RootStackParamList, 'CreateNewAvailability'>
+    >();
   const [weeklyAvailability, setWeeklyAvailability] =
     useState<WeeklyAvailability>({
       Monday: defaultAvailability,
@@ -102,7 +105,10 @@ const CreateNewAvailability: React.FC = () => {
   const handleSubmit = () => {
     // Handle the submission of the availability
     console.log(weeklyAvailability);
-    navigation.navigate('ConfirmationAvailability', { weeklyAvailability, availabilityPeriod });
+    navigation.navigate('ConfirmationAvailability', {
+      weeklyAvailability,
+      availabilityPeriod,
+    });
     // Submit the availability here
   };
 

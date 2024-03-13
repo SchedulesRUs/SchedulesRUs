@@ -8,6 +8,7 @@ import Image from "next/image";
 import Pagination from "@/app/component/dashboard/pagination/pagination";
 import userImage from "../../asset/user.jpg"; // Adjust the path to match the folder structure
 import DeleteModal from "@/app/component/dashboard/deleteModal/deleteModel";
+import { BASE_URL } from "@/app/constants/Config";
 
 const Users = () => {
   const [allUser, setAllUser] = useState([]);
@@ -18,20 +19,17 @@ const Users = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [idToDelete, setIdToDelete] = useState(null);
 
-
   const handleSearchUser = (event) => {
     setSearchUser(event.target.value);
   };
 
   const filteredStaffMembers = allUser.filter((staff) =>
-    staff.username.toLowerCase().includes(searchUser.toLowerCase())
+    staff.username.toLowerCase().includes(searchUser.toLowerCase()),
   );
 
   async function fetchGetAllUser() {
     try {
-      const response = await fetch(
-        `https://schedules-r-us-78b737cd078f.herokuapp.com/user`
-      );
+      const response = await fetch(`${BASE_URL}/user`);
       const data = await response.json();
       console.log("test", data);
       console.dir(data);
@@ -59,15 +57,12 @@ const Users = () => {
 
   async function handleDelete(id) {
     try {
-      await fetch(
-        `https://schedules-r-us-78b737cd078f.herokuapp.com/user/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      await fetch(`${BASE_URL}/user/${id}`, {
+        method: "DELETE",
+      });
       console.log("User deleted:", id);
       // Update the local schedule state after deletion
-      setAllUser(allUser.filter(user => user.id !== id));
+      setAllUser(allUser.filter((user) => user.id !== id));
       setShowDeleteModal(false);
       setIdToDelete(null);
     } catch (error) {
@@ -127,7 +122,10 @@ const Users = () => {
                       View
                     </button>
                   </Link>
-                  <button className="bg-red-700 text-white text-[12px] rounded-lg p-1" onClick={() => handleDeleteModal(user)}>
+                  <button
+                    className="bg-red-700 text-white text-[12px] rounded-lg p-1"
+                    onClick={() => handleDeleteModal(user)}
+                  >
                     Delete
                   </button>
                 </div>

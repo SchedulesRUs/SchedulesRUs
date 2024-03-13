@@ -1,10 +1,17 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import {useNavigation, useRoute, RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import bookOffService from '../../remote/BookOffService';
 import {useAuthContext} from '../../context/AuthContext';
 import {errorToast, successToast} from '../../component/Toast';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 type BookOffRequestState = {
   date: Date;
@@ -53,12 +60,15 @@ const ConfirmationScreen: React.FC = () => {
   };
 
   const handleConfirm = async () => {
+    setSending(true);
     const result = await bookOffService.requestBookOff(
       user.id,
       Math.floor(request.startTime.getTime() / 1000),
       Math.floor(request.endTime.getTime() / 1000),
       request.reason,
     );
+
+    setSending(false);
 
     if (result) {
       successToast('Successfully request day off');
@@ -70,31 +80,46 @@ const ConfirmationScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.confirmationText}>Your request</Text>
-
-      <View style={styles.detailContainer}>
-        <Text style={styles.label}>Your Request Date:</Text>
-        <Text style={styles.detail}>{formatDate(request.date)}</Text>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Icon name="arrow-back-ios-new" size={24} color="#FFFFFF" />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Confirm Your Book Off</Text>
+        <Icon name="" size={24} color="transparent" />
       </View>
 
-      <View style={styles.detailContainer}>
-        <Text style={styles.label}>Your Request Start Time:</Text>
-        <Text style={styles.detail}>{formatTime(request.startTime)}</Text>
-      </View>
+      <View style={styles.contentContainer}>
+        <View style={styles.detailContainer}>
+          <Text style={styles.label}>Your Request Date:</Text>
+          <Text style={styles.detail}>{formatDate(request.date)}</Text>
+        </View>
 
-      <View style={styles.detailContainer}>
-        <Text style={styles.label}>Your Request End Time:</Text>
-        <Text style={styles.detail}>{formatTime(request.endTime)}</Text>
-      </View>
+        <View style={styles.detailContainer}>
+          <Text style={styles.label}>Your Request Start Time:</Text>
+          <Text style={styles.detail}>{formatTime(request.startTime)}</Text>
+        </View>
 
-      <View style={styles.detailContainer}>
-        <Text style={styles.label}>Your Reason:</Text>
-        <Text style={styles.detail}>{request.reason}</Text>
-      </View>
+        <View style={styles.detailContainer}>
+          <Text style={styles.label}>Your Request End Time:</Text>
+          <Text style={styles.detail}>{formatTime(request.endTime)}</Text>
+        </View>
 
-      <TouchableOpacity style={styles.confirmButton} onPress={handleConfirm}>
-        <Text style={styles.confirmButtonText}>Confirm</Text>
-      </TouchableOpacity>
+        <View style={styles.detailContainer}>
+          <Text style={styles.label}>Your Reason:</Text>
+          <Text style={styles.detail}>{request.reason}</Text>
+        </View>
+
+        <TouchableOpacity
+          style={styles.confirmButton}
+          onPress={handleConfirm}
+          disabled={sending}>
+          {sending ? (
+            <ActivityIndicator size={20} color="#fff" />
+          ) : (
+            <Text style={styles.confirmButtonText}>Confirm</Text>
+          )}
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -102,14 +127,30 @@ const ConfirmationScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
     backgroundColor: '#FFF',
+  },
+  header: {
+    backgroundColor: '#0D1282',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  headerTitle: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   confirmationText: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 30,
     textAlign: 'center',
+  },
+  contentContainer: {
+    flex: 1,
+    padding: 15,
   },
   detailContainer: {
     width: '100%',
