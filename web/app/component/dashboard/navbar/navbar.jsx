@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <div className="flex justify-between items-center bg-[#f1efefe9] p-8 rounded-md">
-      <div className="capitalize font-bold">{pathname.split("/").pop()}</div>
+      <div className="capitalize font-bold text-2xl">{pathname.split("/").pop().toUpperCase()}</div>
 
       <div className="flex items-center gap-4">
         {/* <div className="flex items-center gap-4 bg-[#f1efefe9] p-2 rounded-md">

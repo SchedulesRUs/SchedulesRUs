@@ -1,4 +1,6 @@
-import React from "react";
+"use client"
+
+import React, { useState, useEffect } from "react";
 import { menuItems } from "@/app/constants";
 import MenuLink from "./menuLink/menuLink";
 import Image from "next/image";
@@ -7,20 +9,31 @@ import Link from "next/link";
 import { s, s1, s2, s3, s4, s5, s6, s7 } from "@/app/asset";
 
 const Sidebar = () => {
+
+  const id = localStorage.getItem("id");
+  const username = localStorage.getItem("username");
+  const role = localStorage.getItem("role");
+  const image = localStorage.getItem("image");
+
   return (
     <div className="min-w-max">
-      <div className="flex items-center gap-5 mb-8">
-        <Image
-          src={s7}
-          alt="user"
-          width="100"
-          height="100"
-          className="rounded-md "
-          priority
-        />
-        <div className="flex flex-col">
-          <span className="font-bold">Tony Tony Stark</span>
-          <span className="text-[16px]">Administrator Executive</span>
+      
+        <div className="flex items-center gap-5 mb-4">
+          <div className="flex flex-col justify-center items-center">
+            <Image
+              src={image}
+              alt="user"
+              width="120"
+              height="120"
+              className="rounded-md "
+              priority
+            />
+            <span className="text-[16px] mt-2 border-b-4 border-indigo-950">ADMIN ID: {id}</span>
+          </div>
+        <div className="flex flex-col items-center justify-center">
+          
+          <span className="font-bold text-xl">{username && username.toUpperCase()}</span>
+          <span className="text-[18px]">{role}</span>
         </div>
       </div>
       <ul>

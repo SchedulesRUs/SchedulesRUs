@@ -11,6 +11,15 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [isValidationSuccess, setIsValidationSuccess] = useState(false);
 
+
+  async function fetchUserById(id) {
+    try {
+      const response = await fetch(`${BASE_URL}/user/getuser?id=${id}`);
+      const data = await response.json();
+      return data;
+    } catch (error) {}
+  }
+  
   const validateLogin = async ({ username, password }) => {
     setLoading(true);
     setIsValidationSuccess(false);
@@ -23,7 +32,16 @@ export default function Home() {
       console.log("test", data);
       console.dir(data);
       if (data.success === true) {
+        const userData = await fetchUserById(data.userid)
+        console.log(userData)
+        //Store data in local storage
+        localStorage.setItem("username", userData.username);
+        localStorage.setItem("role", userData.role);
+        localStorage.setItem("image", userData.image);
+        localStorage.setItem("id", userData.id);
+
         window.location.href = "/dashboard";
+
       } else {
         setLoading(false);
         setErrorMessage("Wrong username or password, please try again!");
