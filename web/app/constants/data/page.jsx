@@ -34,7 +34,10 @@ export default function getAllUser() {
         ) : allUser.length > 0 ? (
           <ul>
             {allUser.map((item) => (
-              <li key={item.id} className="p-2 m-1 hover:bg-orange-800 cursor-pointer">
+              <li
+                key={item.id}
+                className="p-2 m-1 hover:bg-orange-800 cursor-pointer"
+              >
                 {item.username}
               </li>
             ))}

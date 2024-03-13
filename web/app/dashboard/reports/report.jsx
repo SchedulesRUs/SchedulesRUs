@@ -1,15 +1,16 @@
-import { useState, useEffect } from 'react';
-import { saveAs } from 'file-saver';
-import ExcelJS from 'exceljs';
-import { BASE_URL } from '@/app/constants/Config';
+import { useState, useEffect } from "react";
+import { saveAs } from "file-saver";
+import ExcelJS from "exceljs";
+import { BASE_URL } from "@/app/constants/Config";
 
 const Report = () => {
   const [allUser, setAllUser] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [downloadingUserReport, setDownloadingUserReport] = useState(false);
-  const [downloadingProductReport, setDownloadingProductReport] = useState(false);
-  const [userReportMessage, setUserReportMessage] = useState('');
-  const [productReportMessage, setProductReportMessage] = useState('');
+  const [downloadingProductReport, setDownloadingProductReport] =
+    useState(false);
+  const [userReportMessage, setUserReportMessage] = useState("");
+  const [productReportMessage, setProductReportMessage] = useState("");
 
   useEffect(() => {
     fetchGetAllUser();
@@ -18,47 +19,43 @@ const Report = () => {
 
   const fetchGetAllUser = async () => {
     try {
-      const response = await fetch(
-        `${BASE_URL}/user`
-      );
+      const response = await fetch(`${BASE_URL}/user`);
       const data = await response.json();
       console.log("Fetched Users:", data);
       setAllUser(data);
     } catch (error) {
-      console.error('Error fetching users:', error);
+      console.error("Error fetching users:", error);
     }
   };
 
   const fetchGetAllProducts = async () => {
     try {
-      const response = await fetch(
-        `${BASE_URL}/products`
-      );
+      const response = await fetch(`${BASE_URL}/products`);
       const data = await response.json();
       console.log("Fetched Products:", data);
       setAllProducts(data);
     } catch (error) {
-      console.error('Error fetching products:', error);
+      console.error("Error fetching products:", error);
     }
   };
 
   const generateUserReport = async () => {
     // Create a new workbook
     const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Users');
+    const worksheet = workbook.addWorksheet("Users");
 
     // Define the columns
     worksheet.columns = [
-      { header: 'Id', key: 'id', width: 10 },
-      { header: 'User Name', key: 'username', width: 30 },
-      { header: 'Email', key: 'email', width: 30 },
-      { header: 'Phone Number', key: 'phone', width: 30 },
-      { header: 'Is Admin', key: 'isAdmin', width: 10 },
-      { header: 'Address', key: 'address', width: 60 },
+      { header: "Id", key: "id", width: 10 },
+      { header: "User Name", key: "username", width: 30 },
+      { header: "Email", key: "email", width: 30 },
+      { header: "Phone Number", key: "phone", width: 30 },
+      { header: "Is Admin", key: "isAdmin", width: 10 },
+      { header: "Address", key: "address", width: 60 },
     ];
 
     // Add rows to the worksheet
-    allUser.forEach(user => {
+    allUser.forEach((user) => {
       worksheet.addRow({
         id: user.id,
         username: user.username,
@@ -75,17 +72,19 @@ const Report = () => {
     });
 
     // Generate Excel file
-    const fileName = 'users_report.xlsx';
+    const fileName = "users_report.xlsx";
     const buffer = await workbook.xlsx.writeBuffer();
 
     // Create a Blob from the buffer
-    const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const blob = new Blob([buffer], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
 
     // Trigger file download
     saveAs(blob, fileName);
 
-    setUserReportMessage('Users report downloaded successfully!');
-    setTimeout(() => setUserReportMessage(''), 5000); // Clear message after 5 seconds
+    setUserReportMessage("Users report downloaded successfully!");
+    setTimeout(() => setUserReportMessage(""), 5000); // Clear message after 5 seconds
 
     setDownloadingUserReport(false);
   };
@@ -93,18 +92,18 @@ const Report = () => {
   const generateProductReport = async () => {
     // Create a new workbook
     const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Products');
+    const worksheet = workbook.addWorksheet("Products");
 
     // Define the columns
     worksheet.columns = [
-      { header: 'Id', key: 'id', width: 10 },
-      { header: 'Product Name', key: 'name', width: 30 },
-      { header: 'Price', key: 'price', width: 15 },
-      { header: 'Description', key: 'description', width: 60 },
+      { header: "Id", key: "id", width: 10 },
+      { header: "Product Name", key: "name", width: 30 },
+      { header: "Price", key: "price", width: 15 },
+      { header: "Description", key: "description", width: 60 },
     ];
 
     // Add rows to the worksheet
-    allProducts.forEach(product => {
+    allProducts.forEach((product) => {
       worksheet.addRow({
         id: product.id,
         name: product.name,
@@ -119,17 +118,19 @@ const Report = () => {
     });
 
     // Generate Excel file
-    const fileName = 'products_report.xlsx';
+    const fileName = "products_report.xlsx";
     const buffer = await workbook.xlsx.writeBuffer();
 
     // Create a Blob from the buffer
-    const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const blob = new Blob([buffer], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
 
     // Trigger file download
     saveAs(blob, fileName);
 
-    setProductReportMessage('Products report downloaded successfully!');
-    setTimeout(() => setProductReportMessage(''), 5000); // Clear message after 5 seconds
+    setProductReportMessage("Products report downloaded successfully!");
+    setTimeout(() => setProductReportMessage(""), 5000); // Clear message after 5 seconds
 
     setDownloadingProductReport(false);
   };
@@ -139,7 +140,7 @@ const Report = () => {
       setDownloadingUserReport(true);
       await generateUserReport();
     } catch (error) {
-      console.error('Error generating User report:', error);
+      console.error("Error generating User report:", error);
       setDownloadingUserReport(false);
     }
   };
@@ -149,7 +150,7 @@ const Report = () => {
       setDownloadingProductReport(true);
       await generateProductReport();
     } catch (error) {
-      console.error('Error generating Product report:', error);
+      console.error("Error generating Product report:", error);
       setDownloadingProductReport(false);
     }
   };
@@ -158,16 +159,30 @@ const Report = () => {
     <div className="container">
       <h1 className="title">Excel Report</h1>
       <div className="report-section">
-        <button onClick={handleDownloadUserReport} disabled={downloadingUserReport || allUser.length === 0}>
-          {downloadingUserReport ? 'Downloading Users...' : 'Download Users Report'}
+        <button
+          onClick={handleDownloadUserReport}
+          disabled={downloadingUserReport || allUser.length === 0}
+        >
+          {downloadingUserReport
+            ? "Downloading Users..."
+            : "Download Users Report"}
         </button>
-        {userReportMessage && <p className="success-message">{userReportMessage}</p>}
+        {userReportMessage && (
+          <p className="success-message">{userReportMessage}</p>
+        )}
       </div>
       <div className="report-section">
-        <button onClick={handleDownloadProductReport} disabled={downloadingProductReport || allProducts.length === 0}>
-          {downloadingProductReport ? 'Downloading Products...' : 'Download Products Report'}
+        <button
+          onClick={handleDownloadProductReport}
+          disabled={downloadingProductReport || allProducts.length === 0}
+        >
+          {downloadingProductReport
+            ? "Downloading Products..."
+            : "Download Products Report"}
         </button>
-        {productReportMessage && <p className="success-message">{productReportMessage}</p>}
+        {productReportMessage && (
+          <p className="success-message">{productReportMessage}</p>
+        )}
       </div>
 
       <style jsx>{`
@@ -177,7 +192,6 @@ const Report = () => {
           padding: 20px;
           align-items: center;
           justify-content: center;
-
         }
         .title {
           font-size: 24px;

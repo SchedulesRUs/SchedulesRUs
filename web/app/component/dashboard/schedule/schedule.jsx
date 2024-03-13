@@ -45,7 +45,7 @@ const Schedule = () => {
       const data = await response.json();
       setAllUser(data);
     } catch (error) {
-      console.log("Fetching failed", error)
+      console.log("Fetching failed", error);
     }
   }
 
@@ -80,7 +80,7 @@ const Schedule = () => {
         body: JSON.stringify(scheduleToPost),
       });
       const data = await response.json();
-      setSchedule([...schedule, data])
+      setSchedule([...schedule, data]);
 
       console.log("Add Schedule to DB:", data);
     } catch (error) {
@@ -97,7 +97,6 @@ const Schedule = () => {
   }, [scheduleToPost]);
 
   async function updateEventTime(id, start, end) {
-
     try {
       await fetch(`${BASE_URL}/scheduleInfo/${id}`, {
         method: "PUT",
@@ -107,7 +106,6 @@ const Schedule = () => {
         body: JSON.stringify({ start, end }),
       });
       console.log("Event resized successfully");
-
     } catch (error) {
       console.log("Error updating event time:", error);
       throw new Error(`Unable to update event time: ${error.message}`);
@@ -120,7 +118,7 @@ const Schedule = () => {
 
     try {
       await updateEventTime(id, start, end);
-      await fetchSchedule()
+      await fetchSchedule();
       console.log("Event Dropped with ID:", id, "Start:", start, "End:", end);
     } catch (error) {
       console.error("Error updating event time:", error);
@@ -139,7 +137,6 @@ const Schedule = () => {
       console.error("Error updating event time:", error);
     }
   };
-
 
   const draggableElRef = useRef(null); // Ref to store the Draggable instance
   useEffect(() => {
@@ -164,10 +161,16 @@ const Schedule = () => {
     }
   }, []);
 
-
-
   function addEvent(data) {
-    const colors = ["#ff5733", "#33ff57", "#5733ff", "#ff33a1", "#a133ff", "#33a1ff", "#f6e05e"];
+    const colors = [
+      "#ff5733",
+      "#33ff57",
+      "#5733ff",
+      "#ff33a1",
+      "#a133ff",
+      "#33a1ff",
+      "#f6e05e",
+    ];
 
     const newScheduleInfo = new ScheduleData();
     newScheduleInfo.allDay = data.allDay;
@@ -179,7 +182,6 @@ const Schedule = () => {
       newScheduleInfo.title = data.draggedEl.getAttribute("title");
       newScheduleInfo.userId = data.draggedEl.getAttribute("userId");
     } else {
-
       newScheduleInfo.start = new Date().toISOString();
       newScheduleInfo.end = new Date().toISOString();
     }
@@ -187,7 +189,6 @@ const Schedule = () => {
 
     console.log("addEvent:", newScheduleInfo);
     setScheduleToPost(newScheduleInfo);
-
   }
 
   function handleDeleteModal(data) {
@@ -203,7 +204,7 @@ const Schedule = () => {
       });
       console.log("Staff Deleted ID:", id);
       // Update the local schedule state after deletion
-      setSchedule(schedule.filter(event => event.id !== id));
+      setSchedule(schedule.filter((event) => event.id !== id));
       setShowDeleteModal(false);
       setIdToDelete(null);
     } catch (error) {

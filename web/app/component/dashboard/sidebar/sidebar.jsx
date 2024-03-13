@@ -6,7 +6,6 @@ import { MdLogout } from "react-icons/md";
 import Link from "next/link";
 import { s, s1, s2, s3, s4, s5, s6, s7 } from "@/app/asset";
 
-
 const Sidebar = () => {
   return (
     <div className="min-w-max">
@@ -35,10 +34,10 @@ const Sidebar = () => {
         ))}
       </ul>
       <Link href="./">
-      <button className="flex items-center p-3 gap-2 rounded-2xl hover:bg-indigo-950 hover:text-white w-[100%]">
-        <MdLogout />
-        Logout
-      </button>
+        <button className="flex items-center p-3 gap-2 rounded-2xl hover:bg-indigo-950 hover:text-white w-[100%]">
+          <MdLogout />
+          Logout
+        </button>
       </Link>
     </div>
   );

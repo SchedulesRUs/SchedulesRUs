@@ -2,7 +2,12 @@ import React, { Fragment } from "react";
 import { Transition, Dialog } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/20/solid";
 
-const DeleteModal = ({ showModal, handleDelete, handleCloseModal, idToDelete }) => {
+const DeleteModal = ({
+  showModal,
+  handleDelete,
+  handleCloseModal,
+  idToDelete,
+}) => {
   return (
     <Transition.Root show={showModal} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={handleCloseModal}>

@@ -2,10 +2,15 @@
 
 import React, { Fragment } from "react";
 import { Transition, Dialog } from "@headlessui/react";
-import { CheckIcon } from '@heroicons/react/20/solid';
+import { CheckIcon } from "@heroicons/react/20/solid";
 
-const AddEvent = ({ showModal, handleCloseModal, handleSubmit, handleChange, newEvent}) => {
-  
+const AddEvent = ({
+  showModal,
+  handleCloseModal,
+  handleSubmit,
+  handleChange,
+  newEvent,
+}) => {
   return (
     <div>
       <Transition.Root show={showModal} as={Fragment}>

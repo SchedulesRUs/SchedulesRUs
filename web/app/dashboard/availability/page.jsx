@@ -13,18 +13,18 @@ const Availability = () => {
 
   async function fetchAvailability() {
     try {
-      const response = await fetch(`${BASE_URL}/availability`)
+      const response = await fetch(`${BASE_URL}/availability`);
       const data = await response.json();
-      setAvailability(data)
-      console.log("Aavailability:", data)
+      setAvailability(data);
+      console.log("Aavailability:", data);
     } catch (error) {
-      console.log("Error:", error)
+      console.log("Error:", error);
     }
   }
 
   useEffect(() => {
     fetchAvailability();
-  }, [])
+  }, []);
 
   const addEvent = (newEvent) => {
     setEvents([...events, newEvent]);
