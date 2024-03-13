@@ -43,6 +43,7 @@ const ViewScheduleOnly = () => {
         selectable={true}
         selectMirror={true}
         events={schedule}
+        dayMaxEvents={true}
       />
     </div>
   );

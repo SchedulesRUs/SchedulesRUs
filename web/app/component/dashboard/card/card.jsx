@@ -7,8 +7,7 @@ const Card = () => {
       <MdSupervisedUserCircle size={24} />
       <div className="flex flex-col gap-4">
         <span>Total Employees</span>
-        <span className="font-bold">15 Staffs</span>
-        <span>Details</span>
+        <span className="font-bold">6 Staffs</span>
       </div>
     </div>
   );
