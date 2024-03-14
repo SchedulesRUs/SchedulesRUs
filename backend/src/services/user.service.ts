@@ -44,6 +44,12 @@ export class UserService {
     return this.userRepository.save(updatedUser);
   }
 
+  async updateFcmToken(id: number, fcmToken: string) {
+    const user = await this.findOne(id);
+    const updatedUser = { ...user, fcmToken: fcmToken };
+    return this.userRepository.save(updatedUser);
+  }
+
   async createUser(createUserDto: CreateUserDto) {
     const userColor = generateHexColor();
     const newUser = this.userRepository.create({

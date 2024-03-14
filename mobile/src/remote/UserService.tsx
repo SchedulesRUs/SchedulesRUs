@@ -49,6 +49,27 @@ class UserService {
       return null;
     }
   }
+
+  public async updateFcmToken(
+    userId: number,
+    fcmToken: string,
+  ): Promise<UserInfoResponse | null> {
+    try {
+      const response = await axios.post<UserInfoResponse>(
+        `${BASE_URL}/user/updateFcmToken`,
+        {
+          userId,
+          fcmToken,
+        },
+      );
+      console.log('updateFcmToken Response', response.data);
+      return response.data;
+    } catch (error) {
+      assertIsError(error);
+      console.error('updateFcmToken error', error);
+      return null;
+    }
+  }
 }
 
 const userService = new UserService();

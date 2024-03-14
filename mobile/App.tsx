@@ -193,13 +193,11 @@ function App(): React.JSX.Element {
   }, []);
 
   useEffect(() => {
-    const fetchToken = async () => {
+    const registerDevice = async () => {
       await messaging().registerDeviceForRemoteMessages();
-      const token = await messaging().getToken();
-      console.log('fcm token', token);
     };
 
-    fetchToken();
+    registerDevice();
   }, []);
 
   return (

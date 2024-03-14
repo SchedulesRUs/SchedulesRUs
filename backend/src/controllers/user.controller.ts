@@ -13,6 +13,7 @@ import {
 import { UserService } from '../services/user.service';
 import { CreateUserDto } from 'src/dto/create-user.dto';
 import { UpdateUserDto } from 'src/dto/update-user.dto';
+import { UpdateUserFcmTokenDto } from 'src/dto/update-user-fcmtoken.dto';
 
 @Controller('user')
 export class UserController {
@@ -32,6 +33,20 @@ export class UserController {
   updateUser(@Query('id') id: number, @Body() updateUserDto: UpdateUserDto) {
     try {
       const updatedUser = this.userService.updateUser(id, updateUserDto);
+      return updatedUser;
+    } catch (error) {
+      return 'Failed to update user details';
+    }
+  }
+
+  @Post('updateFcmToken')
+  updateFcmToken(@Body() updateUserFcmTokenDto: UpdateUserFcmTokenDto) {
+    try {
+      const updatedUser = this.userService.updateFcmToken(
+        updateUserFcmTokenDto.userId,
+        updateUserFcmTokenDto.fcmToken,
+      );
+
       return updatedUser;
     } catch (error) {
       return 'Failed to update user details';

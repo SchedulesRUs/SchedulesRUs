@@ -33,7 +33,7 @@ export default class User {
   image: string;
 
   @Column({ nullable: true })
-  fcmTokens: string;
+  fcmToken: string;
 
   //After modifying your entity, remember to synchronize your database schema using TypeORM:
   //npx typeorm schema:sync

@@ -21,9 +21,7 @@ export class NotificationService {
 
   async sendTestNotification() {
     try {
-      const fcmTokens = [
-        'eTvISiN-RYuwoWGt1VB7Eh:APA91bHvdFKTsA6xrwy0huLyJoLRAosGrIzdgTtG1Ro71RsYkefQrleM7fhXc1J8oe_-5Xq6_FL2K9DsqpxDy0YkDhQaJiOP42ZFSNclki4jM2JLW-BEj-Ii77CuPcxPd2a21n8ydL7Q',
-      ];
+      const fcmTokens = ['put your token here'];
 
       const message = {
         notification: {
@@ -48,11 +46,7 @@ export class NotificationService {
   async sendNewScheduleAssigned(userId: number, date: string) {
     try {
       const user = await this.userService.findOne(userId);
-      // const tokens = user.fcm_tokens
-      //TODO: mock for now
-      const fcmTokens = [
-        'eTvISiN-RYuwoWGt1VB7Eh:APA91bHvdFKTsA6xrwy0huLyJoLRAosGrIzdgTtG1Ro71RsYkefQrleM7fhXc1J8oe_-5Xq6_FL2K9DsqpxDy0YkDhQaJiOP42ZFSNclki4jM2JLW-BEj-Ii77CuPcxPd2a21n8ydL7Q',
-      ];
+      const fcmTokens = [user.fcmToken];
 
       const message = {
         notification: {
@@ -79,11 +73,7 @@ export class NotificationService {
   ) {
     try {
       const user = await this.userService.findOne(userId);
-      // const tokens = user.fcm_tokens
-      //TODO: mock for now
-      const fcmTokens = [
-        'eTvISiN-RYuwoWGt1VB7Eh:APA91bHvdFKTsA6xrwy0huLyJoLRAosGrIzdgTtG1Ro71RsYkefQrleM7fhXc1J8oe_-5Xq6_FL2K9DsqpxDy0YkDhQaJiOP42ZFSNclki4jM2JLW-BEj-Ii77CuPcxPd2a21n8ydL7Q',
-      ];
+      const fcmTokens = [user.fcmToken];
 
       let message: Message = {
         data: {

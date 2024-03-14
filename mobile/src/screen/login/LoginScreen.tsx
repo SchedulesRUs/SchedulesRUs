@@ -7,12 +7,12 @@ import {
   TextInput,
   ActivityIndicator,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {assertIsError} from '../../extension/ErrorExt';
 import {useAuthContext} from '../../context/AuthContext';
 import userService from '../../remote/UserService';
 import {errorToast} from '../../component/Toast';
 import {AppStatusBar} from '../../theme/StatusBar';
+import messaging from '@react-native-firebase/messaging';
 
 function LoginScreen() {
   const {user, saveUser} = useAuthContext();
@@ -36,6 +36,10 @@ function LoginScreen() {
       if (result.success) {
         const infoResult = await userService.getUserInfo(result.userid);
         if (infoResult != null) {
+          const fcmToken = await messaging().getToken();
+          console.log('fcmToken', fcmToken);
+          await userService.updateFcmToken(result.userid, fcmToken);
+
           return saveUser({
             id: infoResult.id,
             username: infoResult.username,
