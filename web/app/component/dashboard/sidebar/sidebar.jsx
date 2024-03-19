@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { menuItems } from "@/app/constants";
 import MenuLink from "./menuLink/menuLink";
 import Image from "next/image";
@@ -9,10 +9,27 @@ import Link from "next/link";
 
 const Sidebar = () => {
 
-  const id = localStorage.getItem("id");
-  const username = localStorage.getItem("username");
-  const role = localStorage.getItem("role");
-  const image = localStorage.getItem("image");
+  const [id, setId] = useState("");
+  const [username, setUsername] = useState("");
+  const [role, setRole] = useState("");
+  const [image, setImage] = useState("");
+
+  useEffect(() => {
+    // Fetch user data from localStorage on the client side
+    const id = localStorage.getItem("id");
+    const username = localStorage.getItem("username");
+    const role = localStorage.getItem("role");
+    const image = localStorage.getItem("image");
+
+    // Update state with fetched user data
+    setId(id);
+    setUsername(username);
+    setRole(role);
+    setImage(image);
+  }, []);
+
+  // Return null if data hasn't been loaded yet
+  if (!id || !username || !role || !image) return null;
 
   return (
     <div className="min-w-min">

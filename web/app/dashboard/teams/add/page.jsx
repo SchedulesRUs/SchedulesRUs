@@ -6,7 +6,7 @@ import Image from "next/image";
 import { BASE_URL } from "@/app/constants/Config";
 
 class User {
-  constructor(username, password, email, image, address, role, isAdmin, phone) {
+  constructor(username, password, email, image, address, role, isAdmin, phone, fcmToken) {
     this.username = username;
     this.password = password;
     this.email = email;
@@ -15,12 +15,13 @@ class User {
     this.role = role;
     this.isAdmin = isAdmin;
     this.phone = phone;
+    this.fcmToken = fcmToken;
   }
 }
 
 const AddUser = () => {
   const [user, setUser] = useState(
-    new User("This is test", "", "", "", "", "", "", ""),
+    new User("This is test", "", "", "", "", "", "", "", ""),
   );
 
   // Function to update user state
@@ -108,10 +109,9 @@ const AddUser = () => {
           className="w-[45%] m-4 p-2 rounded-md"
           name="isAdmin"
           id="isAdmin"
+          defaultValue={false}
         >
-          <option value={false} selected>
-            Is Admin?
-          </option>
+          <option value={false}>Is Admin?</option>
           <option value={true}>Yes</option>
           <option value={false}>No</option>
         </select>
@@ -121,7 +121,6 @@ const AddUser = () => {
           name="image"
           id="image"
           onChange={handleImageChange}
-          defaultValue={s6}
         >
           <option value={s6}>Select Image</option>
           <option value={s}>User</option>
@@ -139,7 +138,8 @@ const AddUser = () => {
             alt="Selected User"
             width={140}
             height={140}
-            className="object-cover rounded-md absolute top-[64%] left-[69%] transform -translate-x-1/2 -translate-y-1/2"
+            className="object-cover rounded-md absolute top-[67%] left-[68%] transform -translate-x-1/2 -translate-y-1/2"
+            priority
           />
         )}
         <textarea
