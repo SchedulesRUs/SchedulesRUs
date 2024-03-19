@@ -17,7 +17,7 @@ interface Message {
 
 @Injectable()
 export class NotificationService {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
   async sendTestNotification() {
     try {
@@ -43,15 +43,15 @@ export class NotificationService {
     }
   }
 
-  async sendNewScheduleAssigned(userId: number, date: string) {
+  async sendNewScheduleAssigned(userId: number) {
     try {
       const user = await this.userService.findOne(userId);
       const fcmTokens = [user.fcmToken];
 
       const message = {
         notification: {
-          title: 'You have been assigned to a new schdule',
-          body: 'date has been assigned to you',
+          title: 'You got a new schedule',
+          body: 'You have been assigned to a new schdule',
         },
         data: {
           type: 'new_schedule',
