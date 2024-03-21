@@ -62,19 +62,6 @@ const HomeScreen = () => {
     fetchSchedule();
   }, []);
 
-  useEffect(() => {
-    const unsubscribe = messaging().onMessage(async remoteMessage => {
-      infoToast(
-        remoteMessage.notification?.title ? remoteMessage.notification?.title : '',
-        remoteMessage.notification?.body
-      );
-
-      fetchSchedule();
-    });
-
-    return unsubscribe;
-  }, []);
-
   return (
     <View style={{ flex: 1 }}>
       <AppStatusBar />
