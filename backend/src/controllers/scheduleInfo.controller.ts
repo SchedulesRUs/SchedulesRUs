@@ -29,6 +29,12 @@ export class ScheduleInfoController {
   findOne(@Param('id') id: number) {
     return this.scheduleInfoService.findOne(id);
   }
+  
+  @Get('userId/:userId')
+  getScheduleByUserId(@Param('userId') userId: number) {
+    return this.scheduleInfoService.getScheduleByUserId(userId);
+  }
+
 
   @Post()
   createScheduleInfo(@Body() createScheduleDto: CreateScheduleDto) {

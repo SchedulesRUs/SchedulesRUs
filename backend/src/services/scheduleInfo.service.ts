@@ -48,4 +48,12 @@ export class ScheduleInfoService {
   async removeScheduleById(id: number): Promise<void> {
     await this.scheduleInfoRepository.delete(id);
   }
+
+  // async getScheduleByUserId(userId: number): Promise<ScheduleInfo[]> {
+  //   try {
+  //     return this.scheduleInfoRepository.find({ where: { userId } });
+  //   } catch (error) {
+  //     throw new Error(`Unable to fetch schedule information for user ${userId}: ${error.message}`);
+  //   }
+  // }
 }

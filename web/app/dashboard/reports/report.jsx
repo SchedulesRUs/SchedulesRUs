@@ -3,7 +3,7 @@ import { saveAs } from "file-saver";
 import ExcelJS from "exceljs";
 import { BASE_URL } from "@/app/constants/Config";
 
-const Report = () => {
+const Report = ({type}) => {
   const [allUser, setAllUser] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [downloadingUserReport, setDownloadingUserReport] = useState(false);
@@ -159,6 +159,9 @@ const Report = () => {
     <div className="container">
       <h1 className="title">Excel Report</h1>
       <div className="report-section">
+
+      {type === "1" && (
+        <>
         <button
           onClick={handleDownloadUserReport}
           disabled={downloadingUserReport || allUser.length === 0}
@@ -169,8 +172,10 @@ const Report = () => {
         </button>
         {userReportMessage && (
           <p className="success-message">{userReportMessage}</p>
-        )}
-      </div>
+        )}</>
+     )}
+ </div>
+      {type == 2 && (
       <div className="report-section">
         <button
           onClick={handleDownloadProductReport}
@@ -183,7 +188,8 @@ const Report = () => {
         {productReportMessage && (
           <p className="success-message">{productReportMessage}</p>
         )}
-      </div>
+      </div>)
+      }
 
       <style jsx>{`
         .container {
