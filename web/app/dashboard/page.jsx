@@ -5,11 +5,12 @@ import Card2 from "../component/dashboard/card/card2";
 import Rightbar from "../component/dashboard/rightbar/rightbar";
 import ViewScheduleOnly from "../component/dashboard/viewSchedule/viewSchedule";
 import Chart from "../component/dashboard/chart/barChart";
-import data from "../constants/data.json";
+import monthlyData from "../constants/data.json";
 import { BASE_URL } from "../constants/Config"; // Adjust the import path as necessary
 
 const Dashboard = () => {
   const [totalStaff, setTotalStaff] = useState(0);
+  const [totalHours, setTotalHours] = useState(0);
 
   // Function to fetch all users and set total staff count
   async function fetchTotalStaff() {
@@ -22,8 +23,24 @@ const Dashboard = () => {
     }
   }
 
+  // Function to calculate total working hours for the current month
+  const calculateTotalHours = () => {
+    const currentMonth = new Date().toLocaleString('default', { month: 'short' }).toUpperCase();
+    const monthData = monthlyData.find(d => d.month === currentMonth);
+    if (monthData) {
+      let total = 0;
+      Object.keys(monthData).forEach(key => {
+        if (key !== "month" && !key.includes("Color")) {
+          total += monthData[key];
+        }
+      });
+      setTotalHours(total);
+    }
+  };
+
   useEffect(() => {
     fetchTotalStaff();
+    calculateTotalHours();
   }, []);
 
   return (
@@ -31,10 +48,10 @@ const Dashboard = () => {
       <div className="md:flex-[3] md:flex md:flex-col md:gap-[20px]">
         <div className="flex flex-col sm:flex-row md:gap-4 md:justify-between mb-5">
           <Card totalStaff={totalStaff} /> {/* Pass totalStaff to Card */}
-          <Card2 />
+          <Card2 totalHours={totalHours} /> {/* Pass totalHours to Card2 */}
         </div>
         <ViewScheduleOnly />
-        <Chart data={data} />
+        <Chart data={monthlyData} />
       </div>
       
       <div className="flex-1">
@@ -45,3 +62,8 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
+
+
+
