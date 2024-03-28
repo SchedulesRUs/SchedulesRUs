@@ -25,6 +25,19 @@ const HourSummary = () => {
     chartComponent = <LineChart />;
   }
 
+    //Link the data from dashboard to call the total hours
+
+
+
+
+
+
+
+
+
+
+    
+
   return (
     <div className="mt-5">
       <div className="font-bold flex justify-center items-center text-[24px]">

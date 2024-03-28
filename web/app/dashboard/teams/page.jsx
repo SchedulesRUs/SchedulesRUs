@@ -10,6 +10,7 @@ import userImage from "../../asset/user.jpg"; // Adjust the path to match the fo
 import DeleteModal from "@/app/component/dashboard/deleteModal/deleteModel";
 import { BASE_URL } from "@/app/constants/Config";
 import styles from './teams.module.css'
+import Card from "@/app/component/dashboard/card/card";
 
 const Users = () => {
   const [allUser, setAllUser] = useState([]);
@@ -73,6 +74,8 @@ const Users = () => {
 
   return (
     <div className="bg-[#f1efefe9] rounded-lg p-4 mt-4">
+      <Card totalStaff={allUser.length} />
+
       <div className="flex items-center justify-between">
         <Search
           placeholder="Search for a user..."
