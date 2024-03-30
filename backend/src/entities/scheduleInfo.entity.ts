@@ -23,6 +23,9 @@ export default class ScheduleInfo {
   @Column({ nullable: true })
   end: string;
 
+  @Column({ nullable: true })
+  hour: string;
+
   //After modifying your entity, remember to synchronize your database schema using TypeORM:
   //npx typeorm schema:sync
 }

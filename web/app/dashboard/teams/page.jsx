@@ -76,7 +76,7 @@ const Users = () => {
     <div className="bg-[#f1efefe9] rounded-lg p-4 mt-4">
       <Card totalStaff={allUser.length} />
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mt-2">
         <Search
           placeholder="Search for a user..."
           searchUser={searchUser}

@@ -6,4 +6,5 @@ export class CreateScheduleDto {
   color: string;
   start: string;
   end: string;
+  hour: string;
 }

@@ -13,13 +13,14 @@ import AddEvent from "../addEvent/addEvent";
 import { BASE_URL } from "@/app/constants/Config";
 
 class ScheduleData {
-  constructor(userId, title, allDay, color, start, end) {
+  constructor(userId, title, allDay, color, start, end, hour) {
     this.userId = userId;
     this.title = title;
     this.allDay = allDay;
     this.color = color;
     this.start = start;
     this.end = end;
+    this.hour = hour;
   }
 }
 const Schedule = () => {
@@ -38,6 +39,9 @@ const Schedule = () => {
     allDay: false,
     id: 0,
   });
+
+  const [hourMap, setHourMap] = useState({}); // Mapping between event IDs and hour differences
+
 
   async function fetchGetAllUser() {
     try {
@@ -96,14 +100,14 @@ const Schedule = () => {
     // console.log("createSchedule:schedule", schedule);
   }, [scheduleToPost]);
 
-  async function updateEventTime(id, start, end) {
+  async function updateEventTime(id, start, end, hour) {
     try {
       await fetch(`${BASE_URL}/scheduleInfo/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ start, end }),
+        body: JSON.stringify({ start, end, hour }),
       });
       console.log("Event resized successfully");
     } catch (error) {
@@ -115,11 +119,15 @@ const Schedule = () => {
   const handleEventDrop = async (info) => {
     const { event } = info;
     const { id, start, end } = event;
-
+  
     try {
-      await updateEventTime(id, start, end);
+      // Calculate hour difference
+      const hourDifference = calculateHourDifference(start, end);
+      setHourMap({ ...hourMap, [id]: hourDifference });
+  
+      await updateEventTime(id, start, end, hourDifference);
       await fetchSchedule();
-      console.log("Event Dropped with ID:", id, "Start:", start, "End:", end);
+      console.log("Event Dropped with ID:", id, "Start:", start, "End:", end, "Hour:", hourDifference);
     } catch (error) {
       console.error("Error updating event time:", error);
     }
@@ -128,14 +136,22 @@ const Schedule = () => {
   const handleEventResize = async (info) => {
     const { event } = info;
     const { id, start, end } = event;
-
+  
     try {
-      await updateEventTime(id, start, end);
+      // Calculate hour difference
+      const hourDifference = calculateHourDifference(start, end);
+      setHourMap({ ...hourMap, [id]: hourDifference });
+  
+      await updateEventTime(id, start, end, hourDifference);
       await fetchSchedule();
-      console.log("Event resized:", id, start, end);
+      console.log("Event resized:", id, start, end, "Hour:", hourDifference);
     } catch (error) {
       console.error("Error updating event time:", error);
     }
+  };
+
+  const calculateHourDifference = (start, end) => {
+    return Math.abs(new Date(end) - new Date(start)) / (1000 * 60 * 60); // milliseconds to hours
   };
 
   const draggableElRef = useRef(null); // Ref to store the Draggable instance
@@ -162,25 +178,22 @@ const Schedule = () => {
   }, []);
 
   function addEvent(data) {
-    const colors = [
-      "#ff5733",
-      "#33ff57",
-      "#5733ff",
-      "#ff33a1",
-      "#a133ff",
-      "#33a1ff",
-      "#f6e05e",
-    ];
+    const colors = ["#ff5733","#33ff57","#5733ff","#ff33a1","#a133ff","#33a1ff","#f6e05e"];
 
     const newScheduleInfo = new ScheduleData();
     newScheduleInfo.allDay = data.allDay;
     newScheduleInfo.color = colors[schedule.length % colors.length];
 
     if (data.date) {
-      newScheduleInfo.start = data.date.toISOString();
-      newScheduleInfo.end = data.date.toISOString();
+      const startDate = new Date(data.date);
+      const endDate = new Date(data.date);
+      newScheduleInfo.start = startDate.toISOString();
+      newScheduleInfo.end = endDate.toISOString();
       newScheduleInfo.title = data.draggedEl.getAttribute("title");
       newScheduleInfo.userId = data.draggedEl.getAttribute("userId");
+      // Calculate hour difference
+      const hourDifference = (endDate - startDate) / (1000 * 60 * 60); // milliseconds to hours
+      newScheduleInfo.hour = hourDifference;
     } else {
       newScheduleInfo.start = new Date().toISOString();
       newScheduleInfo.end = new Date().toISOString();

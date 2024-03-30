@@ -48,8 +48,9 @@ export class ScheduleInfoController {
     @Body() updateScheduleDto: UpdateScheduleDto,
     @Body('start') start: string,
     @Body('end') end: string,
+    @Body('hour') hour: string,
   ) {
-    return this.scheduleInfoService.update(id, updateScheduleDto, start, end);
+    return this.scheduleInfoService.update(id, updateScheduleDto, start, end, hour);
   }
 
   @Delete(':id')

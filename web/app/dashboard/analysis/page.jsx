@@ -2,8 +2,7 @@
 import React, { useState } from "react";
 import BarChart from "@/app/component/dashboard/chart/barChart";
 import PieChart from "@/app/component/dashboard/chart/pieChart";
-import LineChart from "@/app/component/dashboard/chart/lineChart";
-import data from "../../constants/data.json";
+import MyResponsiveTimeRange from "@/app/component/dashboard/chart/timeRangeChart";
 
 const HourSummary = () => {
   const [chartType, setChartType] = useState("pie");
@@ -20,28 +19,15 @@ const HourSummary = () => {
   if (chartType === "pie") {
     chartComponent = <PieChart />;
   } else if (chartType === "bar") {
-    chartComponent = <BarChart data={data} />;
-  } else if (chartType === "line") {
-    chartComponent = <LineChart />;
+    chartComponent = <BarChart />;
+  } else if (chartType === "timeRange") {
+    chartComponent = <MyResponsiveTimeRange />;
   }
-
-    //Link the data from dashboard to call the total hours
-
-
-
-
-
-
-
-
-
-
-    
 
   return (
     <div className="mt-5">
       <div className="font-bold flex justify-center items-center text-[24px]">
-        <h1>Staff Working Hour Summary</h1>
+        <h1 className="mb-5">Employee Management Analysis</h1>
       </div>
       <div>
         <div style={chartTypeButtonsStyles.container}>
@@ -51,7 +37,7 @@ const HourSummary = () => {
             onMouseEnter={(e) => (e.target.style.backgroundColor = "#0056b3")}
             onMouseLeave={(e) => (e.target.style.backgroundColor = "#007bff")}
           >
-            Pie Chart
+            Employee's Role
           </button>
           <button
             onClick={() => handleChartTypeChange("bar")}
@@ -59,15 +45,15 @@ const HourSummary = () => {
             onMouseEnter={(e) => (e.target.style.backgroundColor = "#0056b3")}
             onMouseLeave={(e) => (e.target.style.backgroundColor = "#007bff")}
           >
-            Bar Chart
+            Employee's Working Hours
           </button>
           <button
-            onClick={() => handleChartTypeChange("line")}
+            onClick={() => handleChartTypeChange("timeRange")}
             style={chartTypeButtonsStyles.button}
             onMouseEnter={(e) => (e.target.style.backgroundColor = "#0056b3")}
             onMouseLeave={(e) => (e.target.style.backgroundColor = "#007bff")}
           >
-            Line Chart
+            Overview of working hours
           </button>
         </div>
         <div style={{ marginTop: "20px" }}>{chartComponent}</div>

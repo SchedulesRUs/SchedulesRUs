@@ -29,11 +29,13 @@ export class ScheduleInfoService {
     updateScheduleDto: UpdateScheduleDto,
     start: string,
     end: string,
+    hour: string,
   ) {
     return await this.scheduleInfoRepository.update(id, {
       ...updateScheduleDto,
       start,
       end,
+      hour,
     });
   }
 
@@ -49,11 +51,11 @@ export class ScheduleInfoService {
     await this.scheduleInfoRepository.delete(id);
   }
 
-  // async getScheduleByUserId(userId: number): Promise<ScheduleInfo[]> {
-  //   try {
-  //     return this.scheduleInfoRepository.find({ where: { userId } });
-  //   } catch (error) {
-  //     throw new Error(`Unable to fetch schedule information for user ${userId}: ${error.message}`);
-  //   }
-  // }
+  async getScheduleByUserId(userId: number): Promise<ScheduleInfo[]> {
+    try {
+      return this.scheduleInfoRepository.find({ where: { userId } });
+    } catch (error) {
+      throw new Error(`Unable to fetch schedule information for user ${userId}: ${error.message}`);
+    }
+  }
 }
