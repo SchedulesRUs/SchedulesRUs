@@ -27,7 +27,7 @@ Nivo is a well-known library for building data visualizations in React applicati
 
 Please install the below packgage:
    
-npm i @nivo/line
+npm i @nivo/line @nivo/bar @nivo/pie @nivo/calendar
 
 ## Documentation
 

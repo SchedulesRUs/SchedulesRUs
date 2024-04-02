@@ -5,36 +5,30 @@ import Card2 from "../component/dashboard/card/card2";
 import Rightbar from "../component/dashboard/rightbar/rightbar";
 import ViewScheduleOnly from "../component/dashboard/viewSchedule/viewSchedule";
 import Chart from "../component/dashboard/chart/barChart";
-import monthlyData from "../constants/data.json";
 import { BASE_URL } from "../constants/Config"; // Adjust the import path as necessary
 
 const Dashboard = () => {
   const [totalStaff, setTotalStaff] = useState(0);
   const [totalHours, setTotalHours] = useState(0);
 
-  // Function to fetch all users and set total staff count
   async function fetchTotalStaff() {
     try {
       const response = await fetch(`${BASE_URL}/user`);
       const data = await response.json();
-      setTotalStaff(data.length); // Assuming `data` is an array of users
+      setTotalStaff(data.length);
     } catch (error) {
       console.error("Failed to fetch total staff count:", error);
     }
   }
 
-  // Function to calculate total working hours for the current month
-  const calculateTotalHours = () => {
-    const currentMonth = new Date().toLocaleString('default', { month: 'short' }).toUpperCase();
-    const monthData = monthlyData.find(d => d.month === currentMonth);
-    if (monthData) {
-      let total = 0;
-      Object.keys(monthData).forEach(key => {
-        if (key !== "month" && !key.includes("Color")) {
-          total += monthData[key];
-        }
-      });
+  const calculateTotalHours = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/scheduleInfo`);
+      const scheduleData = await response.json();
+      const total = scheduleData.reduce((acc, curr) => acc + parseFloat(curr.hour), 0);
       setTotalHours(total);
+    } catch (error) {
+      console.error("Failed to calculate total hours:", error);
     }
   };
 
@@ -51,7 +45,7 @@ const Dashboard = () => {
           <Card2 totalHours={totalHours} /> {/* Pass totalHours to Card2 */}
         </div>
         <ViewScheduleOnly />
-        <Chart data={monthlyData} />
+        {/* <Chart data={monthlyData} /> */}
       </div>
       
       <div className="flex-1">

@@ -35,8 +35,8 @@ const menuItems = [
         icon: <MdShoppingBag />,
       },
       {
-        title: "Hours Summary",
-        path: "/dashboard/hour",
+        title: "Data Visualization",
+        path: "/dashboard/analysis",
         icon: <MdPeople />,
       },
       {
