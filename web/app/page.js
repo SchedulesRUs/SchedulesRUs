@@ -60,7 +60,7 @@ export default function Home() {
         ) : (
           <div>
             <div className="flex-1 flex justify-center ">
-              <Image src={logo1} alt="Image" className="max-w-xs" />
+              <Image src={logo1} alt="Image" className="max-w-xs" priority />
             </div>
             <div className="text-center">
               <h2 className="mt-6 text-3xl font-extrabold text-indigo-950 font-mono"></h2>

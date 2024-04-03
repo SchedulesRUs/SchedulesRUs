@@ -1,7 +1,5 @@
-import logo from "./logo/logo.jpg";
-import logo1 from "./logo/logo1.jpg";
-
-import chick from "./chick.jpg";
+import logo from "./logo.jpg"
+import logo1 from "./logo1.jpg"
 import user from "./user.jpg";
 import user2 from "./user2.jpg";
 import user3 from "./user3.jpg";
@@ -24,10 +22,11 @@ const s6 =
   "https://img.freepik.com/free-psd/3d-icon-social-media-app_23-2150049569.jpg?w=740&t=st=1707710651~exp=1707711251~hmac=4132ad9e7226ce53381143f0fa2555ab13abca1134e10d0fb0ffb92c85fb9226";
 const s7 =
   "https://img.freepik.com/free-psd/3d-rendering-avatar_23-2150833554.jpg?w=740&t=st=1707710801~exp=1707711401~hmac=b6d937919f0042d03b0d751adfa8c69e8c9bc8810c1c294a9aa0ebc495e67af9";
-export {
+
+
+  export {
   logo,
   logo1,
-  chick,
   user,
   user2,
   user3,
