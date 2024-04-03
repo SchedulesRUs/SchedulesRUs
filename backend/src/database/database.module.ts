@@ -5,6 +5,7 @@ import ScheduleInfo from 'src/entities/scheduleInfo.entity';
 import User from 'src/entities/user.entity';
 import Request from 'src/entities/request.entity';
 import Availability from 'src/entities/availability.entity';
+import Announcement from 'src/entities/announcement.entity';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import Availability from 'src/entities/availability.entity';
       ssl: {
         rejectUnauthorized: false,
       },
-      entities: [User, ScheduleInfo, Request, Availability],
+      entities: [User, ScheduleInfo, Request, Availability, Announcement],
       synchronize: true,
       autoLoadEntities: true,
     }),
