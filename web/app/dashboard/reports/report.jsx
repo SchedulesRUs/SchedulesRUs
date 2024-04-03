@@ -7,10 +7,17 @@ const Report = ({type}) => {
   const [allUser, setAllUser] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [downloadingUserReport, setDownloadingUserReport] = useState(false);
-  const [downloadingProductReport, setDownloadingProductReport] =
-    useState(false);
+  const [downloadingScheduleDetailReport, setScheduleDetailReport] = useState(false);
+  const [downloadingSummaryHourByUserReport, setSummaryHourByUserReport] = useState(false);
   const [userReportMessage, setUserReportMessage] = useState("");
-  const [productReportMessage, setProductReportMessage] = useState("");
+  const [scheduleDetailReportMessage, setScheduleDetailReportMessage] = useState("");
+  const [summaryHourByUserReportMessage, setSummaryHourByUserReportMessage] = useState("");
+  const [userSelectedOption, setUserSelectedOption] = useState('');
+
+   // Handler for select change
+   const handleUserSelectedOptionChange = (event) => {
+    setUserSelectedOption(event.target.value);
+  };
 
   useEffect(() => {
     fetchGetAllUser();
@@ -30,7 +37,7 @@ const Report = ({type}) => {
 
   const fetchGetAllProducts = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/products`);
+      const response = await fetch(`${BASE_URL}/scheduleInfo`);
       const data = await response.json();
       console.log("Fetched Products:", data);
       setAllProducts(data);
@@ -96,19 +103,22 @@ const Report = ({type}) => {
 
     // Define the columns
     worksheet.columns = [
-      { header: "Id", key: "id", width: 10 },
-      { header: "Product Name", key: "name", width: 30 },
-      { header: "Price", key: "price", width: 15 },
-      { header: "Description", key: "description", width: 60 },
+      { header: "UserId", key: "id", width: 10 },
+      { header: "Employee Name", key: "name", width: 30 },
+      { header: "Start", key: "start", width: 60 },
+      { header: "End", key: "end", width: 60 },
+      { header: "Hour", key: "hour", width: 10 },
+
     ];
 
     // Add rows to the worksheet
-    allProducts.forEach((product) => {
+    allProducts.forEach((scheduleInfo) => {
       worksheet.addRow({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        description: product.description,
+        id: scheduleInfo.id,
+        name: scheduleInfo.title,
+        start: scheduleInfo.start,
+        end: scheduleInfo.end,
+        hour:scheduleInfo.hour
       });
     });
 
@@ -129,11 +139,73 @@ const Report = ({type}) => {
     // Trigger file download
     saveAs(blob, fileName);
 
-    setProductReportMessage("Products report downloaded successfully!");
-    setTimeout(() => setProductReportMessage(""), 5000); // Clear message after 5 seconds
+    setScheduleDetailReportMessage("Products report downloaded successfully!");
+    setTimeout(() => setScheduleDetailReportMessage(""), 5000); // Clear message after 5 seconds
 
-    setDownloadingProductReport(false);
+    setScheduleDetailReport(false);
   };
+
+
+  const generateScheduleInfoByUserReport = async ({userId}) => {
+    // Create a new workbook
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Products");
+
+    // Define the columns
+    worksheet.columns = [
+      { header: "UserId", key: "id", width: 10 },
+      { header: "Employee Name", key: "name", width: 30 },
+      { header: "Start", key: "start", width: 60 },
+      { header: "End", key: "end", width: 60 },
+      { header: "Hour", key: "hour", width: 10 },
+
+    ];
+
+    // Add rows to the worksheet
+    allProducts.forEach((scheduleInfo) => {
+      worksheet.addRow({
+        id: scheduleInfo.id,
+        name: scheduleInfo.title,
+        start: scheduleInfo.start,
+        end: scheduleInfo.end,
+        hour:scheduleInfo.hour
+      });
+    });
+
+    // Set the style for the header row
+    worksheet.getRow(1).eachCell((cell) => {
+      cell.font = { bold: true };
+    });
+
+    // Generate Excel file
+    const fileName = "products_report.xlsx";
+    const buffer = await workbook.xlsx.writeBuffer();
+
+    // Create a Blob from the buffer
+    const blob = new Blob([buffer], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+
+    // Trigger file download
+    saveAs(blob, fileName);
+
+    setScheduleDetailReportMessage("Products report downloaded successfully!");
+    setTimeout(() => setScheduleDetailReportMessage(""), 5000); // Clear message after 5 seconds
+
+    setScheduleDetailReport(false);
+  };
+
+
+  const handleDownloadScheduleInfoByUserReport = async ({userId}) => {
+    try {
+      setDownloadingUserReport(true);
+      await generateScheduleInfoByUserReport(userId);
+    } catch (error) {
+      console.error("Error generating Schedule Info By User report:", error);
+      setDownloadingUserReport(false);
+    }
+  };
+
 
   const handleDownloadUserReport = async () => {
     try {
@@ -147,11 +219,11 @@ const Report = ({type}) => {
 
   const handleDownloadProductReport = async () => {
     try {
-      setDownloadingProductReport(true);
+      setScheduleDetailReport(true);
       await generateProductReport();
     } catch (error) {
       console.error("Error generating Product report:", error);
-      setDownloadingProductReport(false);
+      setScheduleDetailReport(false);
     }
   };
 
@@ -177,18 +249,48 @@ const Report = ({type}) => {
  </div>
       {type == 2 && (
       <div className="report-section">
+
+<div className="bg-[#f1efefe9] rounded-lg p-4 mt-4">
+      <div>
+      <div style={styles.criteriaBar} className="criteria-bar">
+      <span>Choose a user :</span>
+      <select value={userSelectedOption} onChange={handleUserSelectedOptionChange} style={styles.select}>
+      {allUser.map((option) => (
+        <option key={option.id} value={option.username}>{option.username}</option>
+      ))}
+      </select>
+    </div>
+      </div>
+      </div>
         <button
-          onClick={handleDownloadProductReport}
-          disabled={downloadingProductReport || allProducts.length === 0}
+          onClick={handleDownloadScheduleInfoByUserReport(userSelectedOption)}
+          disabled={downloadingScheduleDetailReport || allProducts.length === 0}
         >
-          {downloadingProductReport
-            ? "Downloading Products..."
-            : "Download Products Report"}
+          {downloadingScheduleDetailReport
+            ? "Downloading Summary Hour By User Report..."
+            : "Download Summary Hour By User Report"}
         </button>
-        {productReportMessage && (
-          <p className="success-message">{productReportMessage}</p>
+        {summaryHourByUserReportMessage && (
+          <p className="success-message">{summaryHourByUserReportMessage}</p>
         )}
       </div>)
+      }
+
+         {type == 3 && (
+      <div className="report-section">
+        <button
+          onClick={handleDownloadProductReport}
+          disabled={downloadingScheduleDetailReport || allProducts.length === 0}
+        >
+          {downloadingScheduleDetailReport
+            ? "Downloading Schedule Detail Report..."
+            : "Download Schedule Detail Report"}
+        </button>
+        {scheduleDetailReportMessage && (
+          <p className="success-message">{scheduleDetailReportMessage}</p>
+        )}
+      </div>
+      )
       }
 
       <style jsx>{`
@@ -233,3 +335,19 @@ const Report = ({type}) => {
 };
 
 export default Report;
+
+const styles = {
+  criteriaBar: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    marginBottom: '20px',
+  },
+  select: {
+    padding: '8px',
+    fontSize: '16px',
+    borderRadius: '5px',
+    border: '1px solid #ccc',
+    backgroundColor: '#fff',
+  },
+};

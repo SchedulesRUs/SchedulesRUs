@@ -25,7 +25,7 @@ const ReportPage = () => {
       <div>
       <div style={styles.criteriaBar} className="criteria-bar">
       <span>Choose a report:</span>
-      <select value={criteria1} onChange={handleCriteria1Change} style={styles.select}>
+      <select value={selectedOption} onChange={handleCriteria1Change} style={styles.select}>
       <option value="option0">Select</option>
         <option value="option1">Employee Detail Report</option>
         <option value="option2">Summary Hour By User</option>
