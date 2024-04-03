@@ -37,7 +37,7 @@ const HourSummary = () => {
             onMouseEnter={(e) => (e.target.style.backgroundColor = "#0056b3")}
             onMouseLeave={(e) => (e.target.style.backgroundColor = "#007bff")}
           >
-            Employee's Role
+            Employee&apos;s Role
           </button>
           <button
             onClick={() => handleChartTypeChange("bar")}
@@ -45,7 +45,7 @@ const HourSummary = () => {
             onMouseEnter={(e) => (e.target.style.backgroundColor = "#0056b3")}
             onMouseLeave={(e) => (e.target.style.backgroundColor = "#007bff")}
           >
-            Employee's Working Hours
+            Employee&apos;s Working Hours
           </button>
           <button
             onClick={() => handleChartTypeChange("timeRange")}

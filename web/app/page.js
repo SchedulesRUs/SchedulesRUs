@@ -123,7 +123,7 @@ export default function Home() {
       </div>
       <footer className="text-center py-4 text-gray-600">
         <p>
-          Schedule "R" Us © 2024 -{" "}
+          Schedule &apos;R&apos; Us © 2024 -{" "}
           <a
             href="https://github.com/JustKhit/SchedulesRUs"
             target="_blank"

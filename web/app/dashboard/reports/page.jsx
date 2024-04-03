@@ -1,4 +1,5 @@
-"use client";
+"use client"
+
 import React, { useEffect, useState } from "react";
 import Search from "@/app/component/dashboard/search/search";
 import Image from "next/image";
