@@ -1,3 +1,5 @@
+"use client"
+
 // ReportsPage.jsx
 import React, { useState, useEffect } from "react";
 

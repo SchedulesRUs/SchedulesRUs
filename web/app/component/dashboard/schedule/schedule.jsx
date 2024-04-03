@@ -25,9 +25,7 @@ class ScheduleData {
 }
 const Schedule = () => {
   const [allUser, setAllUser] = useState([]);
-
   const [schedule, setSchedule] = useState([]);
-  const [scheduleToPost, setScheduleToPost] = useState();
 
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -56,7 +54,7 @@ const Schedule = () => {
   useEffect(() => {
     fetchGetAllUser();
     console.log("Fetch User:", allUser);
-  }, []);
+  });
 
   async function fetchSchedule() {
     try {
@@ -73,32 +71,6 @@ const Schedule = () => {
     fetchSchedule();
     // console.log("fetchSchedule", schedule);
   }, []);
-
-  async function createSchedule() {
-    try {
-      const response = await fetch(`${BASE_URL}/scheduleInfo`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(scheduleToPost),
-      });
-      const data = await response.json();
-      setSchedule([...schedule, data]);
-
-      console.log("Add Schedule to DB:", data);
-    } catch (error) {
-      console.log("Error add to DB:", error);
-    }
-  }
-
-  useEffect(() => {
-    if (scheduleToPost != null) {
-      createSchedule();
-      // setScheduleToPost(null);
-    }
-    // console.log("createSchedule:schedule", schedule);
-  }, [scheduleToPost]);
 
   async function updateEventTime(id, start, end, hour) {
     try {
@@ -177,13 +149,13 @@ const Schedule = () => {
     }
   }, []);
 
-  function addEvent(data) {
+  async function addEvent(data) {
     const colors = ["#ff5733","#33ff57","#5733ff","#ff33a1","#a133ff","#33a1ff","#f6e05e"];
-
+  
     const newScheduleInfo = new ScheduleData();
     newScheduleInfo.allDay = data.allDay;
     newScheduleInfo.color = colors[schedule.length % colors.length];
-
+  
     if (data.date) {
       const startDate = new Date(data.date);
       const endDate = new Date(data.date);
@@ -194,14 +166,28 @@ const Schedule = () => {
       // Calculate hour difference
       const hourDifference = (endDate - startDate) / (1000 * 60 * 60); // milliseconds to hours
       newScheduleInfo.hour = hourDifference;
+  
+      try {
+        const response = await fetch(`${BASE_URL}/scheduleInfo`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newScheduleInfo),
+        });
+        const createdEvent = await response.json();
+        setSchedule([...schedule, createdEvent]);
+        console.log("Event added:", createdEvent);
+      } catch (error) {
+        console.error("Error adding event:", error);
+      }
     } else {
       newScheduleInfo.start = new Date().toISOString();
       newScheduleInfo.end = new Date().toISOString();
     }
     newScheduleInfo.allDay = data.allDay;
-
+  
     console.log("addEvent:", newScheduleInfo);
-    setScheduleToPost(newScheduleInfo);
   }
 
   function handleDeleteModal(data) {
