@@ -19,6 +19,10 @@ export class AnnouncementController {
     return this.announcementService.getAnnouncement();
   }
 
+  @Get(':id')
+  getAnnouncementById(@Param('id') id: number) {
+    return this.announcementService.findOne(id);
+  }
   @Post()
   createAnnouncement(@Body() announcement: AnnouncementDto) {
     return this.announcementService.createAnnouncement(announcement);

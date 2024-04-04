@@ -21,6 +21,9 @@ export class AnnouncementService {
     return this.announcementRepository.save(newAnnouncement);
   }
 
+  findOne(id: number): Promise<Announcement | null> {
+    return this.announcementRepository.findOneBy({ id });
+  }
   async removeAnnouncementById(id: number): Promise<void> {
     await this.announcementRepository.delete(id);
   }

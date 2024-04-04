@@ -1,93 +1,72 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { BASE_URL } from "@/app/constants/Config";
+import styles from "./announcement";
 
 const Announcement = () => {
   // State hooks for each field
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [detail, setDetail] = useState("");
-  const [announcements, setAnnouncements] = useState([]); // Array to store multiple announcements
+  const [announcements, setAnnouncements] = useState([]);
+
+  useEffect(() => {
+    fetchAnnouncement();
+  }, []);
+
+  async function fetchAnnouncement() {
+    try {
+      const response = await fetch(`${BASE_URL}/announcement`);
+      const data = await response.json();
+      setAnnouncements(data);
+    } catch (error) {
+      console.error("Error fetching announcements:", error);
+    }
+  }
+
+  async function addAnnouncement() {
+    try {
+      const response = await fetch(`${BASE_URL}/announcement`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title, date, detail }),
+      });
+      const newAnnouncement = await response.json();
+      setAnnouncements([...announcements, newAnnouncement]);
+      setTitle("");
+      setDate("");
+      setDetail("");
+    } catch (error) {
+      console.error("Error adding announcement:", error);
+    }
+  }
+
+  async function deleteAnnouncement(id) {
+    try {
+      const response = await fetch(`${BASE_URL}/announcement/${id}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        setAnnouncements(announcements.filter((_, index) => index !== id));
+        // Re-fetch announcements to synchronize client-side state with server
+        fetchAnnouncement();
+      }
+    } catch (error) {
+      console.error("Error deleting announcement:", error);
+    }
+  }
 
   // Function to handle the form submission
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevents the default form submit action
-
-    // Add the new announcement to the announcements array
-    setAnnouncements([...announcements, { title, date, detail }]);
-
-    // Optionally, reset the form fields after submission
-    setTitle("");
-    setDate("");
-    setDetail("");
-  };
-
-  const handleDelete = (indexToDelete) => {
-    setAnnouncements(
-      announcements.filter((_, index) => index !== indexToDelete)
-    );
+    addAnnouncement();
   };
 
   // Simple styles
-  const styles = {
-    container: {
-      maxWidth: "500px",
-      margin: "20px auto",
-      padding: "20px",
-      boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-      borderRadius: "8px",
-      backgroundColor: "#fff",
-    },
-    formGroup: {
-      marginBottom: "15px",
-    },
-    label: {
-      display: "block",
-      marginBottom: "5px",
-      fontWeight: "bold",
-    },
-    input: {
-      width: "100%",
-      padding: "8px",
-      margin: "0 0 20px 0",
-      borderRadius: "4px",
-      border: "1px solid #ccc",
-    },
-    textArea: {
-      width: "100%",
-      height: "100px",
-      padding: "8px",
-      borderRadius: "4px",
-      border: "1px solid #ccc",
-    },
-    button: {
-      padding: "10px 20px",
-      border: "none",
-      borderRadius: "4px",
-      backgroundColor: "#007bff",
-      color: "#ffffff",
-      cursor: "pointer",
-      width: "100%",
-    },
-    deleteButton: {
-      backgroundColor: "#dc3545",
-    },
-    submittedDetails: {
-      marginTop: "20px",
-      padding: "20px",
-      backgroundColor: "#f8f9fa",
-      borderRadius: "8px",
-    },
-    announcementList: {
-      marginTop: "20px",
-    },
-    announcementItem: {
-      marginBottom: "15px",
-      padding: "10px",
-      border: "1px solid #ddd",
-      borderRadius: "8px",
-    },
-  };
+  
 
   return (
     <div style={styles.container}>
@@ -135,9 +114,9 @@ const Announcement = () => {
         </button>
       </form>
       <div style={styles.announcementList}>
-        {announcements.map((announcement, index) => (
+        {announcements.map((announcement, id) => (
           <div
-            key={index}
+            key={id}
             style={styles.announcementItem}
             className="flex flex-col"
           >
@@ -146,7 +125,7 @@ const Announcement = () => {
             <p>Detail: {announcement.detail}</p>
             <button
               style={{ ...styles.button, ...styles.deleteButton }}
-              onClick={() => handleDelete(index)}
+              onClick={() => deleteAnnouncement(id)}
               className="mt-5"
             >
               Delete
