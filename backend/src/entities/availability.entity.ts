@@ -14,6 +14,7 @@ class DailySchedule {
 class TimeSlot {
   startTime: string;
   endTime: string;
+  isEnabled: boolean;
 }
 
 @Entity()

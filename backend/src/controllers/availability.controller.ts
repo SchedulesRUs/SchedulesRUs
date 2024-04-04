@@ -21,6 +21,11 @@ export class AvailabilityController {
     return this.availabilityService.getAvailability();
   }
 
+  @Get(':userId')
+  getAvailabilityByUserId(@Param('userId') userId: number) {
+    return this.availabilityService.getAvailabilityByUserId(userId);
+  }
+
   @Post()
   setAvailability(@Body() setAvailability: SetAvailabilityDto) {
     return this.availabilityService.setAvailability(setAvailability);

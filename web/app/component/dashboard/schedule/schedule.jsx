@@ -30,7 +30,6 @@ class ScheduleData {
 const Schedule = () => {
   const [allUser, setAllUser] = useState([]);
   const [schedule, setSchedule] = useState([]);
-  const [availability, setAvailability] = useState([]);
 
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -75,9 +74,10 @@ const Schedule = () => {
       });
 
       console.log("Availability Processed:", availabilityInCalendarFormat);
-      setAvailability(availabilityInCalendarFormat);
+      return availabilityInCalendarFormat;
     } catch (error) {
       console.log("Error:", error);
+      return [];
     }
   }
 
@@ -85,7 +85,7 @@ const Schedule = () => {
     try {
       const response = await fetch(`${BASE_URL}/scheduleInfo`);
       const data = await response.json();
-      console.log("Fetch Schedule:", data);
+      const availability = await fetchAvailability();
       setSchedule([...data, ...availability]);
     } catch (error) {
       console.log("fail", error);
@@ -95,12 +95,7 @@ const Schedule = () => {
   useEffect(() => {
     fetchSchedule();
     fetchGetAllUser();
-    fetchAvailability();
   }, []);
-
-  useEffect(() => {
-    setSchedule((currentSchedule) => [...currentSchedule, ...availability]);
-  }, [availability]);
 
   console.log("schedule", schedule);
 

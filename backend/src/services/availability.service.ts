@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import Availability from 'src/entities/availability.entity';
@@ -17,22 +17,37 @@ export class AvailabilityService {
     return this.availabilityRepository.find();
   }
 
-  async getAvailabilityById(userId: number): Promise<Availability | null> {
-    return this.availabilityRepository.findOneBy({ userId });
+  async getAvailabilityByUserId(userId: number): Promise<Availability | null> {
+    return this.availabilityRepository.findOneBy({ userId: userId });
   }
 
   async findOne(id: number): Promise<Availability | null> {
     return this.availabilityRepository.findOneBy({ id });
   }
-  async setAvailability(setAvailbilityDto: SetAvailabilityDto) {
+
+  async setAvailability(setAvailabilityDto: SetAvailabilityDto) {
     try {
-      const user = await this.userService.findOne(setAvailbilityDto.userId);
-      const newAvailability = this.availabilityRepository.create({
-        ...setAvailbilityDto,
-        username: user.username,
-        userColor: user.userColor
-      });
-      return this.availabilityRepository.save(newAvailability);
+      const user = await this.userService.findOne(setAvailabilityDto.userId);
+      let availability = await this.getAvailabilityByUserId(user.id);
+
+      if (availability) {
+        // If it exists, update the existing availability
+        availability = this.availabilityRepository.merge(availability, {
+          ...setAvailabilityDto,
+          username: user.username,
+          userColor: user.userColor,
+        });
+      } else {
+        // If not, create a new availability entry
+        availability = this.availabilityRepository.create({
+          ...setAvailabilityDto,
+          username: user.username,
+          userColor: user.userColor,
+        });
+      }
+
+      // Save the availability entry
+      return await this.availabilityRepository.save(availability);
     } catch (error) {
       return error;
     }

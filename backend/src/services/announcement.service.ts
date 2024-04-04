@@ -16,12 +16,12 @@ export class AnnouncementService {
   }
 
   async createAnnouncement(createAvailbilityDto: AnnouncementDto) {
-      const newAnnouncement = this.announcementRepository.create(createAvailbilityDto);
-      return this.announcementRepository.save(newAnnouncement);
+    const newAnnouncement =
+      this.announcementRepository.create(createAvailbilityDto);
+    return this.announcementRepository.save(newAnnouncement);
   }
 
   async removeAnnouncementById(id: number): Promise<void> {
     await this.announcementRepository.delete(id);
   }
-
 }

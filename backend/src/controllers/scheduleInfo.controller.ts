@@ -17,8 +17,8 @@ import { NotificationService } from 'src/services/notification.service';
 export class ScheduleInfoController {
   constructor(
     private readonly scheduleInfoService: ScheduleInfoService,
-    private readonly notificationService: NotificationService
-    ) {}
+    private readonly notificationService: NotificationService,
+  ) {}
 
   @Get()
   getScheduleInfoService() {
@@ -29,16 +29,15 @@ export class ScheduleInfoController {
   findOne(@Param('id') id: number) {
     return this.scheduleInfoService.findOne(id);
   }
-  
+
   @Get('userId/:userId')
   getScheduleByUserId(@Param('userId') userId: number) {
     return this.scheduleInfoService.getScheduleByUserId(userId);
   }
 
-
   @Post()
   createScheduleInfo(@Body() createScheduleDto: CreateScheduleDto) {
-    this.notificationService.sendNewScheduleAssigned(createScheduleDto.userId)
+    this.notificationService.sendNewScheduleAssigned(createScheduleDto.userId);
     return this.scheduleInfoService.createScheduleInfo(createScheduleDto);
   }
 
@@ -50,7 +49,13 @@ export class ScheduleInfoController {
     @Body('end') end: string,
     @Body('hour') hour: string,
   ) {
-    return this.scheduleInfoService.update(id, updateScheduleDto, start, end, hour);
+    return this.scheduleInfoService.update(
+      id,
+      updateScheduleDto,
+      start,
+      end,
+      hour,
+    );
   }
 
   @Delete(':id')

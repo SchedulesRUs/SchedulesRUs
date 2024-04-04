@@ -16,7 +16,7 @@ export function generateCalendarEvents(
     day = new Date(day.getTime() + oneDay)
   ) {
     const weekDay = day.toLocaleString("en-US", { weekday: "long" });
-    if (dailySchedule[weekDay]) {
+    if (dailySchedule[weekDay] && dailySchedule[weekDay].isEnabled) {
       const startDateTime = new Date(
         day.getFullYear(),
         day.getMonth(),
