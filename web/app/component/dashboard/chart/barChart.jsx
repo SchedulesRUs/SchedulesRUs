@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
@@ -27,10 +27,12 @@ const BarChart = () => {
       setSummaryData(summaryData);
 
       // Convert summaryData object to array
-      const formattedData = Object.entries(summaryData).map(([title, hour]) => ({
-        title,
-        hour,
-      }));
+      const formattedData = Object.entries(summaryData).map(
+        ([title, hour]) => ({
+          title,
+          hour,
+        }),
+      );
 
       setData(formattedData);
     } catch (error) {
@@ -128,18 +130,32 @@ const BarChart = () => {
         />
       </div>
       <div className="mt-5 mb-5">
-        <table style={{ borderCollapse: "collapse", width: "100%", textAlign: "left" }}>
+        <table
+          style={{
+            borderCollapse: "collapse",
+            width: "100%",
+            textAlign: "left",
+          }}
+        >
           <thead>
             <tr>
-              <th style={{ borderBottom: "1px solid #ddd", padding: "8px" }}>Name</th>
-              <th style={{ borderBottom: "1px solid #ddd", padding: "8px" }}>Total Hours</th>
+              <th style={{ borderBottom: "1px solid #ddd", padding: "8px" }}>
+                Name
+              </th>
+              <th style={{ borderBottom: "1px solid #ddd", padding: "8px" }}>
+                Total Hours
+              </th>
             </tr>
           </thead>
           <tbody>
             {Object.entries(summaryData).map(([title, hour]) => (
               <tr key={title}>
-                <td style={{ borderBottom: "1px solid #ddd", padding: "8px" }}>{title}</td>
-                <td style={{ borderBottom: "1px solid #ddd", padding: "8px" }}>{hour}</td>
+                <td style={{ borderBottom: "1px solid #ddd", padding: "8px" }}>
+                  {title}
+                </td>
+                <td style={{ borderBottom: "1px solid #ddd", padding: "8px" }}>
+                  {hour}
+                </td>
               </tr>
             ))}
           </tbody>

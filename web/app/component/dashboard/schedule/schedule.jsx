@@ -11,6 +11,10 @@ import listPlugin from "@fullcalendar/list";
 import DeleteModal from "../deleteModal/deleteModel";
 import AddEvent from "../addEvent/addEvent";
 import { BASE_URL } from "@/app/constants/Config";
+import {
+  generateCalendarEvents,
+  hexToRGBA,
+} from "@/app/utils/AvailabilityUtil";
 
 class ScheduleData {
   constructor(userId, title, allDay, color, start, end, hour) {
@@ -40,28 +44,49 @@ const Schedule = () => {
 
   const [hourMap, setHourMap] = useState({}); // Mapping between event IDs and hour differences
 
-
   async function fetchGetAllUser() {
     try {
       const response = await fetch(`${BASE_URL}/user`);
       const data = await response.json();
       setAllUser(data);
+      console.log("All User", data);
     } catch (error) {
       console.log("Fetching failed", error);
     }
   }
 
-  useEffect(() => {
-    fetchGetAllUser();
-    console.log("Fetch User:", allUser);
-  });
+  async function fetchAvailability() {
+    try {
+      const response = await fetch(`${BASE_URL}/availability`);
+      const data = await response.json();
+      const availabilityInCalendarFormat = [];
+
+      data.forEach((item) => {
+        availabilityInCalendarFormat.push(
+          ...generateCalendarEvents(
+            `Free - ${item.username}`,
+            hexToRGBA(item.userColor, 0.5),
+            item.durationStart,
+            item.durationEnd,
+            item.dailySchedule,
+          ),
+        );
+      });
+
+      console.log("Availability Processed:", availabilityInCalendarFormat);
+      return availabilityInCalendarFormat;
+    } catch (error) {
+      console.log("Error:", error);
+      return [];
+    }
+  }
 
   async function fetchSchedule() {
     try {
       const response = await fetch(`${BASE_URL}/scheduleInfo`);
       const data = await response.json();
-      console.log("Fetch Schedule:", data);
-      setSchedule(data);
+      const availability = await fetchAvailability();
+      setSchedule([...data, ...availability]);
     } catch (error) {
       console.log("fail", error);
     }
@@ -69,8 +94,10 @@ const Schedule = () => {
 
   useEffect(() => {
     fetchSchedule();
-    // console.log("fetchSchedule", schedule);
+    fetchGetAllUser();
   }, []);
+
+  console.log("schedule", schedule);
 
   async function updateEventTime(id, start, end, hour) {
     try {
@@ -91,15 +118,24 @@ const Schedule = () => {
   const handleEventDrop = async (info) => {
     const { event } = info;
     const { id, start, end } = event;
-  
+
     try {
       // Calculate hour difference
       const hourDifference = calculateHourDifference(start, end);
       setHourMap({ ...hourMap, [id]: hourDifference });
-  
+
       await updateEventTime(id, start, end, hourDifference);
       await fetchSchedule();
-      console.log("Event Dropped with ID:", id, "Start:", start, "End:", end, "Hour:", hourDifference);
+      console.log(
+        "Event Dropped with ID:",
+        id,
+        "Start:",
+        start,
+        "End:",
+        end,
+        "Hour:",
+        hourDifference,
+      );
     } catch (error) {
       console.error("Error updating event time:", error);
     }
@@ -108,12 +144,12 @@ const Schedule = () => {
   const handleEventResize = async (info) => {
     const { event } = info;
     const { id, start, end } = event;
-  
+
     try {
       // Calculate hour difference
       const hourDifference = calculateHourDifference(start, end);
       setHourMap({ ...hourMap, [id]: hourDifference });
-  
+
       await updateEventTime(id, start, end, hourDifference);
       await fetchSchedule();
       console.log("Event resized:", id, start, end, "Hour:", hourDifference);
@@ -150,12 +186,14 @@ const Schedule = () => {
   }, []);
 
   async function addEvent(data) {
-    const colors = ["#ff5733","#33ff57","#5733ff","#ff33a1","#a133ff","#33a1ff","#f6e05e"];
-  
+    // const colors = ["#ff5733", "#33ff57", "#5733ff", "#ff33a1", "#a133ff", "#33a1ff", "#f6e05e"];
+
     const newScheduleInfo = new ScheduleData();
     newScheduleInfo.allDay = data.allDay;
-    newScheduleInfo.color = colors[schedule.length % colors.length];
-  
+    const userId = data.draggedEl.getAttribute("userid");
+    const user = allUser.find((user) => user.id == userId);
+    newScheduleInfo.color = user.userColor;
+
     if (data.date) {
       const startDate = new Date(data.date);
       const endDate = new Date(data.date);
@@ -166,7 +204,7 @@ const Schedule = () => {
       // Calculate hour difference
       const hourDifference = (endDate - startDate) / (1000 * 60 * 60); // milliseconds to hours
       newScheduleInfo.hour = hourDifference;
-  
+
       try {
         const response = await fetch(`${BASE_URL}/scheduleInfo`, {
           method: "POST",
@@ -186,13 +224,15 @@ const Schedule = () => {
       newScheduleInfo.end = new Date().toISOString();
     }
     newScheduleInfo.allDay = data.allDay;
-  
+
     console.log("addEvent:", newScheduleInfo);
   }
 
   function handleDeleteModal(data) {
-    setShowDeleteModal(true);
-    setIdToDelete(Number(data.event.id));
+    if (data.event.id) {
+      setShowDeleteModal(true);
+      setIdToDelete(Number(data.event.id));
+    }
     // console.log('handleDeleteModal:', idToDelete);
   }
 

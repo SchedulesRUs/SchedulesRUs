@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -11,13 +11,13 @@ import {
   Dimensions,
 } from 'react-native';
 import ShiftItem from './ShiftItem';
-import { AppStatusBar } from '../../theme/StatusBar';
+import {AppStatusBar} from '../../theme/StatusBar';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { getSchedule } from '../../remote/ScheduleService';
-import { useAuthContext } from '../../context/AuthContext';
-import { DrawerActions, useNavigation } from '@react-navigation/native';
+import {getSchedule} from '../../remote/ScheduleService';
+import {useAuthContext} from '../../context/AuthContext';
+import {DrawerActions, useNavigation} from '@react-navigation/native';
 import messaging from '@react-native-firebase/messaging';
-import { infoToast } from '../../component/Toast';
+import {infoToast} from '../../component/Toast';
 
 type Shift = {
   id: number;
@@ -27,7 +27,7 @@ type Shift = {
 };
 
 const HomeScreen = () => {
-  const { user } = useAuthContext();
+  const {user} = useAuthContext();
   const navigation = useNavigation();
 
   const [refreshing, setRefreshing] = useState(false);
@@ -63,7 +63,7 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{flex: 1}}>
       <AppStatusBar />
       <View style={styles.header}>
         <TouchableOpacity
@@ -76,22 +76,22 @@ const HomeScreen = () => {
         <Text style={styles.headerTitle}>Welcome {user.username}</Text>
       </View>
       <ScrollView
-        contentContainerStyle={{ flex: 1, margin: 20 }}
+        contentContainerStyle={{flex: 1, margin: 20}}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 10 }}>
+        <Text style={{fontSize: 18, fontWeight: 'bold', marginBottom: 10}}>
           Your Upcoming Shift
         </Text>
         {shifts && shifts.length > 0 ? (
           <FlatList
             data={shifts}
-            renderItem={({ item }) => <ShiftItem shift={item} />}
+            renderItem={({item}) => <ShiftItem shift={item} />}
             keyExtractor={item => item.id.toString()}
           />
         ) : shifts && shifts.length === 0 ? (
           <View style={styles.centeredView}>
-            <Text style={{ fontSize: 16, textAlign: 'center' }}>
+            <Text style={{fontSize: 16, textAlign: 'center'}}>
               You haven't been assigned any shifts yet.
             </Text>
           </View>

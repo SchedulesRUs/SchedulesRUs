@@ -55,7 +55,9 @@ export class ScheduleInfoService {
     try {
       return this.scheduleInfoRepository.find({ where: { userId } });
     } catch (error) {
-      throw new Error(`Unable to fetch schedule information for user ${userId}: ${error.message}`);
+      throw new Error(
+        `Unable to fetch schedule information for user ${userId}: ${error.message}`,
+      );
     }
   }
 }

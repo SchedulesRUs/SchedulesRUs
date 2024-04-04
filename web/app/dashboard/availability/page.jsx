@@ -7,6 +7,10 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import { BASE_URL } from "@/app/constants/Config";
+import {
+  generateCalendarEvents,
+  hexToRGBA,
+} from "@/app/utils/AvailabilityUtil";
 
 const Availability = () => {
   const [availability, setAvailability] = useState([]);
@@ -15,8 +19,23 @@ const Availability = () => {
     try {
       const response = await fetch(`${BASE_URL}/availability`);
       const data = await response.json();
-      setAvailability(data);
-      console.log("Aavailability:", data);
+      const availabilityInCalendarFormat = [];
+
+      console.log("Availability Data:", data);
+      data.forEach((item) => {
+        availabilityInCalendarFormat.push(
+          ...generateCalendarEvents(
+            `Free - ${item.username}`,
+            hexToRGBA(item.userColor, 0.8),
+            item.durationStart,
+            item.durationEnd,
+            item.dailySchedule,
+          ),
+        );
+      });
+
+      console.log("Availability Processed:", availabilityInCalendarFormat);
+      setAvailability(availabilityInCalendarFormat);
     } catch (error) {
       console.log("Error:", error);
     }

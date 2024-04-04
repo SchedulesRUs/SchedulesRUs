@@ -21,7 +21,7 @@ const MyResponsiveTimeRange = () => {
 
   const aggregateData = () => {
     const aggregatedData = {};
-    scheduleData.forEach(schedule => {
+    scheduleData.forEach((schedule) => {
       const day = schedule.start.split("T")[0];
       if (aggregatedData[day]) {
         aggregatedData[day] += parseInt(schedule.hour);
@@ -29,9 +29,9 @@ const MyResponsiveTimeRange = () => {
         aggregatedData[day] = parseInt(schedule.hour);
       }
     });
-    return Object.keys(aggregatedData).map(day => ({
+    return Object.keys(aggregatedData).map((day) => ({
       day,
-      value: aggregatedData[day]
+      value: aggregatedData[day],
     }));
   };
 
@@ -43,8 +43,8 @@ const MyResponsiveTimeRange = () => {
       fontSize: 13,
       fill: "#333333",
       outlineWidth: 0,
-      outlineColor: "transparent"
-    }
+      outlineColor: "transparent",
+    },
   };
 
   return (
@@ -78,8 +78,8 @@ const MyResponsiveTimeRange = () => {
               itemDirection: "right-to-left",
               translateX: -60,
               translateY: -60,
-              symbolSize: 20
-            }
+              symbolSize: 20,
+            },
           ]}
         />
       </div>

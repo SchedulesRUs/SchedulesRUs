@@ -13,5 +13,4 @@ export default class Announcement {
 
   @Column({ nullable: true })
   detail: string;
-
 }

@@ -9,7 +9,7 @@ import Pagination from "@/app/component/dashboard/pagination/pagination";
 import userImage from "../../asset/user.jpg"; // Adjust the path to match the folder structure
 import DeleteModal from "@/app/component/dashboard/deleteModal/deleteModel";
 import { BASE_URL } from "@/app/constants/Config";
-import styles from './teams.module.css'
+import styles from "./teams.module.css";
 import Card from "@/app/component/dashboard/card/card";
 
 const Users = () => {
@@ -74,8 +74,6 @@ const Users = () => {
 
   return (
     <div className="bg-[#f1efefe9] rounded-lg p-4 mt-4">
-      
-
       <div className="flex items-center justify-between mt-2">
         <Search
           placeholder="Search for a user..."

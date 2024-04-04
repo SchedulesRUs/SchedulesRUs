@@ -3,19 +3,23 @@ import { saveAs } from "file-saver";
 import ExcelJS from "exceljs";
 import { BASE_URL } from "@/app/constants/Config";
 
-const Report = ({type}) => {
+const Report = ({ type }) => {
   const [allUser, setAllUser] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [downloadingUserReport, setDownloadingUserReport] = useState(false);
-  const [downloadingScheduleDetailReport, setScheduleDetailReport] = useState(false);
-  const [downloadingSummaryHourByUserReport, setSummaryHourByUserReport] = useState(false);
+  const [downloadingScheduleDetailReport, setScheduleDetailReport] =
+    useState(false);
+  const [downloadingSummaryHourByUserReport, setSummaryHourByUserReport] =
+    useState(false);
   const [userReportMessage, setUserReportMessage] = useState("");
-  const [scheduleDetailReportMessage, setScheduleDetailReportMessage] = useState("");
-  const [summaryHourByUserReportMessage, setSummaryHourByUserReportMessage] = useState("");
-  const [userSelectedOption, setUserSelectedOption] = useState('');
+  const [scheduleDetailReportMessage, setScheduleDetailReportMessage] =
+    useState("");
+  const [summaryHourByUserReportMessage, setSummaryHourByUserReportMessage] =
+    useState("");
+  const [userSelectedOption, setUserSelectedOption] = useState("");
 
-   // Handler for select change
-   const handleUserSelectedOptionChange = (event) => {
+  // Handler for select change
+  const handleUserSelectedOptionChange = (event) => {
     setUserSelectedOption(event.target.value);
   };
 
@@ -93,7 +97,7 @@ const Report = ({type}) => {
     setUserReportMessage("Users report downloaded successfully!");
     setTimeout(() => setUserReportMessage(""), 5000); // Clear message after 5 seconds
 
-    setDownloadingUserReport(false);
+    setSummaryHourByUserReport(false);
   };
 
   const generateProductReport = async () => {
@@ -108,7 +112,6 @@ const Report = ({type}) => {
       { header: "Start", key: "start", width: 60 },
       { header: "End", key: "end", width: 60 },
       { header: "Hour", key: "hour", width: 10 },
-
     ];
 
     // Add rows to the worksheet
@@ -118,7 +121,7 @@ const Report = ({type}) => {
         name: scheduleInfo.title,
         start: scheduleInfo.start,
         end: scheduleInfo.end,
-        hour:scheduleInfo.hour
+        hour: scheduleInfo.hour,
       });
     });
 
@@ -145,8 +148,7 @@ const Report = ({type}) => {
     setScheduleDetailReport(false);
   };
 
-
-  const generateScheduleInfoByUserReport = async ({userId}) => {
+  const generateScheduleInfoByUserReport = async () => {
     // Create a new workbook
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet("Products");
@@ -158,19 +160,22 @@ const Report = ({type}) => {
       { header: "Start", key: "start", width: 60 },
       { header: "End", key: "end", width: 60 },
       { header: "Hour", key: "hour", width: 10 },
-
     ];
+    console.error("userSelectedOption", userSelectedOption);
+    console.error("userSelectedOption", allProducts);
 
     // Add rows to the worksheet
-    allProducts.forEach((scheduleInfo) => {
-      worksheet.addRow({
-        id: scheduleInfo.id,
-        name: scheduleInfo.title,
-        start: scheduleInfo.start,
-        end: scheduleInfo.end,
-        hour:scheduleInfo.hour
+    allProducts
+      .filter((item) => item.title == userSelectedOption)
+      .forEach((scheduleInfo) => {
+        worksheet.addRow({
+          id: scheduleInfo.id,
+          name: scheduleInfo.title,
+          start: scheduleInfo.start,
+          end: scheduleInfo.end,
+          hour: scheduleInfo.hour,
+        });
       });
-    });
 
     // Set the style for the header row
     worksheet.getRow(1).eachCell((cell) => {
@@ -189,23 +194,23 @@ const Report = ({type}) => {
     // Trigger file download
     saveAs(blob, fileName);
 
-    setScheduleDetailReportMessage("Products report downloaded successfully!");
-    setTimeout(() => setScheduleDetailReportMessage(""), 5000); // Clear message after 5 seconds
+    setSummaryHourByUserReportMessage(
+      "Products report downloaded successfully!",
+    );
+    setTimeout(() => setSummaryHourByUserReportMessage(""), 5000); // Clear message after 5 seconds
 
     setScheduleDetailReport(false);
   };
 
-
-  const handleDownloadScheduleInfoByUserReport = async ({userId}) => {
+  const handleDownloadScheduleInfoByUserReport = async () => {
     try {
-      setDownloadingUserReport(true);
-      await generateScheduleInfoByUserReport(userId);
+      setSummaryHourByUserReport(true);
+      await generateScheduleInfoByUserReport();
     } catch (error) {
       console.error("Error generating Schedule Info By User report:", error);
-      setDownloadingUserReport(false);
+      setSummaryHourByUserReport(false);
     }
   };
-
 
   const handleDownloadUserReport = async () => {
     try {
@@ -231,67 +236,75 @@ const Report = ({type}) => {
     <div className="container">
       <h1 className="title">Excel Report</h1>
       <div className="report-section">
-
-      {type === "1" && (
-        <>
-        <button
-          onClick={handleDownloadUserReport}
-          disabled={downloadingUserReport || allUser.length === 0}
-        >
-          {downloadingUserReport
-            ? "Downloading Users..."
-            : "Download Users Report"}
-        </button>
-        {userReportMessage && (
-          <p className="success-message">{userReportMessage}</p>
-        )}</>
-     )}
- </div>
+        {type === "1" && (
+          <>
+            <button
+              onClick={handleDownloadUserReport}
+              disabled={downloadingUserReport || allUser.length === 0}
+            >
+              {downloadingUserReport
+                ? "Downloading Users..."
+                : "Download Users Report"}
+            </button>
+            {userReportMessage && (
+              <p className="success-message">{userReportMessage}</p>
+            )}
+          </>
+        )}
+      </div>
       {type == 2 && (
-      <div className="report-section">
+        <div className="report-section">
+          <div className="bg-[#f1efefe9] rounded-lg p-4 mt-4">
+            <div>
+              <div style={styles.criteriaBar} className="criteria-bar">
+                <span>Choose a user :</span>
+                <select
+                  value={userSelectedOption}
+                  onChange={handleUserSelectedOptionChange}
+                  style={styles.select}
+                >
+                  {allUser.map((option) => (
+                    <option key={option.id} value={option.username}>
+                      {option.username}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </div>
+          <button
+            onClick={handleDownloadScheduleInfoByUserReport}
+            disabled={
+              downloadingSummaryHourByUserReport || allProducts.length === 0
+            }
+          >
+            {downloadingSummaryHourByUserReport
+              ? "Downloading Summary Hour By User Report..."
+              : "Download Summary Hour By User Report"}
+          </button>
+          {summaryHourByUserReportMessage && (
+            <p className="success-message">{summaryHourByUserReportMessage}</p>
+          )}
+        </div>
+      )}
 
-<div className="bg-[#f1efefe9] rounded-lg p-4 mt-4">
-      <div>
-      <div style={styles.criteriaBar} className="criteria-bar">
-      <span>Choose a user :</span>
-      <select value={userSelectedOption} onChange={handleUserSelectedOptionChange} style={styles.select}>
-      {allUser.map((option) => (
-        <option key={option.id} value={option.username}>{option.username}</option>
-      ))}
-      </select>
-    </div>
-      </div>
-      </div>
-        <button
-          onClick={handleDownloadScheduleInfoByUserReport(userSelectedOption)}
-          disabled={downloadingScheduleDetailReport || allProducts.length === 0}
-        >
-          {downloadingScheduleDetailReport
-            ? "Downloading Summary Hour By User Report..."
-            : "Download Summary Hour By User Report"}
-        </button>
-        {summaryHourByUserReportMessage && (
-          <p className="success-message">{summaryHourByUserReportMessage}</p>
-        )}
-      </div>)
-      }
-
-         {type == 3 && (
-      <div className="report-section">
-        <button
-          onClick={handleDownloadProductReport}
-          disabled={downloadingScheduleDetailReport || allProducts.length === 0}
-        >
-          {downloadingScheduleDetailReport
-            ? "Downloading Schedule Detail Report..."
-            : "Download Schedule Detail Report"}
-        </button>
-        {scheduleDetailReportMessage && (
-          <p className="success-message">{scheduleDetailReportMessage}</p>
-        )}
-      </div>
-      )
-      }
+      {type == 3 && (
+        <div className="report-section">
+          <button
+            onClick={handleDownloadProductReport}
+            disabled={
+              downloadingScheduleDetailReport || allProducts.length === 0
+            }
+          >
+            {downloadingScheduleDetailReport
+              ? "Downloading Schedule Detail Report..."
+              : "Download Schedule Detail Report"}
+          </button>
+          {scheduleDetailReportMessage && (
+            <p className="success-message">{scheduleDetailReportMessage}</p>
+          )}
+        </div>
+      )}
 
       <style jsx>{`
         .container {
@@ -338,16 +351,16 @@ export default Report;
 
 const styles = {
   criteriaBar: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '10px',
-    marginBottom: '20px',
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    marginBottom: "20px",
   },
   select: {
-    padding: '8px',
-    fontSize: '16px',
-    borderRadius: '5px',
-    border: '1px solid #ccc',
-    backgroundColor: '#fff',
+    padding: "8px",
+    fontSize: "16px",
+    borderRadius: "5px",
+    border: "1px solid #ccc",
+    backgroundColor: "#fff",
   },
 };

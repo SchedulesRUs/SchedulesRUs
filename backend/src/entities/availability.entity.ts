@@ -1,4 +1,21 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Type } from 'class-transformer';
+
+class DailySchedule {
+  Monday?: TimeSlot;
+  Tuesday?: TimeSlot;
+  Wednesday?: TimeSlot;
+  Thursday?: TimeSlot;
+  Friday?: TimeSlot;
+  Saturday?: TimeSlot;
+  Sunday?: TimeSlot;
+}
+
+class TimeSlot {
+  startTime: string;
+  endTime: string;
+  isEnabled: boolean;
+}
 
 @Entity()
 export default class Availability {
@@ -6,20 +23,21 @@ export default class Availability {
   id: number;
 
   @Column()
-  user_id: number;
+  userId: number;
 
   @Column()
-  title: string;
+  username: string;
 
-  @Column({ nullable: true })
-  allDay: boolean;
+  @Column()
+  userColor: string;
 
-  @Column({ nullable: true })
-  color: string;
+  @Column()
+  durationStart: string;
 
-  @Column({ nullable: true })
-  start: string;
+  @Column()
+  durationEnd: string;
 
-  @Column({ nullable: true })
-  end: string;
+  @Column('simple-json', { nullable: true })
+  @Type(() => DailySchedule)
+  dailySchedule?: DailySchedule;
 }

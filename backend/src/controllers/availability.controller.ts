@@ -10,7 +10,7 @@ import {
   Param,
 } from '@nestjs/common';
 import { AvailabilityService } from 'src/services/availability.service';
-import { CreateAvailabilityDto } from 'src/dto/create-availability.dto';
+import { SetAvailabilityDto } from 'src/dto/set-availability.dto';
 
 @Controller('availability')
 export class AvailabilityController {
@@ -21,9 +21,14 @@ export class AvailabilityController {
     return this.availabilityService.getAvailability();
   }
 
+  @Get(':userId')
+  getAvailabilityByUserId(@Param('userId') userId: number) {
+    return this.availabilityService.getAvailabilityByUserId(userId);
+  }
+
   @Post()
-  createAvailability(@Body() creatAvailability: CreateAvailabilityDto) {
-    return this.availabilityService.createAvailability(creatAvailability);
+  setAvailability(@Body() setAvailability: SetAvailabilityDto) {
+    return this.availabilityService.setAvailability(setAvailability);
   }
 
   @Delete(':id')

@@ -34,7 +34,13 @@ import { NotificationService } from './services/notification.service';
 @Module({
   imports: [
     DatabaseModule,
-    TypeOrmModule.forFeature([User, ScheduleInfo, Request, Availability, Announcement]),
+    TypeOrmModule.forFeature([
+      User,
+      ScheduleInfo,
+      Request,
+      Availability,
+      Announcement,
+    ]),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env', // optional, if you are using environment variables
@@ -46,7 +52,7 @@ import { NotificationService } from './services/notification.service';
     ScheduleInfoController,
     RequestController,
     AvailabilityController,
-    AnnouncementController
+    AnnouncementController,
   ],
   providers: [
     AppService,
@@ -60,7 +66,7 @@ import { NotificationService } from './services/notification.service';
     AvailabilityRepository,
     NotificationService,
     AnnouncementRepository,
-    AnnouncementService
+    AnnouncementService,
   ],
 })
 export class AppModule {}

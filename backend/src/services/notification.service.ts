@@ -17,7 +17,7 @@ interface Message {
 
 @Injectable()
 export class NotificationService {
-  constructor(private readonly userService: UserService) { }
+  constructor(private readonly userService: UserService) {}
 
   async sendTestNotification() {
     try {

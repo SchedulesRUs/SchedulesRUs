@@ -13,7 +13,7 @@ const PieChart = () => {
         const userData = await response.json();
         const roleCounts = {};
 
-        userData.forEach(user => {
+        userData.forEach((user) => {
           const role = user.role;
           roleCounts[role] = (roleCounts[role] || 0) + 1;
         });
@@ -21,7 +21,7 @@ const PieChart = () => {
         const data = Object.entries(roleCounts).map(([role, count]) => ({
           id: role,
           label: role,
-          value: count
+          value: count,
         }));
 
         setChartData(data);
@@ -29,7 +29,7 @@ const PieChart = () => {
         // Prepare data for table
         const tableData = Object.entries(roleCounts).map(([role, count]) => ({
           role,
-          count
+          count,
         }));
 
         setTableData(tableData);
@@ -40,7 +40,6 @@ const PieChart = () => {
 
     fetchData();
   }, []);
-
 
   const theme = {
     background: "#F1EFEFE9",
@@ -104,18 +103,28 @@ const PieChart = () => {
           ]}
         />
       </div>
-      <table style={{ borderCollapse: "collapse", width: "100%", textAlign: "left" }}>
+      <table
+        style={{ borderCollapse: "collapse", width: "100%", textAlign: "left" }}
+      >
         <thead>
           <tr>
-            <th style={{ borderBottom: "1px solid #ddd", padding: "8px" }}>Role</th>
-            <th style={{ borderBottom: "1px solid #ddd", padding: "8px" }}>Number of Role</th>
+            <th style={{ borderBottom: "1px solid #ddd", padding: "8px" }}>
+              Role
+            </th>
+            <th style={{ borderBottom: "1px solid #ddd", padding: "8px" }}>
+              Number of Role
+            </th>
           </tr>
         </thead>
         <tbody>
           {tableData.map((row, index) => (
             <tr key={index}>
-              <td style={{ borderBottom: "1px solid #ddd", padding: "8px" }}>{row.role}</td>
-              <td style={{ borderBottom: "1px solid #ddd", padding: "8px" }}>{row.count}</td>
+              <td style={{ borderBottom: "1px solid #ddd", padding: "8px" }}>
+                {row.role}
+              </td>
+              <td style={{ borderBottom: "1px solid #ddd", padding: "8px" }}>
+                {row.count}
+              </td>
             </tr>
           ))}
         </tbody>

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { userRequests } from "@/app/constants"; // Ensure correct import path
 import { user } from "@/app/asset";
 import { BASE_URL } from "@/app/constants/Config";
-import styles from "./request.module.css"
+import styles from "./request.module.css";
 
 //allRequest keep all the object from the server -- fetch the data
 
@@ -15,7 +15,7 @@ const RequestsPage = () => {
 
   async function fetchAllRequest() {
     try {
-      const response = await fetch(`${BASE_URL}/request`);  //get the API(link) from backend
+      const response = await fetch(`${BASE_URL}/request`); //get the API(link) from backend
 
       const data = await response.json();
       setAllRequest(data);
@@ -51,7 +51,7 @@ const RequestsPage = () => {
       changeStatusOnDB(id, newStatus);
       const updatedRequests = allRequest.map((request) => {
         if (request.id === id) {
-          // Update the status of the matched request, if 
+          // Update the status of the matched request, if
           return { ...request, status: newStatus };
         }
         // For requests that don't match the id, return them unchanged
@@ -134,7 +134,7 @@ const RequestsPage = () => {
                   <div className="flex justify-start space-x-2">
                     <button
                       className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600 mr-2"
-                      onClick={() => changeStatus(request.id, "Approved")}  //call the function above
+                      onClick={() => changeStatus(request.id, "Approved")} //call the function above
                     >
                       Approve
                     </button>

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import Card from "../component/dashboard/card/card";
 import Card2 from "../component/dashboard/card/card2";
@@ -25,7 +25,10 @@ const Dashboard = () => {
     try {
       const response = await fetch(`${BASE_URL}/scheduleInfo`);
       const scheduleData = await response.json();
-      const total = scheduleData.reduce((acc, curr) => acc + parseFloat(curr.hour), 0);
+      const total = scheduleData.reduce(
+        (acc, curr) => acc + parseFloat(curr.hour),
+        0,
+      );
       setTotalHours(total);
     } catch (error) {
       console.error("Failed to calculate total hours:", error);
@@ -47,7 +50,7 @@ const Dashboard = () => {
         <ViewScheduleOnly />
         {/* <Chart data={monthlyData} /> */}
       </div>
-      
+
       <div className="flex-1">
         <Rightbar />
       </div>
