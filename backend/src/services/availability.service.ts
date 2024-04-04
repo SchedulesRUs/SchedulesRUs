@@ -3,8 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import Availability from 'src/entities/availability.entity';
 import { UserService } from './user.service';
-import { CreateAvailabilityDto } from 'src/dto/create-availability.dto';
-import { UpdateAvailabilityDto } from 'src/dto/update-availability.dto';
+import { SetAvailabilityDto } from 'src/dto/set-availability.dto';
 
 @Injectable()
 export class AvailabilityService {
@@ -18,19 +17,20 @@ export class AvailabilityService {
     return this.availabilityRepository.find();
   }
 
-  async getAvailabilityById(user_id: number): Promise<Availability | null> {
-    return this.availabilityRepository.findOneBy({ user_id });
+  async getAvailabilityById(userId: number): Promise<Availability | null> {
+    return this.availabilityRepository.findOneBy({ userId });
   }
 
   async findOne(id: number): Promise<Availability | null> {
     return this.availabilityRepository.findOneBy({ id });
   }
-  async createAvailability(createAvailbilityDto: CreateAvailabilityDto) {
+  async setAvailability(setAvailbilityDto: SetAvailabilityDto) {
     try {
-      const user = await this.userService.findOne(createAvailbilityDto.user_id);
+      const user = await this.userService.findOne(setAvailbilityDto.userId);
       const newAvailability = this.availabilityRepository.create({
-        ...createAvailbilityDto,
-        title: user.username,
+        ...setAvailbilityDto,
+        username: user.username,
+        userColor: user.userColor
       });
       return this.availabilityRepository.save(newAvailability);
     } catch (error) {
@@ -40,14 +40,5 @@ export class AvailabilityService {
 
   async removeAvailabilityById(id: number): Promise<void> {
     await this.availabilityRepository.delete(id);
-  }
-
-  async updateAvailability(
-    id: number,
-    updateAvailabilityDto: UpdateAvailabilityDto,
-  ) {
-    const user = await this.findOne(id);
-    const updatedAvailability = { ...user, ...updateAvailabilityDto };
-    return this.availabilityRepository.save(updatedAvailability);
   }
 }

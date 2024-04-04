@@ -5,7 +5,7 @@ export class AvailabilityRepository extends Repository<Availability> {
   async findAll(): Promise<Availability[]> {
     return this.find();
   }
-  async findByUserId(user_id: number): Promise<Availability | undefined> {
-    return this.findOne({ where: { user_id } });
+  async findByUserId(userId: number): Promise<Availability | undefined> {
+    return this.findOne({ where: { userId } });
   }
 }

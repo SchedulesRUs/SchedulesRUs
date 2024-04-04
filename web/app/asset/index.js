@@ -1,5 +1,5 @@
-import logo from "./logo.jpg"
-import logo1 from "./logo1.jpg"
+import logo from "./logo.jpg";
+import logo1 from "./logo1.jpg";
 import user from "./user.jpg";
 import user2 from "./user2.jpg";
 import user3 from "./user3.jpg";
@@ -23,8 +23,7 @@ const s6 =
 const s7 =
   "https://img.freepik.com/free-psd/3d-rendering-avatar_23-2150833554.jpg?w=740&t=st=1707710801~exp=1707711401~hmac=b6d937919f0042d03b0d751adfa8c69e8c9bc8810c1c294a9aa0ebc495e67af9";
 
-
-  export {
+export {
   logo,
   logo1,
   user,

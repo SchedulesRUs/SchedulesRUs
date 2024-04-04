@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { menuItems } from "@/app/constants";
@@ -8,7 +8,6 @@ import { MdLogout } from "react-icons/md";
 import Link from "next/link";
 
 const Sidebar = () => {
-
   const [id, setId] = useState("");
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("");
@@ -33,22 +32,22 @@ const Sidebar = () => {
 
   return (
     <div className="min-w-min">
-      
-        <div className="flex items-center gap-5 mb-4">
-          <div className="flex flex-col justify-center items-center">
-            <Image
-              src={image}
-              alt="user"
-              width="120"
-              height="120"
-              className="rounded-md "
-              priority
-            />
-            <span className="text-[16px] mt-2">ADMIN ID: {id}</span>
-          </div>
+      <div className="flex items-center gap-5 mb-4">
+        <div className="flex flex-col justify-center items-center">
+          <Image
+            src={image}
+            alt="user"
+            width="120"
+            height="120"
+            className="rounded-md "
+            priority
+          />
+          <span className="text-[16px] mt-2">ADMIN ID: {id}</span>
+        </div>
         <div className="flex flex-col items-center justify-center">
-          
-          <span className="font-bold text-xl">{username && username.toUpperCase()}</span>
+          <span className="font-bold text-xl">
+            {username && username.toUpperCase()}
+          </span>
           <span className="text-[18px]">{role}</span>
         </div>
       </div>

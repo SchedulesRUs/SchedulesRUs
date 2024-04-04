@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 
@@ -6,7 +6,9 @@ const Rightbar = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState("Staff Special Request");
   const [date, setDate] = useState("Mar 12, 2024");
-  const [note, setNote] = useState("Paradon M.- Request Sick\nKhit K. - Request Vacation\nThu Ngoc - Request Sick");
+  const [note, setNote] = useState(
+    "Paradon M.- Request Sick\nKhit K. - Request Vacation\nThu Ngoc - Request Sick",
+  );
 
   const handleEditClick = () => {
     setIsEditing(true);

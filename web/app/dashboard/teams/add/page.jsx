@@ -6,7 +6,17 @@ import Image from "next/image";
 import { BASE_URL } from "@/app/constants/Config";
 
 class User {
-  constructor(username, password, email, image, address, role, isAdmin, phone, fcmToken) {
+  constructor(
+    username,
+    password,
+    email,
+    image,
+    address,
+    role,
+    isAdmin,
+    phone,
+    fcmToken,
+  ) {
     this.username = username;
     this.password = password;
     this.email = email;
