@@ -49,6 +49,11 @@ const menuItems = [
         path: "/dashboard/availability",
         icon: <MdWork />,
       },
+      {
+        title: "Announcement",
+        path: "/dashboard/announcement",
+        icon: <MdAttachMoney />,
+      },
     ],
   },
   {

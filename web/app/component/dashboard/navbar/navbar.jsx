@@ -13,7 +13,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="flex justify-start items-center bg-[#f1efefe9] p-8 rounded-md">
+    <div className="flex justify-start items-center bg-indigo-950 text-white p-8 rounded-md">
       <div className="capitalize font-bold text-2xl">{pathname.split("/").pop().toUpperCase()}</div>
 
       {/* <div className="flex items-center gap-4">
