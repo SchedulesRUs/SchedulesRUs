@@ -93,7 +93,7 @@ const Report = ({type}) => {
     setUserReportMessage("Users report downloaded successfully!");
     setTimeout(() => setUserReportMessage(""), 5000); // Clear message after 5 seconds
 
-    setDownloadingUserReport(false);
+    setSummaryHourByUserReport(false);
   };
 
   const generateProductReport = async () => {
@@ -146,7 +146,7 @@ const Report = ({type}) => {
   };
 
 
-  const generateScheduleInfoByUserReport = async ({userId}) => {
+  const generateScheduleInfoByUserReport = async () => {
     // Create a new workbook
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet("Products");
@@ -160,9 +160,12 @@ const Report = ({type}) => {
       { header: "Hour", key: "hour", width: 10 },
 
     ];
+    console.error("userSelectedOption", userSelectedOption);
+    console.error("userSelectedOption", allProducts);
+
 
     // Add rows to the worksheet
-    allProducts.forEach((scheduleInfo) => {
+    allProducts.filter(item => item.title == userSelectedOption).forEach((scheduleInfo) => {
       worksheet.addRow({
         id: scheduleInfo.id,
         name: scheduleInfo.title,
@@ -189,20 +192,21 @@ const Report = ({type}) => {
     // Trigger file download
     saveAs(blob, fileName);
 
-    setScheduleDetailReportMessage("Products report downloaded successfully!");
-    setTimeout(() => setScheduleDetailReportMessage(""), 5000); // Clear message after 5 seconds
+    setSummaryHourByUserReportMessage("Products report downloaded successfully!");
+    setTimeout(() => setSummaryHourByUserReportMessage(""), 5000); // Clear message after 5 seconds
+
 
     setScheduleDetailReport(false);
   };
 
 
-  const handleDownloadScheduleInfoByUserReport = async ({userId}) => {
+  const handleDownloadScheduleInfoByUserReport = async () => {
     try {
-      setDownloadingUserReport(true);
-      await generateScheduleInfoByUserReport(userId);
+      setSummaryHourByUserReport(true);
+      await generateScheduleInfoByUserReport();
     } catch (error) {
       console.error("Error generating Schedule Info By User report:", error);
-      setDownloadingUserReport(false);
+      setSummaryHourByUserReport(false);
     }
   };
 
@@ -263,10 +267,10 @@ const Report = ({type}) => {
       </div>
       </div>
         <button
-          onClick={handleDownloadScheduleInfoByUserReport(userSelectedOption)}
-          disabled={downloadingScheduleDetailReport || allProducts.length === 0}
+          onClick={handleDownloadScheduleInfoByUserReport}
+          disabled={downloadingSummaryHourByUserReport || allProducts.length === 0}
         >
-          {downloadingScheduleDetailReport
+          {downloadingSummaryHourByUserReport
             ? "Downloading Summary Hour By User Report..."
             : "Download Summary Hour By User Report"}
         </button>
