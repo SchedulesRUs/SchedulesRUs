@@ -65,9 +65,9 @@ const Announcement = () => {
             backgroundColor: '#007bff',
             color: '#ffffff',
             cursor: 'pointer',
+            width: '100%'
         },
         deleteButton: {
-            marginLeft: '10px',
             backgroundColor: '#dc3545',
           },
         submittedDetails: {
