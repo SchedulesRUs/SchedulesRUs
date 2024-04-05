@@ -46,13 +46,17 @@ const Announcement = () => {
 
   async function deleteAnnouncement(id) {
     try {
+      console.log("Deleting announcement with ID:", id);
       const response = await fetch(`${BASE_URL}/announcement/${id}`, {
         method: "DELETE",
       });
+      console.log("Response received:", response);
       if (response.ok) {
-        setAnnouncements(announcements.filter((_, index) => index !== id));
-        // Re-fetch announcements to synchronize client-side state with server
-        fetchAnnouncement();
+        console.log("Deletion successful");
+        // Remove the announcement from the client-side state
+        setAnnouncements(
+          announcements.filter((announcement) => announcement.id !== id)
+        );
       }
     } catch (error) {
       console.error("Error deleting announcement:", error);
@@ -66,7 +70,6 @@ const Announcement = () => {
   };
 
   // Simple styles
-  
 
   return (
     <div style={styles.container}>
@@ -114,9 +117,9 @@ const Announcement = () => {
         </button>
       </form>
       <div style={styles.announcementList}>
-        {announcements.map((announcement, id) => (
+        {announcements.map((announcement) => (
           <div
-            key={id}
+            key={announcement.id}
             style={styles.announcementItem}
             className="flex flex-col"
           >
@@ -125,7 +128,7 @@ const Announcement = () => {
             <p>Detail: {announcement.detail}</p>
             <button
               style={{ ...styles.button, ...styles.deleteButton }}
-              onClick={() => deleteAnnouncement(id)}
+              onClick={() => deleteAnnouncement(announcement.id)}
               className="mt-5"
             >
               Delete
