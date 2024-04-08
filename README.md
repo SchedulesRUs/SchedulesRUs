@@ -35,7 +35,7 @@ The Nivo documentation is hosted on its official website, which you can visit at
 
 # 3.Headless UI
 
-Headless UI is a library of completely unstyled, fully accessible UI components, designed to integrate seamlessly with Tailwind CSS. It's developed by the creators of Tailwind CSS to provide developers with the core functionality of various UI components without any default styling. This approach allows developers to build their own unique UI designs on top of robust, accessible components without having to fight against pre-existing styles.
+Headless UI is a toolkit designed for developers to build fully accessible UI components with ease, offering the unstyled, fully accessible UI components, so developers can build fully custom designs without having to start from scratch. It's particularly popular in the React and Vue communities but is designed to be framework-agnostic, making it adaptable to many development environments.It's developed by the same team behind Tailwind CSS, a utility-first CSS framework. Although they are separate projects, they complement each other well. Developers often use them together to quickly style Headless UI components with Tailwind CSS utility classes, benefiting from both the rapid development cycle Tailwind CSS offers and the accessible, unstyled components from Headless UI.
 
 ## Installation
 
