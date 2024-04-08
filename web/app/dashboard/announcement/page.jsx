@@ -69,7 +69,6 @@ const Announcement = () => {
     addAnnouncement();
   };
 
-  // Simple styles
 
   return (
     <div style={styles.container}>
@@ -113,7 +112,7 @@ const Announcement = () => {
           />
         </div>
         <button style={styles.button} type="submit">
-          Submit Announcement
+          Submit Form
         </button>
       </form>
       <div style={styles.announcementList}>
