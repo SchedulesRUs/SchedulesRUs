@@ -55,6 +55,8 @@ const styles = {
       padding: "10px",
       border: "1px solid #ddd",
       borderRadius: "8px",
+      wordWrap: 'break-word',
+      overflowWrap: 'break-word',
     },
   };
 

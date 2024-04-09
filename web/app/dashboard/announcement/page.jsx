@@ -116,10 +116,9 @@ const Announcement = () => {
         </button>
       </form>
       <div style={styles.announcementList}>
-        {announcements.map((announcement) => (
+        {announcements.map((announcement, index) => (
           <div
-            key={announcement.id}
-            style={styles.announcementItem}
+            key={index} style={styles.announcementItem}
             className="flex flex-col"
           >
             <h3>{announcement.title}</h3>
