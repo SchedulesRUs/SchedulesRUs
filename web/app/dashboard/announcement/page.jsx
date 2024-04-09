@@ -5,7 +5,7 @@ import { BASE_URL } from "@/app/constants/Config";
 import styles from "./announcement";
 
 const Announcement = () => {
-  // State hooks for each field
+ 
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [detail, setDetail] = useState("");
@@ -69,6 +69,8 @@ const Announcement = () => {
     addAnnouncement();
   };
 
+  const sortedAnnouncements = announcements.sort((a, b) => new Date(b.date) - new Date(a.date));
+
 
   return (
     <div style={styles.container}>
@@ -116,7 +118,7 @@ const Announcement = () => {
         </button>
       </form>
       <div style={styles.announcementList}>
-        {announcements.map((announcement, index) => (
+        {sortedAnnouncements.map((announcement, index) => (
           <div
             key={index} style={styles.announcementItem}
             className="flex flex-col"
