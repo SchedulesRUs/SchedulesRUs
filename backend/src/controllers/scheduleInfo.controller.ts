@@ -9,9 +9,9 @@ import {
   Put,
 } from '@nestjs/common';
 import { ScheduleInfoService } from '../services/scheduleInfo.service';
-import { CreateScheduleDto } from 'src/dto/create-schedule.dto';
-import { UpdateScheduleDto } from 'src/dto/update-schedule.dto';
-import { NotificationService } from 'src/services/notification.service';
+import { CreateScheduleDto } from '../dto/create-schedule.dto';
+import { UpdateScheduleDto } from '../dto/update-schedule.dto';
+import { NotificationService } from '../services/notification.service';
 
 @Controller('scheduleInfo')
 export class ScheduleInfoController {

@@ -9,7 +9,7 @@
     "target": "ES2021",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    "baseUrl": "postgres://esphxfxrkrnban:0ee44d7af1517cf44565f290350e35b905f05e6a76814f244507d559e659302d@ec2-44-220-7-157.compute-1.amazonaws.com:5432/ddu9rphke81vh0/",
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
