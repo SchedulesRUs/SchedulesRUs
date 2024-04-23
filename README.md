@@ -27,8 +27,8 @@ Check out the [FullCalendar Documentation](https://fullcalendar.io/docs) for mor
 
 Nivo is a well-known library for building data visualizations in React applications. It offers a rich set of graph components, including standard charts like bar, line, pie, scatter, and more complex visualizations like heatmaps, radar charts, and network diagrams. Nivo is built on top of D3.js, which is a powerful and flexible tool for creating complex data visualizations in the browser, but Nivo simplifies the process by providing pre-built, customizable components that are easy to integrate into React applications.
 
-!["Project Screenshot"](Schedule-r-us-chart.png)
-!["Project Screenshot"](Schedule-r-us-chart_bar.png)
+!["Project Screenshot"](Schedule-r-us-chart.png) !["Project Screenshot"](Schedule-r-us-chart_bar.png)
+
 
 
 ## Installation
