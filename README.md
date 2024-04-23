@@ -4,6 +4,11 @@ Schedule"R"Us is Sheduling Management System for restaurant to especially organi
 
 This Scheduling Management System is envisioned as a comprehensive tool that not only simplifies the intricate task of staff scheduling but also integrates seamlessly with other vital aspects of restaurant management.
 
+
+![schedule-r-us]([image link](https://res.cloudinary.com/djdwqmkkb/image/upload/v1713893029/Schedule-r-us_nb0hip.png))
+
+
+
 # 1.FullCalendar
 
 FullCalendar is a JavaScript library for creating interactive calendars on websites. It provides a flexible and customizable way to display events, schedules, and other date-related information. FullCalendar is often used in web development projects where a dynamic and feature-rich calendar interface is required.
