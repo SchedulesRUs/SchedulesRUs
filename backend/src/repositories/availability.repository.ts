@@ -1,5 +1,5 @@
 import { Repository } from 'typeorm';
-import Availability from 'src/entities/availability.entity';
+import Availability from '../entities/availability.entity';
 
 export class AvailabilityRepository extends Repository<Availability> {
   async findAll(): Promise<Availability[]> {

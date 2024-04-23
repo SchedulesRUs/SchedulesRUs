@@ -1,11 +1,11 @@
 // database.module.ts
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import ScheduleInfo from 'src/entities/scheduleInfo.entity';
-import User from 'src/entities/user.entity';
-import Request from 'src/entities/request.entity';
-import Availability from 'src/entities/availability.entity';
-import Announcement from 'src/entities/announcement.entity';
+import ScheduleInfo from '../entities/scheduleInfo.entity';
+import User from '../entities/user.entity';
+import Request from '../entities/request.entity';
+import Availability from '../entities/availability.entity';
+import Announcement from '../entities/announcement.entity';
 
 @Module({
   imports: [

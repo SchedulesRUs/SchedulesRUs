@@ -12,7 +12,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { RequestService } from '../services/request.service';
-import { NotificationService } from 'src/services/notification.service';
+import { NotificationService } from '../services/notification.service';
 
 @Controller('request')
 export class RequestController {

@@ -9,8 +9,8 @@ import {
   Delete,
   Param,
 } from '@nestjs/common';
-import { AvailabilityService } from 'src/services/availability.service';
-import { SetAvailabilityDto } from 'src/dto/set-availability.dto';
+import { AvailabilityService } from '../services/availability.service';
+import { SetAvailabilityDto } from '../dto/set-availability.dto';
 
 @Controller('availability')
 export class AvailabilityController {

@@ -11,9 +11,9 @@ import {
   Patch,
 } from '@nestjs/common';
 import { UserService } from '../services/user.service';
-import { CreateUserDto } from 'src/dto/create-user.dto';
-import { UpdateUserDto } from 'src/dto/update-user.dto';
-import { UpdateUserFcmTokenDto } from 'src/dto/update-user-fcmtoken.dto';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { UpdateUserDto } from '../dto/update-user.dto';
+import { UpdateUserFcmTokenDto } from '../dto/update-user-fcmtoken.dto';
 
 @Controller('user')
 export class UserController {

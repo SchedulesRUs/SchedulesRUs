@@ -7,8 +7,8 @@ import {
   Param,
   Put,
 } from '@nestjs/common';
-import { AnnouncementService } from 'src/services/announcement.service';
-import { AnnouncementDto } from 'src/dto/create-announcement.dto';
+import { AnnouncementService } from '../services/announcement.service';
+import { AnnouncementDto } from '../dto/create-announcement.dto';
 
 @Controller('announcement')
 export class AnnouncementController {

@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import Announcement from 'src/entities/announcement.entity';
-import { AnnouncementDto } from 'src/dto/create-announcement.dto';
+import Announcement from '../entities/announcement.entity';
+import { AnnouncementDto } from '../dto/create-announcement.dto';
+
 
 @Injectable()
 export class AnnouncementService {
